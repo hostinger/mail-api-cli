@@ -1,0 +1,70 @@
+project_name: hostinger-mail
+version: 2
+
+before:
+  hooks:
+    - mkdir -p completions
+    - sh -c 'go run . completion bash > completions/hostinger-mail.bash'
+    - sh -c 'go run . completion zsh  > completions/hostinger-mail.zsh'
+    - sh -c 'go run . completion fish > completions/hostinger-mail.fish'
+
+builds:
+  - main: ./main.go
+    env:
+      - CGO_ENABLED=0
+      - GO111MODULE=on
+    flags:
+      - -mod=vendor
+      - -v
+    ldflags:
+      - -X github.com/hostinger/mail-api-cli/utils.Build={{ .ShortCommit }}
+      - -X github.com/hostinger/mail-api-cli/utils.Major={{ .Major }}
+      - -X github.com/hostinger/mail-api-cli/utils.Minor={{ .Minor }}
+      - -X github.com/hostinger/mail-api-cli/utils.Patch={{ .Patch }}
+    goos:
+      - windows
+      - darwin
+      - linux
+
+archives:
+  - name_template: "hostinger-mail-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
+    files:
+      - completions/*
+    wrap_in_directory: false
+
+source:
+  enabled: true
+  name_template: 'hostinger-mail-{{ .Version }}-source'
+
+checksum:
+  name_template: "hostinger-mail-{{ .Version }}-checksums.sha256"
+
+#dockers:
+#  - dockerfile: Dockerfile.goreleaser
+#    image_templates:
+#      - "hostinger/hostinger:latest"
+#      - "hostinger/hostinger:{{ .Major }}-latest"
+#      - "hostinger/hostinger:{{ .Version }}"
+
+release:
+  github:
+    owner: hostinger
+    name: mail-api-cli
+
+brews:
+  - repository:
+      owner: hostinger
+      name: homebrew-tap
+    directory: Formula
+    homepage: "https://www.hostinger.com"
+    description: "Hostinger Mail API CLI"
+    license: "MIT"
+    install: |
+      bin.install "hostinger-mail"
+    extra_install: |
+      bash_completion.install "completions/hostinger-mail.bash" => "hostinger-mail"
+      zsh_completion.install  "completions/hostinger-mail.zsh"  => "_hostinger-mail"
+      fish_completion.install "completions/hostinger-mail.fish"
+
+changelog:
+  disable: false

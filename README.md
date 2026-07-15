@@ -1,4 +1,56 @@
-# Please make sure to set up a CODEOWNERS file
+# Hostinger Mail API CLI
 
-# Branch protection rules are required and one has been already set up, but not enforced. After you are done with the initial setup please make sure to enable it.
-(Settings > Rules > Rulesets > "main")
+`hostinger-mail` is the command line interface for the [Hostinger Mail API](https://api.mail.hostinger.com).
+
+> **This repository is generated.** Do not open pull requests here — every file
+> is overwritten by the next generation run. The CLI is generated from the
+> OpenAPI specification by
+> [hostinger/public-api-generator](https://github.com/hostinger/public-api-generator)
+> (see the `cli/` directory there). Report issues or contribute in that repository.
+
+## Installation
+
+### Homebrew (macOS & Linux)
+
+```sh
+brew install hostinger/tap/hostinger-mail
+```
+
+Upgrade with `brew upgrade hostinger-mail`. Shell tab-completion (bash/zsh/fish) is installed
+automatically.
+
+### Binary download
+
+Download the binary for your platform from the
+[releases page](https://github.com/hostinger/mail-api-cli/releases).
+
+## Configuration
+
+Create `$HOME/.hostinger-mail.yaml`:
+
+```yaml
+api_token: <your API token>
+```
+
+or set the `HOSTINGER_MAIL_API_TOKEN` environment variable. Generate a token at
+[hPanel → API](https://hpanel.hostinger.com/emails).
+
+## Usage
+
+```
+hostinger-mail <group> <subgroup> <verb> [args] [flags]
+```
+
+Examples:
+
+```
+hostinger-mail billing catalog list
+hostinger-mail vps virtual-machines list
+hostinger-mail vps vm start 123          # vm is an alias for virtual-machines
+hostinger-mail dns records list example.com
+```
+
+Output format defaults to a table; use `--format json|table|tree` to change it.
+Command documentation lives in [docs/](docs/), and `manifest.json` maps every
+API operation to its command. Shell autocompletion: see
+[AUTOCOMPLETE.md](AUTOCOMPLETE.md).

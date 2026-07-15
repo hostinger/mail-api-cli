@@ -1,0 +1,137 @@
+{
+  "createFolder": {
+    "command": "hostinger-mail folders create",
+    "method": "POST",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/folders"
+  },
+  "createWebhook": {
+    "command": "hostinger-mail webhooks create",
+    "method": "POST",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/webhooks"
+  },
+  "deleteAllMessages": {
+    "command": "hostinger-mail messages delete-all",
+    "method": "DELETE",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages"
+  },
+  "deleteFolder": {
+    "command": "hostinger-mail folders delete",
+    "method": "DELETE",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/folders/{folder}"
+  },
+  "deleteMessage": {
+    "command": "hostinger-mail messages delete",
+    "method": "DELETE",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}"
+  },
+  "deleteMessages": {
+    "command": "hostinger-mail messages delete-bulk",
+    "method": "POST",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/delete"
+  },
+  "deleteWebhook": {
+    "command": "hostinger-mail webhooks delete",
+    "method": "DELETE",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook}"
+  },
+  "getCurrentAccount": {
+    "command": "hostinger-mail account current",
+    "method": "GET",
+    "path": "/api/v1/me"
+  },
+  "getMessage": {
+    "command": "hostinger-mail messages get",
+    "method": "GET",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}"
+  },
+  "getMessageAttachment": {
+    "command": "hostinger-mail messages attachment",
+    "method": "GET",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/attachments/{attachmentId}"
+  },
+  "getMessageSource": {
+    "command": "hostinger-mail messages source",
+    "method": "GET",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/source"
+  },
+  "getMessageText": {
+    "command": "hostinger-mail messages text",
+    "method": "GET",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/text"
+  },
+  "getQuota": {
+    "command": "hostinger-mail quota get",
+    "method": "GET",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/quota"
+  },
+  "getWebhook": {
+    "command": "hostinger-mail webhooks get",
+    "method": "GET",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook}"
+  },
+  "listFolders": {
+    "command": "hostinger-mail folders list",
+    "method": "GET",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/folders"
+  },
+  "listMessages": {
+    "command": "hostinger-mail messages list",
+    "method": "GET",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages"
+  },
+  "listWebhooks": {
+    "command": "hostinger-mail webhooks list",
+    "method": "GET",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/webhooks"
+  },
+  "moveMessage": {
+    "command": "hostinger-mail messages move",
+    "method": "POST",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/move"
+  },
+  "moveMessages": {
+    "command": "hostinger-mail messages move-bulk",
+    "method": "POST",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/move"
+  },
+  "patchMessage": {
+    "command": "hostinger-mail messages patch",
+    "method": "PATCH",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}"
+  },
+  "regenerateWebhookSecret": {
+    "command": "hostinger-mail webhooks regenerate-secret",
+    "method": "POST",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook}/regenerate-secret"
+  },
+  "searchMessages": {
+    "command": "hostinger-mail messages search",
+    "method": "POST",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/search"
+  },
+  "sendEmail": {
+    "command": "hostinger-mail send email",
+    "method": "POST",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/send"
+  },
+  "testWebhook": {
+    "command": "hostinger-mail webhooks test",
+    "method": "POST",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook}/test"
+  },
+  "updateFolder": {
+    "command": "hostinger-mail folders update",
+    "method": "PUT",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/folders/{folder}"
+  },
+  "updateMessageFlags": {
+    "command": "hostinger-mail messages update-flags",
+    "method": "POST",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/flags"
+  },
+  "updateWebhook": {
+    "command": "hostinger-mail webhooks update",
+    "method": "PATCH",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook}"
+  }
+}
