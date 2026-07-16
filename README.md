@@ -38,16 +38,16 @@ or set the `HOSTINGER_MAIL_API_TOKEN` environment variable. Generate a token at
 ## Usage
 
 ```
-hostinger-mail <group> <subgroup> <verb> [args] [flags]
+hostinger-mail <group> <verb> [args] [flags]
 ```
 
 Examples:
 
 ```
-hostinger-mail billing catalog list
-hostinger-mail vps virtual-machines list
-hostinger-mail vps vm start 123          # vm is an alias for virtual-machines
-hostinger-mail dns records list example.com
+hostinger-mail account current
+hostinger-mail folders list <mailbox-resource-id>
+hostinger-mail messages list <mailbox-resource-id> <folder>
+hostinger-mail quota get <mailbox-resource-id>
 ```
 
 Output format defaults to a table; use `--format json|table|tree` to change it.

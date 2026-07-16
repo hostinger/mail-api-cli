@@ -1,8 +1,8 @@
 # Enabling shell auto-completion
 
 `hostinger-mail` has auto-complete support. This makes it easier to use the CLI and improves user experience by completing command
-names by clicking TAB key. For example if you type `hostinger-mail vps dat<TAB>` with auto-completion enabled, shell will automatically append
-rest of the command: `hostinger-mail vps data-centers`.
+names by clicking TAB key. For example if you type `hostinger-mail account cur<TAB>` with auto-completion enabled, shell will automatically append
+rest of the command: `hostinger-mail account current`.
 
 Auto-completion can be generated for multiple shells. The currently supported shells are:
 - Bash
