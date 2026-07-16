@@ -1,0 +1,58 @@
+name: build-release
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - ".github/**"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get GitHub token
+        uses: actions/create-github-app-token@v3
+        id: get_token
+        with:
+          app-id: ${{ secrets.HOSTINGERBOT_APP_ID }}
+          private-key: ${{ secrets.HOSTINGERBOT_PRIVATE_KEY }}
+          owner: hostinger
+          repositories: |
+            mail-api-cli
+            homebrew-tap
+
+      - name: Repo checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Bump version and push tag
+        id: bump
+        uses: mathieudutour/github-tag-action@v6.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          release_branches: main
+
+      - name: Fetch tags
+        if: steps.bump.outputs.new_tag != ''
+        run: git fetch --force --tags
+
+      - name: Install Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: 'go.mod'
+
+      - name: Run GoReleaser
+        if: steps.bump.outputs.new_tag != ''
+        uses: goreleaser/goreleaser-action@v7
+        with:
+          distribution: goreleaser
+          version: "~> v2"
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
+          GORELEASER_CURRENT_TAG: ${{ steps.bump.outputs.new_tag }}
