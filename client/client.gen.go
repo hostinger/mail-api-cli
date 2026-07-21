@@ -465,17 +465,32 @@ type V1SendAttachment struct {
 	Filename string  `json:"filename"`
 }
 
+// V1SendMessageRef Reference to a source message by UID within a folder, used for reply/forward threading. Both fields are required.
+type V1SendMessageRef struct {
+	// Folder Folder containing the source message.
+	Folder string `json:"folder"`
+
+	// Uid UID of the source message.
+	Uid int `json:"uid"`
+}
+
 // V1SendRequest Outgoing message payload. At least one of to, cc, or bcc must be present.
 type V1SendRequest struct {
 	Attachments *[]V1SendAttachment    `json:"attachments,omitempty"`
 	Bcc         *[]openapi_types.Email `json:"bcc,omitempty"`
 	Cc          *[]openapi_types.Email `json:"cc,omitempty"`
 	DisplayName *string                `json:"displayName,omitempty"`
-	Html        *string                `json:"html,omitempty"`
-	Subject     *string                `json:"subject,omitempty"`
-	Text        *string                `json:"text,omitempty"`
-	To          *[]openapi_types.Email `json:"to,omitempty"`
-	union       json.RawMessage
+
+	// ForwardOf Source message this forwards. Copies its Message-Id/References into In-Reply-To/References and flags it $forwarded. Mutually exclusive with inReplyTo.
+	ForwardOf *V1SendMessageRef `json:"forwardOf,omitempty"`
+	Html      *string           `json:"html,omitempty"`
+
+	// InReplyTo Source message this is a reply to. Copies its Message-Id/References into In-Reply-To/References and flags it \Answered. Mutually exclusive with forwardOf.
+	InReplyTo *V1SendMessageRef      `json:"inReplyTo,omitempty"`
+	Subject   *string                `json:"subject,omitempty"`
+	Text      *string                `json:"text,omitempty"`
+	To        *[]openapi_types.Email `json:"to,omitempty"`
+	union     json.RawMessage
 }
 
 // V1SendRequest0 defines model for .
@@ -847,10 +862,24 @@ func (t V1SendRequest) MarshalJSON() ([]byte, error) {
 		}
 	}
 
+	if t.ForwardOf != nil {
+		object["forwardOf"], err = json.Marshal(t.ForwardOf)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'forwardOf': %w", err)
+		}
+	}
+
 	if t.Html != nil {
 		object["html"], err = json.Marshal(t.Html)
 		if err != nil {
 			return nil, fmt.Errorf("error marshaling 'html': %w", err)
+		}
+	}
+
+	if t.InReplyTo != nil {
+		object["inReplyTo"], err = json.Marshal(t.InReplyTo)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'inReplyTo': %w", err)
 		}
 	}
 
@@ -917,10 +946,24 @@ func (t *V1SendRequest) UnmarshalJSON(b []byte) error {
 		}
 	}
 
+	if raw, found := object["forwardOf"]; found {
+		err = json.Unmarshal(raw, &t.ForwardOf)
+		if err != nil {
+			return fmt.Errorf("error reading 'forwardOf': %w", err)
+		}
+	}
+
 	if raw, found := object["html"]; found {
 		err = json.Unmarshal(raw, &t.Html)
 		if err != nil {
 			return fmt.Errorf("error reading 'html': %w", err)
+		}
+	}
+
+	if raw, found := object["inReplyTo"]; found {
+		err = json.Unmarshal(raw, &t.InReplyTo)
+		if err != nil {
+			return fmt.Errorf("error reading 'inReplyTo': %w", err)
 		}
 	}
 

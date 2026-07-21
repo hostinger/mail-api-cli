@@ -36,7 +36,9 @@ func init() {
 	EmailCmd.Flags().StringSliceP("bcc", "", nil, "")
 	EmailCmd.Flags().StringSliceP("cc", "", nil, "")
 	EmailCmd.Flags().StringP("displayname", "", "", "")
+	EmailCmd.Flags().StringP("forwardof", "", "", "Source message this forwards. Copies its Message-Id/References into In-Reply-To/References and flags it $forwarded. Mutually exclusive with inReplyTo. (JSON)")
 	EmailCmd.Flags().StringP("html", "", "", "")
+	EmailCmd.Flags().StringP("inreplyto", "", "", "Source message this is a reply to. Copies its Message-Id/References into In-Reply-To/References and flags it \\Answered. Mutually exclusive with forwardOf. (JSON)")
 	EmailCmd.Flags().StringP("subject", "", "", "")
 	EmailCmd.Flags().StringP("text", "", "", "")
 	EmailCmd.Flags().StringSliceP("to", "", nil, "")
@@ -60,9 +62,17 @@ func emailBody(cmd *cobra.Command) map[string]any {
 		v, _ := cmd.Flags().GetString("displayname")
 		body["displayName"] = v
 	}
+	if cmd.Flags().Changed("forwardof") {
+		v, _ := cmd.Flags().GetString("forwardof")
+		body["forwardOf"] = utils.JSONValue(v, "forwardof")
+	}
 	if cmd.Flags().Changed("html") {
 		v, _ := cmd.Flags().GetString("html")
 		body["html"] = v
+	}
+	if cmd.Flags().Changed("inreplyto") {
+		v, _ := cmd.Flags().GetString("inreplyto")
+		body["inReplyTo"] = utils.JSONValue(v, "inreplyto")
 	}
 	if cmd.Flags().Changed("subject") {
 		v, _ := cmd.Flags().GetString("subject")
