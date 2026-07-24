@@ -18,10 +18,6 @@ import (
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
-const (
-	BearerAuthScopes bearerAuthContextKey = "BearerAuth.Scopes"
-)
-
 // Defines values for V1WebhooksCreateRequestEvents.
 const (
 	V1WebhooksCreateRequestEventsMessageReceived V1WebhooksCreateRequestEvents = "message.received"
@@ -168,19 +164,19 @@ func (e V1WebhooksWebhookWithSecretStatus) Valid() bool {
 
 // Defines values for ListWebhooksParamsStatus.
 const (
-	Active   ListWebhooksParamsStatus = "active"
-	Disabled ListWebhooksParamsStatus = "disabled"
-	Paused   ListWebhooksParamsStatus = "paused"
+	ListWebhooksParamsStatusActive   ListWebhooksParamsStatus = "active"
+	ListWebhooksParamsStatusDisabled ListWebhooksParamsStatus = "disabled"
+	ListWebhooksParamsStatusPaused   ListWebhooksParamsStatus = "paused"
 )
 
 // Valid indicates whether the value is a known member of the ListWebhooksParamsStatus enum.
 func (e ListWebhooksParamsStatus) Valid() bool {
 	switch e {
-	case Active:
+	case ListWebhooksParamsStatusActive:
 		return true
-	case Disabled:
+	case ListWebhooksParamsStatusDisabled:
 		return true
-	case Paused:
+	case ListWebhooksParamsStatusPaused:
 		return true
 	default:
 		return false
@@ -190,9 +186,13 @@ func (e ListWebhooksParamsStatus) Valid() bool {
 // Error Standard error envelope. Frontend translations key off `code`, never off `error`.
 type Error struct {
 	// Code Machine-readable error code in SCREAMING_SNAKE_CASE.
+	//
+	// Example: ERR_RESOURCE_NOT_FOUND
 	Code string `json:"code"`
 
 	// Error Human-readable error message.
+	//
+	// Example: Resource not found.
 	Error string `json:"error"`
 
 	// Params Additional structured context for the error. May be omitted.
@@ -202,15 +202,23 @@ type Error struct {
 // Pagination Pagination metadata for paginated collections.
 type Pagination struct {
 	// Page Current page number (1-based).
+	//
+	// Example: 1
 	Page int `json:"page"`
 
 	// PerPage Items per page.
+	//
+	// Example: 25
 	PerPage int `json:"perPage"`
 
 	// Total Total number of items across all pages.
+	//
+	// Example: 137
 	Total int `json:"total"`
 
 	// TotalPages Total number of pages.
+	//
+	// Example: 6
 	TotalPages int `json:"totalPages"`
 }
 
@@ -225,21 +233,31 @@ type V1FolderMessagesCollection struct {
 // V1FolderMessagesDeleteBulkRequest Body for permanently deleting multiple messages.
 type V1FolderMessagesDeleteBulkRequest struct {
 	// Uids Message UIDs to delete. 1-100 entries, each > 0.
+	//
+	// Example: [42,43,44]
 	Uids []int `json:"uids"`
 }
 
 // V1FolderMessagesFlagsBulkRequest Add and/or remove flags on multiple messages. At least one of addFlags or removeFlags must be set.
 type V1FolderMessagesFlagsBulkRequest struct {
-	AddFlags    *[]string `json:"addFlags,omitempty"`
+	// AddFlags Example: ["\\Seen","\\Flagged","$forwarded"]
+	AddFlags *[]string `json:"addFlags,omitempty"`
+
+	// RemoveFlags Example: ["\\Seen"]
 	RemoveFlags *[]string `json:"removeFlags,omitempty"`
 
 	// Uids Message UIDs to update. 1-100 entries, each > 0.
+	//
+	// Example: [42,43,44]
 	Uids []int `json:"uids"`
 }
 
 // V1FolderMessagesFlagsRequest Add and/or remove flags on a message. At least one of addFlags or removeFlags must be set.
 type V1FolderMessagesFlagsRequest struct {
-	AddFlags    *[]string `json:"addFlags,omitempty"`
+	// AddFlags Example: ["\\Seen","\\Flagged","$forwarded"]
+	AddFlags *[]string `json:"addFlags,omitempty"`
+
+	// RemoveFlags Example: ["\\Seen"]
 	RemoveFlags *[]string `json:"removeFlags,omitempty"`
 }
 
@@ -248,17 +266,35 @@ type V1FolderMessagesMessage struct {
 	Attachments []V1FolderMessagesMessageAttachment `json:"attachments"`
 	Bcc         []V1FolderMessagesMessageAddress    `json:"bcc"`
 	Cc          []V1FolderMessagesMessageAddress    `json:"cc"`
-	Date        time.Time                           `json:"date"`
-	Flags       []string                            `json:"flags"`
-	From        *V1FolderMessagesMessage_From       `json:"from"`
-	InReplyTo   *string                             `json:"inReplyTo"`
-	MessageId   *string                             `json:"messageId"`
-	Path        string                              `json:"path"`
-	Size        int                                 `json:"size"`
-	Subject     *string                             `json:"subject"`
-	To          []V1FolderMessagesMessageAddress    `json:"to"`
-	Uid         int                                 `json:"uid"`
-	Unseen      bool                                `json:"unseen"`
+
+	// Date Example: 2024-01-15T10:30:00.000Z
+	Date time.Time `json:"date"`
+
+	// Flags Example: ["\\Seen","\\Flagged"]
+	Flags []string                      `json:"flags"`
+	From  *V1FolderMessagesMessage_From `json:"from"`
+
+	// InReplyTo Example: <0987654321@example.com>
+	InReplyTo *string `json:"inReplyTo"`
+
+	// MessageId Example: <1234567890@example.com>
+	MessageId *string `json:"messageId"`
+
+	// Path Example: INBOX
+	Path string `json:"path"`
+
+	// Size Example: 2048
+	Size int `json:"size"`
+
+	// Subject Example: Test Email Subject
+	Subject *string                          `json:"subject"`
+	To      []V1FolderMessagesMessageAddress `json:"to"`
+
+	// Uid Example: 123
+	Uid int `json:"uid"`
+
+	// Unseen Example: false
+	Unseen bool `json:"unseen"`
 }
 
 // V1FolderMessagesMessage_From defines model for V1FolderMessagesMessage.From.
@@ -268,25 +304,42 @@ type V1FolderMessagesMessage_From struct {
 
 // V1FolderMessagesMessageAddress A single email address with optional display name.
 type V1FolderMessagesMessageAddress struct {
+	// Address Example: john@example.com
 	Address string `json:"address"`
-	Name    string `json:"name"`
+
+	// Name Example: John Doe
+	Name string `json:"name"`
 }
 
 // V1FolderMessagesMessageAttachment Attachment metadata attached to a message.
 type V1FolderMessagesMessageAttachment struct {
-	ContentId   *string `json:"contentId"`
-	ContentType string  `json:"contentType"`
-	Filename    *string `json:"filename"`
+	// ContentId Example: <attachment@example.com>
+	ContentId *string `json:"contentId"`
+
+	// ContentType Example: application/pdf
+	ContentType string `json:"contentType"`
+
+	// Filename Example: document.pdf
+	Filename *string `json:"filename"`
 
 	// Id Opaque attachment identifier. Use as the {attachmentId} path parameter on the download endpoint.
-	Id        string `json:"id"`
-	Inline    bool   `json:"inline"`
-	SizeBytes int    `json:"sizeBytes"`
+	//
+	// Example: YXR0YWNobWVudDpJTkJPWDoxMjM6MS4y
+	Id string `json:"id"`
+
+	// Inline Example: false
+	Inline bool `json:"inline"`
+
+	// SizeBytes Example: 1024
+	SizeBytes int `json:"sizeBytes"`
 }
 
 // V1FolderMessagesMessageText Rendered text and HTML parts of a message.
 type V1FolderMessagesMessageText struct {
+	// Html Example: <p>Hello world</p>
 	Html string `json:"html"`
+
+	// Text Example: Hello world
 	Text string `json:"text"`
 }
 
@@ -299,15 +352,21 @@ type V1FolderMessagesMessageTextResource struct {
 // V1FolderMessagesMoveBulkRequest Body for moving multiple messages to a target folder.
 type V1FolderMessagesMoveBulkRequest struct {
 	// TargetFolder Destination folder path.
+	//
+	// Example: INBOX.Sent
 	TargetFolder string `json:"targetFolder"`
 
 	// Uids Message UIDs to move. 1-100 entries, each > 0.
+	//
+	// Example: [42,43,44]
 	Uids []int `json:"uids"`
 }
 
 // V1FolderMessagesMoveRequest Body for moving a single message to a target folder.
 type V1FolderMessagesMoveRequest struct {
 	// TargetFolder Destination folder path.
+	//
+	// Example: INBOX.Sent
 	TargetFolder string `json:"targetFolder"`
 }
 
@@ -319,28 +378,58 @@ type V1FolderMessagesResource struct {
 
 // V1FolderMessagesSearchRequest Search criteria. All fields optional; combine to narrow results.
 type V1FolderMessagesSearchRequest struct {
-	Before  *openapi_types.Date `json:"before,omitempty"`
-	Body    *string             `json:"body,omitempty"`
-	Cc      *string             `json:"cc,omitempty"`
-	Flags   *[]string           `json:"flags,omitempty"`
-	From    *string             `json:"from,omitempty"`
-	Header  *string             `json:"header,omitempty"`
-	Larger  *int                `json:"larger,omitempty"`
-	Since   *openapi_types.Date `json:"since,omitempty"`
-	Smaller *int                `json:"smaller,omitempty"`
-	Subject *string             `json:"subject,omitempty"`
-	Text    *string             `json:"text,omitempty"`
-	To      *string             `json:"to,omitempty"`
-	Uid     *string             `json:"uid,omitempty"`
+	// Before Example: 2024-12-31
+	Before *openapi_types.Date `json:"before,omitempty"`
+
+	// Body Example: important
+	Body *string `json:"body,omitempty"`
+
+	// Cc Example: team@example.com
+	Cc *string `json:"cc,omitempty"`
+
+	// Flags Example: ["\\Seen","\\Flagged"]
+	Flags *[]string `json:"flags,omitempty"`
+
+	// From Example: john@example.com
+	From *string `json:"from,omitempty"`
+
+	// Header Example: X-Custom-Header:value
+	Header *string `json:"header,omitempty"`
+
+	// Larger Example: 1024
+	Larger *int `json:"larger,omitempty"`
+
+	// Since Example: 2024-01-01
+	Since *openapi_types.Date `json:"since,omitempty"`
+
+	// Smaller Example: 1048576
+	Smaller *int `json:"smaller,omitempty"`
+
+	// Subject Example: meeting
+	Subject *string `json:"subject,omitempty"`
+
+	// Text Example: urgent
+	Text *string `json:"text,omitempty"`
+
+	// To Example: jane@example.com
+	To *string `json:"to,omitempty"`
+
+	// Uid Example: 1:100
+	Uid *string `json:"uid,omitempty"`
 }
 
 // V1FolderMessagesUpdateFlagsResult Per-UID outcome of a bulk flag update. 200 when every UID succeeded, 207 when at least one failed.
 type V1FolderMessagesUpdateFlagsResult struct {
 	Data struct {
 		Failed []struct {
+			// Reason Example: Failed to update message flags
 			Reason string `json:"reason"`
-			Uid    int    `json:"uid"`
+
+			// Uid Example: 44
+			Uid int `json:"uid"`
 		} `json:"failed"`
+
+		// Successful Example: [42,43]
 		Successful []int `json:"successful"`
 	} `json:"data"`
 }
@@ -356,27 +445,41 @@ type V1FoldersCollection struct {
 // V1FoldersCreateRequest Body for creating a folder.
 type V1FoldersCreateRequest struct {
 	// Name Folder name. Length 1-100 after trimming.
+	//
+	// Example: Projects
 	Name string `json:"name"`
 }
 
 // V1FoldersFolder A folder (IMAP mailbox) in the managed mailbox.
 type V1FoldersFolder struct {
 	// Delimiter Hierarchy delimiter used by the IMAP server.
+	//
+	// Example: .
 	Delimiter string `json:"delimiter"`
 
 	// MessageCount Total number of messages in the folder.
+	//
+	// Example: 42
 	MessageCount int `json:"messageCount"`
 
 	// Name Leaf name of the folder.
+	//
+	// Example: Sent
 	Name string `json:"name"`
 
 	// Path Full hierarchical folder path including the delimiter.
+	//
+	// Example: INBOX.Sent
 	Path string `json:"path"`
 
 	// SpecialUse IMAP SPECIAL-USE attribute (RFC 6154). `null` for regular folders.
+	//
+	// Example: \Sent
 	SpecialUse *string `json:"specialUse"`
 
 	// UnreadCount Number of unread messages in the folder.
+	//
+	// Example: 5
 	UnreadCount int `json:"unreadCount"`
 }
 
@@ -389,15 +492,21 @@ type V1FoldersResource struct {
 // V1FoldersUpdateRequest Body for renaming a folder.
 type V1FoldersUpdateRequest struct {
 	// Name New folder name. Length 1-100 after trimming.
+	//
+	// Example: Archive
 	Name string `json:"name"`
 }
 
 // V1MeMailbox A mailbox the authenticated API token can manage.
 type V1MeMailbox struct {
 	// Address Email address of the mailbox.
+	//
+	// Example: user@example.com
 	Address openapi_types.Email `json:"address"`
 
 	// ResourceId Unique identifier of the mailbox.
+	//
+	// Example: AC1a2b3c4d5e6f7g
 	ResourceId string `json:"resourceId"`
 }
 
@@ -408,6 +517,8 @@ type V1MeResource struct {
 		Mailboxes []V1MeMailbox `json:"mailboxes"`
 
 		// OrderResourceId Identifier of the order this API token is scoped to.
+		//
+		// Example: OR1a2b3c4d5e6f7g
 		OrderResourceId string `json:"orderResourceId"`
 	} `json:"data"`
 }
@@ -418,30 +529,46 @@ type V1QuotaQuota struct {
 	Quotas []V1QuotaQuotaResource `json:"quotas"`
 
 	// Supported Whether the IMAP server reports quota information for this mailbox.
+	//
+	// Example: true
 	Supported bool `json:"supported"`
 
 	// TotalLimit Aggregate storage limit across all resources, in bytes.
+	//
+	// Example: 1073741824
 	TotalLimit int `json:"totalLimit"`
 
 	// TotalPercentage Aggregate storage usage as a percentage of the total limit.
+	//
+	// Example: 0
 	TotalPercentage int `json:"totalPercentage"`
 
 	// TotalUsage Aggregate storage usage across all resources, in bytes.
+	//
+	// Example: 1048576
 	TotalUsage int `json:"totalUsage"`
 }
 
 // V1QuotaQuotaResource Usage and limit for a single IMAP quota resource.
 type V1QuotaQuotaResource struct {
 	// Limit Maximum allowed value for the resource (bytes for STORAGE, count for MESSAGE).
+	//
+	// Example: 1073741824
 	Limit int `json:"limit"`
 
 	// Percentage Usage as a percentage of the limit.
+	//
+	// Example: 0
 	Percentage int `json:"percentage"`
 
 	// ResourceName Name of the quota resource as reported by the IMAP server.
+	//
+	// Example: STORAGE
 	ResourceName string `json:"resourceName"`
 
 	// Usage Current usage of the resource (bytes for STORAGE, count for MESSAGE).
+	//
+	// Example: 1048576
 	Usage int `json:"usage"`
 }
 
@@ -454,52 +581,80 @@ type V1QuotaResource struct {
 // V1SendAttachment Attachment payload for outgoing mail. Supports regular attachments and inline images linked via Content-ID.
 type V1SendAttachment struct {
 	// Cid Content-ID for inline images. Reference from HTML as <img src="cid:logo">.
+	//
+	// Example: logo
 	Cid *string `json:"cid,omitempty"`
 
 	// Content Attachment body. Base64-encoded by default; set encoding to switch.
-	Content     string  `json:"content"`
+	//
+	// Example: JVBERi0xLjQK...
+	Content string `json:"content"`
+
+	// ContentType Example: application/pdf
 	ContentType *string `json:"contentType,omitempty"`
 
 	// Encoding Encoding of content. Defaults to base64.
+	//
+	// Example: base64
 	Encoding *string `json:"encoding,omitempty"`
-	Filename string  `json:"filename"`
+
+	// Filename Example: invoice.pdf
+	Filename string `json:"filename"`
 }
 
 // V1SendMessageRef Reference to a source message by UID within a folder, used for reply/forward threading. Both fields are required.
 type V1SendMessageRef struct {
 	// Folder Folder containing the source message.
+	//
+	// Example: INBOX
 	Folder string `json:"folder"`
 
 	// Uid UID of the source message.
+	//
+	// Example: 123
 	Uid int `json:"uid"`
 }
 
 // V1SendRequest Outgoing message payload. At least one of to, cc, or bcc must be present.
 type V1SendRequest struct {
-	Attachments *[]V1SendAttachment    `json:"attachments,omitempty"`
-	Bcc         *[]openapi_types.Email `json:"bcc,omitempty"`
-	Cc          *[]openapi_types.Email `json:"cc,omitempty"`
-	DisplayName *string                `json:"displayName,omitempty"`
+	Attachments *[]V1SendAttachment `json:"attachments,omitempty"`
+
+	// Bcc Example: ["bcc@example.com"]
+	Bcc *[]openapi_types.Email `json:"bcc,omitempty"`
+
+	// Cc Example: ["cc@example.com"]
+	Cc *[]openapi_types.Email `json:"cc,omitempty"`
+
+	// DisplayName Example: John Doe
+	DisplayName *string `json:"displayName,omitempty"`
 
 	// ForwardOf Source message this forwards. Copies its Message-Id/References into In-Reply-To/References and flags it $forwarded. Mutually exclusive with inReplyTo.
 	ForwardOf *V1SendMessageRef `json:"forwardOf,omitempty"`
-	Html      *string           `json:"html,omitempty"`
+
+	// Html Example: <p>HTML body</p>
+	Html *string `json:"html,omitempty"`
 
 	// InReplyTo Source message this is a reply to. Copies its Message-Id/References into In-Reply-To/References and flags it \Answered. Mutually exclusive with forwardOf.
-	InReplyTo *V1SendMessageRef      `json:"inReplyTo,omitempty"`
-	Subject   *string                `json:"subject,omitempty"`
-	Text      *string                `json:"text,omitempty"`
-	To        *[]openapi_types.Email `json:"to,omitempty"`
-	union     json.RawMessage
+	InReplyTo *V1SendMessageRef `json:"inReplyTo,omitempty"`
+
+	// Subject Example: Hello
+	Subject *string `json:"subject,omitempty"`
+
+	// Text Example: Plain body
+	Text *string `json:"text,omitempty"`
+
+	// To Example: ["recipient@example.com"]
+	To    *[]openapi_types.Email `json:"to,omitempty"`
+	union json.RawMessage
 }
 
-// V1SendRequest0 defines model for .
+// V1SendRequest0 defines model for V1SendRequest.0.
 type V1SendRequest0 = interface{}
 
-// V1SendRequest1 defines model for .
+// V1SendRequest1 defines model for V1SendRequest.1.
 type V1SendRequest1 = interface{}
 
-// V1SendRequest2 defines model for .
+// V1SendRequest2 defines model for V1SendRequest.2.
 type V1SendRequest2 = interface{}
 
 // V1WebhooksCollection Paginated list of webhooks.
@@ -512,17 +667,26 @@ type V1WebhooksCollection struct {
 
 // V1WebhooksCreateRequest Body for creating a webhook.
 type V1WebhooksCreateRequest struct {
-	Description *string                         `json:"description,omitempty"`
-	Events      []V1WebhooksCreateRequestEvents `json:"events"`
-	Name        string                          `json:"name"`
-	Status      *V1WebhooksCreateRequestStatus  `json:"status,omitempty"`
-	Url         string                          `json:"url"`
+	// Description Example: Notifies CRM on new mail
+	Description *string `json:"description,omitempty"`
+
+	// Events Example: ["message.received"]
+	Events []V1WebhooksCreateRequestEvents `json:"events"`
+
+	// Name Example: New message notifier
+	Name string `json:"name"`
+
+	// Status Example: active
+	Status *V1WebhooksCreateRequestStatus `json:"status,omitempty"`
+
+	// Url Example: https://example.com/webhooks/incoming
+	Url string `json:"url"`
 }
 
 // V1WebhooksCreateRequestEvents defines model for V1WebhooksCreateRequest.Events.
 type V1WebhooksCreateRequestEvents string
 
-// V1WebhooksCreateRequestStatus defines model for V1WebhooksCreateRequest.Status.
+// V1WebhooksCreateRequestStatus Example: active
 type V1WebhooksCreateRequestStatus string
 
 // V1WebhooksResource Single webhook payload.
@@ -540,76 +704,128 @@ type V1WebhooksResourceWithSecret struct {
 // V1WebhooksTestResult Result of a webhook test delivery.
 type V1WebhooksTestResult struct {
 	Data struct {
-		Error      *string `json:"error,omitempty"`
-		HttpStatus int     `json:"httpStatus"`
-		Success    *bool   `json:"success,omitempty"`
+		// Error Example: Connection refused
+		Error *string `json:"error,omitempty"`
+
+		// HttpStatus Example: 200
+		HttpStatus int `json:"httpStatus"`
+
+		// Success Example: true
+		Success *bool `json:"success,omitempty"`
 	} `json:"data"`
 }
 
 // V1WebhooksUpdateRequest Body for partially updating a webhook. All fields optional; only present fields are applied.
 type V1WebhooksUpdateRequest struct {
-	Description *string                          `json:"description,omitempty"`
-	Events      *[]V1WebhooksUpdateRequestEvents `json:"events,omitempty"`
-	Name        *string                          `json:"name,omitempty"`
-	Status      *V1WebhooksUpdateRequestStatus   `json:"status,omitempty"`
-	Url         *string                          `json:"url,omitempty"`
+	// Description Example: Updated description
+	Description *string `json:"description,omitempty"`
+
+	// Events Example: ["message.received"]
+	Events *[]V1WebhooksUpdateRequestEvents `json:"events,omitempty"`
+
+	// Name Example: Renamed webhook
+	Name *string `json:"name,omitempty"`
+
+	// Status Example: paused
+	Status *V1WebhooksUpdateRequestStatus `json:"status,omitempty"`
+
+	// Url Example: https://example.com/webhooks/new
+	Url *string `json:"url,omitempty"`
 }
 
 // V1WebhooksUpdateRequestEvents defines model for V1WebhooksUpdateRequest.Events.
 type V1WebhooksUpdateRequestEvents string
 
-// V1WebhooksUpdateRequestStatus defines model for V1WebhooksUpdateRequest.Status.
+// V1WebhooksUpdateRequestStatus Example: paused
 type V1WebhooksUpdateRequestStatus string
 
 // V1WebhooksWebhook Webhook configured for a managed mailbox.
 type V1WebhooksWebhook struct {
 	// AccountResourceId Resource ID of the mailbox this webhook is attached to.
-	AccountResourceId string                    `json:"accountResourceId"`
-	CreatedAt         time.Time                 `json:"createdAt"`
-	Description       *string                   `json:"description"`
-	Events            []V1WebhooksWebhookEvents `json:"events"`
+	//
+	// Example: AC1a2b3c4d5e6f7g
+	AccountResourceId string `json:"accountResourceId"`
+
+	// CreatedAt Example: 2026-04-07T12:00:00+00:00
+	CreatedAt time.Time `json:"createdAt"`
+
+	// Description Example: Notifies our CRM when a new email arrives
+	Description *string                   `json:"description"`
+	Events      []V1WebhooksWebhookEvents `json:"events"`
 
 	// Id Unique webhook identifier (UUID v7).
+	//
+	// Example: 019683f8-1234-7abc-8def-0123456789ab
 	Id openapi_types.UUID `json:"id"`
 
 	// Mailbox Email address of the mailbox.
-	Mailbox   string                  `json:"mailbox"`
-	Name      string                  `json:"name"`
-	Status    V1WebhooksWebhookStatus `json:"status"`
-	UpdatedAt time.Time               `json:"updatedAt"`
-	Url       string                  `json:"url"`
+	//
+	// Example: user@example.com
+	Mailbox string `json:"mailbox"`
+
+	// Name Example: New message notifier
+	Name string `json:"name"`
+
+	// Status Example: active
+	Status V1WebhooksWebhookStatus `json:"status"`
+
+	// UpdatedAt Example: 2026-04-07T12:00:00+00:00
+	UpdatedAt time.Time `json:"updatedAt"`
+
+	// Url Example: https://example.com/webhooks/incoming
+	Url string `json:"url"`
 }
 
-// V1WebhooksWebhookEvents defines model for V1WebhooksWebhook.Events.
+// V1WebhooksWebhookEvents Example: message.received
 type V1WebhooksWebhookEvents string
 
-// V1WebhooksWebhookStatus defines model for V1WebhooksWebhook.Status.
+// V1WebhooksWebhookStatus Example: active
 type V1WebhooksWebhookStatus string
 
-// V1WebhooksWebhookWithSecret defines model for V1.Webhooks.WebhookWithSecret.
+// V1WebhooksWebhookWithSecret Webhook payload that includes the one-time `secret`. Returned at creation and after secret regeneration. The secret is delivered as a bearer token on every webhook request (`Authorization: Bearer <secret>`); store it securely as it is not returned again.
 type V1WebhooksWebhookWithSecret struct {
 	// AccountResourceId Resource ID of the mailbox this webhook is attached to.
-	AccountResourceId string                              `json:"accountResourceId"`
-	CreatedAt         time.Time                           `json:"createdAt"`
-	Description       *string                             `json:"description"`
-	Events            []V1WebhooksWebhookWithSecretEvents `json:"events"`
+	//
+	// Example: AC1a2b3c4d5e6f7g
+	AccountResourceId string `json:"accountResourceId"`
+
+	// CreatedAt Example: 2026-04-07T12:00:00+00:00
+	CreatedAt time.Time `json:"createdAt"`
+
+	// Description Example: Notifies our CRM when a new email arrives
+	Description *string                             `json:"description"`
+	Events      []V1WebhooksWebhookWithSecretEvents `json:"events"`
 
 	// Id Unique webhook identifier (UUID v7).
+	//
+	// Example: 019683f8-1234-7abc-8def-0123456789ab
 	Id openapi_types.UUID `json:"id"`
 
 	// Mailbox Email address of the mailbox.
-	Mailbox   string                            `json:"mailbox"`
-	Name      string                            `json:"name"`
-	Secret    *string                           `json:"secret,omitempty"`
-	Status    V1WebhooksWebhookWithSecretStatus `json:"status"`
-	UpdatedAt time.Time                         `json:"updatedAt"`
-	Url       string                            `json:"url"`
+	//
+	// Example: user@example.com
+	Mailbox string `json:"mailbox"`
+
+	// Name Example: New message notifier
+	Name string `json:"name"`
+
+	// Secret Example: 4a6f8b2d1e9c3f7a0b5d8e2c4f1a7b3d9e6c2f8a1b4d7e0c3f6a9b2d5e8c1f4
+	Secret string `json:"secret"`
+
+	// Status Example: active
+	Status V1WebhooksWebhookWithSecretStatus `json:"status"`
+
+	// UpdatedAt Example: 2026-04-07T12:00:00+00:00
+	UpdatedAt time.Time `json:"updatedAt"`
+
+	// Url Example: https://example.com/webhooks/incoming
+	Url string `json:"url"`
 }
 
-// V1WebhooksWebhookWithSecretEvents defines model for V1WebhooksWebhookWithSecret.Events.
+// V1WebhooksWebhookWithSecretEvents Example: message.received
 type V1WebhooksWebhookWithSecretEvents string
 
-// V1WebhooksWebhookWithSecretStatus defines model for V1WebhooksWebhookWithSecret.Status.
+// V1WebhooksWebhookWithSecretStatus Example: active
 type V1WebhooksWebhookWithSecretStatus string
 
 // CommonResponseBadGatewayResponse Standard error envelope. Frontend translations key off `code`, never off `error`.
@@ -632,9 +848,6 @@ type CommonResponseUnauthorizedResponse = Error
 
 // CommonResponseValidationFailedResponse Standard error envelope. Frontend translations key off `code`, never off `error`.
 type CommonResponseValidationFailedResponse = Error
-
-// bearerAuthContextKey is the context key for BearerAuth security scheme
-type bearerAuthContextKey string
 
 // ListFoldersParams defines parameters for ListFolders.
 type ListFoldersParams struct {
@@ -991,7 +1204,7 @@ func (t *V1SendRequest) UnmarshalJSON(b []byte) error {
 	return err
 }
 
-// RequestEditorFn  is the function signature for the RequestEditor callback function
+// RequestEditorFn is the function signature for the RequestEditor callback function
 type RequestEditorFn func(ctx context.Context, req *http.Request) error
 
 // Doer performs HTTP requests.
@@ -1064,110 +1277,323 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
-	// ListFolders request
+
+	// ListFolders List folders
+	//
+	// Retrieve a paginated list of folders in the managed mailbox.
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders (the `ListFolders` operationId).
 	ListFolders(ctx context.Context, mailboxResourceId string, params *ListFoldersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateFolderWithBody request with any body
+	// CreateFolderWithBody Create folder
+	//
+	// Create a new folder in the managed mailbox.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders (the `CreateFolder` operationId).
 	CreateFolderWithBody(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// CreateFolder Create folder
+	//
+	// Create a new folder in the managed mailbox.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders (the `CreateFolder` operationId).
 	CreateFolder(ctx context.Context, mailboxResourceId string, body CreateFolderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DeleteFolder request
+	// DeleteFolder Delete folder
+	//
+	// Delete a folder and all of its subfolders.
+	//
+	// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/folders/{folder} (the `DeleteFolder` operationId).
 	DeleteFolder(ctx context.Context, mailboxResourceId string, folder string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// UpdateFolderWithBody request with any body
+	// UpdateFolderWithBody Update folder
+	//
+	// Rename an existing folder.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/folders/{folder} (the `UpdateFolder` operationId).
 	UpdateFolderWithBody(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// UpdateFolder Update folder
+	//
+	// Rename an existing folder.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/folders/{folder} (the `UpdateFolder` operationId).
 	UpdateFolder(ctx context.Context, mailboxResourceId string, folder string, body UpdateFolderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DeleteAllMessages request
+	// DeleteAllMessages Delete all messages
+	//
+	// Permanently delete every message in a folder (empty the folder).
+	//
+	// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages (the `DeleteAllMessages` operationId).
 	DeleteAllMessages(ctx context.Context, mailboxResourceId string, folder string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ListMessages request
+	// ListMessages List messages
+	//
+	// List messages in a folder. Use POST /search for filtering. Sort fields: uid, date, size (prefix with `-` for descending). Default `-uid`.
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages (the `ListMessages` operationId).
 	ListMessages(ctx context.Context, mailboxResourceId string, folder string, params *ListMessagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DeleteMessagesWithBody request with any body
+	// DeleteMessagesWithBody Delete messages
+	//
+	// Permanently delete multiple messages from a folder.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/delete (the `DeleteMessages` operationId).
 	DeleteMessagesWithBody(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DeleteMessages Delete messages
+	//
+	// Permanently delete multiple messages from a folder.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/delete (the `DeleteMessages` operationId).
 	DeleteMessages(ctx context.Context, mailboxResourceId string, folder string, body DeleteMessagesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// UpdateMessageFlagsWithBody request with any body
+	// UpdateMessageFlagsWithBody Update message flags
+	//
+	// Add and/or remove flags on multiple messages. Returns 200 when all UIDs succeed, 207 with per-UID outcome when some fail.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/flags (the `UpdateMessageFlags` operationId).
 	UpdateMessageFlagsWithBody(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// UpdateMessageFlags Update message flags
+	//
+	// Add and/or remove flags on multiple messages. Returns 200 when all UIDs succeed, 207 with per-UID outcome when some fail.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/flags (the `UpdateMessageFlags` operationId).
 	UpdateMessageFlags(ctx context.Context, mailboxResourceId string, folder string, body UpdateMessageFlagsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// MoveMessagesWithBody request with any body
+	// MoveMessagesWithBody Move messages
+	//
+	// Move multiple messages from a source folder to a target folder.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/move (the `MoveMessages` operationId).
 	MoveMessagesWithBody(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// MoveMessages Move messages
+	//
+	// Move multiple messages from a source folder to a target folder.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/move (the `MoveMessages` operationId).
 	MoveMessages(ctx context.Context, mailboxResourceId string, folder string, body MoveMessagesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// SearchMessagesWithBody request with any body
+	// SearchMessagesWithBody Search messages
+	//
+	// Search messages in a folder. Filters in body; pagination and sort via query (`page`, `perPage`, `sort`).
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/search (the `SearchMessages` operationId).
 	SearchMessagesWithBody(ctx context.Context, mailboxResourceId string, folder string, params *SearchMessagesParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// SearchMessages Search messages
+	//
+	// Search messages in a folder. Filters in body; pagination and sort via query (`page`, `perPage`, `sort`).
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/search (the `SearchMessages` operationId).
 	SearchMessages(ctx context.Context, mailboxResourceId string, folder string, params *SearchMessagesParams, body SearchMessagesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DeleteMessage request
+	// DeleteMessage Delete message
+	//
+	// Permanently delete a single message.
+	//
+	// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid} (the `DeleteMessage` operationId).
 	DeleteMessage(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetMessage request
+	// GetMessage Get message
+	//
+	// Retrieve a single message by UID.
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid} (the `GetMessage` operationId).
 	GetMessage(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PatchMessageWithBody request with any body
+	// PatchMessageWithBody Update message flags
+	//
+	// Add and/or remove flags on a single message. Returns the updated message.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid} (the `PatchMessage` operationId).
 	PatchMessageWithBody(ctx context.Context, mailboxResourceId string, folder string, uid int, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// PatchMessage Update message flags
+	//
+	// Add and/or remove flags on a single message. Returns the updated message.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid} (the `PatchMessage` operationId).
 	PatchMessage(ctx context.Context, mailboxResourceId string, folder string, uid int, body PatchMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetMessageAttachment request
+	// GetMessageAttachment Download message attachment
+	//
+	// Download a message attachment as `application/octet-stream`.
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/attachments/{attachmentId} (the `GetMessageAttachment` operationId).
 	GetMessageAttachment(ctx context.Context, mailboxResourceId string, folder string, uid int, attachmentId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// MoveMessageWithBody request with any body
+	// MoveMessageWithBody Move message
+	//
+	// Move a single message to a target folder.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/move (the `MoveMessage` operationId).
 	MoveMessageWithBody(ctx context.Context, mailboxResourceId string, folder string, uid int, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// MoveMessage Move message
+	//
+	// Move a single message to a target folder.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/move (the `MoveMessage` operationId).
 	MoveMessage(ctx context.Context, mailboxResourceId string, folder string, uid int, body MoveMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetMessageSource request
+	// GetMessageSource Get message source
+	//
+	// Retrieve raw RFC822 source of a message as `message/rfc822` attachment.
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/source (the `GetMessageSource` operationId).
 	GetMessageSource(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetMessageText request
+	// GetMessageText Get message text content
+	//
+	// Retrieve rendered text (plain + HTML) of a message. Marks message as `\Seen`.
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/text (the `GetMessageText` operationId).
 	GetMessageText(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetQuota request
+	// GetQuota Get mailbox quota
+	//
+	// Retrieve storage and message quota usage for the managed mailbox.
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/quota (the `GetQuota` operationId).
 	GetQuota(ctx context.Context, mailboxResourceId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// SendEmailWithBody request with any body
+	// SendEmailWithBody Send email
+	//
+	// Send a message from the managed mailbox. Saves a copy to INBOX.Sent.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/send (the `SendEmail` operationId).
 	SendEmailWithBody(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// SendEmail Send email
+	//
+	// Send a message from the managed mailbox. Saves a copy to INBOX.Sent.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/send (the `SendEmail` operationId).
 	SendEmail(ctx context.Context, mailboxResourceId string, body SendEmailJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ListWebhooks request
+	// ListWebhooks List webhooks
+	//
+	// List webhooks for a mailbox.
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/webhooks (the `ListWebhooks` operationId).
 	ListWebhooks(ctx context.Context, mailboxResourceId string, params *ListWebhooksParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateWebhookWithBody request with any body
+	// CreateWebhookWithBody Create webhook
+	//
+	// Create a webhook. The response includes the one-time `secret` — store it securely as it is never returned again.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/webhooks (the `CreateWebhook` operationId).
 	CreateWebhookWithBody(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// CreateWebhook Create webhook
+	//
+	// Create a webhook. The response includes the one-time `secret` — store it securely as it is never returned again.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/webhooks (the `CreateWebhook` operationId).
 	CreateWebhook(ctx context.Context, mailboxResourceId string, body CreateWebhookJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DeleteWebhook request
+	// DeleteWebhook Delete webhook
+	//
+	// Delete a webhook.
+	//
+	// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook} (the `DeleteWebhook` operationId).
 	DeleteWebhook(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetWebhook request
+	// GetWebhook Get webhook
+	//
+	// Retrieve a single webhook by id.
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook} (the `GetWebhook` operationId).
 	GetWebhook(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// UpdateWebhookWithBody request with any body
+	// UpdateWebhookWithBody Update webhook
+	//
+	// Partially update a webhook.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook} (the `UpdateWebhook` operationId).
 	UpdateWebhookWithBody(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// UpdateWebhook Update webhook
+	//
+	// Partially update a webhook.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook} (the `UpdateWebhook` operationId).
 	UpdateWebhook(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, body UpdateWebhookJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RegenerateWebhookSecret request
+	// RegenerateWebhookSecret Regenerate webhook secret
+	//
+	// Regenerate the webhook secret. The previous secret is immediately invalidated. The new secret is returned once.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook}/regenerate-secret (the `RegenerateWebhookSecret` operationId).
 	RegenerateWebhookSecret(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// TestWebhook request
+	// TestWebhook Test webhook
+	//
+	// Send a test delivery to the webhook URL and return the upstream response.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook}/test (the `TestWebhook` operationId).
 	TestWebhook(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetCurrentAccount request
+	// GetCurrentAccount Get the authenticated account
+	//
+	// Returns the authenticated account and the mailboxes it can manage.
+	//
+	// Corresponds with GET /api/v1/me (the `GetCurrentAccount` operationId).
 	GetCurrentAccount(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
+// ListFolders List folders
+//
+// Retrieve a paginated list of folders in the managed mailbox.
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders (the `ListFolders` operationId).
 func (c *Client) ListFolders(ctx context.Context, mailboxResourceId string, params *ListFoldersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListFoldersRequest(c.Server, mailboxResourceId, params)
 	if err != nil {
@@ -1180,6 +1606,13 @@ func (c *Client) ListFolders(ctx context.Context, mailboxResourceId string, para
 	return c.Client.Do(req)
 }
 
+// CreateFolderWithBody Create folder
+//
+// Create a new folder in the managed mailbox.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders (the `CreateFolder` operationId).
 func (c *Client) CreateFolderWithBody(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateFolderRequestWithBody(c.Server, mailboxResourceId, contentType, body)
 	if err != nil {
@@ -1192,6 +1625,13 @@ func (c *Client) CreateFolderWithBody(ctx context.Context, mailboxResourceId str
 	return c.Client.Do(req)
 }
 
+// CreateFolder Create folder
+//
+// Create a new folder in the managed mailbox.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders (the `CreateFolder` operationId).
 func (c *Client) CreateFolder(ctx context.Context, mailboxResourceId string, body CreateFolderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateFolderRequest(c.Server, mailboxResourceId, body)
 	if err != nil {
@@ -1204,6 +1644,11 @@ func (c *Client) CreateFolder(ctx context.Context, mailboxResourceId string, bod
 	return c.Client.Do(req)
 }
 
+// DeleteFolder Delete folder
+//
+// Delete a folder and all of its subfolders.
+//
+// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/folders/{folder} (the `DeleteFolder` operationId).
 func (c *Client) DeleteFolder(ctx context.Context, mailboxResourceId string, folder string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteFolderRequest(c.Server, mailboxResourceId, folder)
 	if err != nil {
@@ -1216,6 +1661,13 @@ func (c *Client) DeleteFolder(ctx context.Context, mailboxResourceId string, fol
 	return c.Client.Do(req)
 }
 
+// UpdateFolderWithBody Update folder
+//
+// Rename an existing folder.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/folders/{folder} (the `UpdateFolder` operationId).
 func (c *Client) UpdateFolderWithBody(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateFolderRequestWithBody(c.Server, mailboxResourceId, folder, contentType, body)
 	if err != nil {
@@ -1228,6 +1680,13 @@ func (c *Client) UpdateFolderWithBody(ctx context.Context, mailboxResourceId str
 	return c.Client.Do(req)
 }
 
+// UpdateFolder Update folder
+//
+// Rename an existing folder.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/folders/{folder} (the `UpdateFolder` operationId).
 func (c *Client) UpdateFolder(ctx context.Context, mailboxResourceId string, folder string, body UpdateFolderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateFolderRequest(c.Server, mailboxResourceId, folder, body)
 	if err != nil {
@@ -1240,6 +1699,11 @@ func (c *Client) UpdateFolder(ctx context.Context, mailboxResourceId string, fol
 	return c.Client.Do(req)
 }
 
+// DeleteAllMessages Delete all messages
+//
+// Permanently delete every message in a folder (empty the folder).
+//
+// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages (the `DeleteAllMessages` operationId).
 func (c *Client) DeleteAllMessages(ctx context.Context, mailboxResourceId string, folder string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteAllMessagesRequest(c.Server, mailboxResourceId, folder)
 	if err != nil {
@@ -1252,6 +1716,11 @@ func (c *Client) DeleteAllMessages(ctx context.Context, mailboxResourceId string
 	return c.Client.Do(req)
 }
 
+// ListMessages List messages
+//
+// List messages in a folder. Use POST /search for filtering. Sort fields: uid, date, size (prefix with `-` for descending). Default `-uid`.
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages (the `ListMessages` operationId).
 func (c *Client) ListMessages(ctx context.Context, mailboxResourceId string, folder string, params *ListMessagesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListMessagesRequest(c.Server, mailboxResourceId, folder, params)
 	if err != nil {
@@ -1264,6 +1733,13 @@ func (c *Client) ListMessages(ctx context.Context, mailboxResourceId string, fol
 	return c.Client.Do(req)
 }
 
+// DeleteMessagesWithBody Delete messages
+//
+// Permanently delete multiple messages from a folder.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/delete (the `DeleteMessages` operationId).
 func (c *Client) DeleteMessagesWithBody(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteMessagesRequestWithBody(c.Server, mailboxResourceId, folder, contentType, body)
 	if err != nil {
@@ -1276,6 +1752,13 @@ func (c *Client) DeleteMessagesWithBody(ctx context.Context, mailboxResourceId s
 	return c.Client.Do(req)
 }
 
+// DeleteMessages Delete messages
+//
+// Permanently delete multiple messages from a folder.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/delete (the `DeleteMessages` operationId).
 func (c *Client) DeleteMessages(ctx context.Context, mailboxResourceId string, folder string, body DeleteMessagesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteMessagesRequest(c.Server, mailboxResourceId, folder, body)
 	if err != nil {
@@ -1288,6 +1771,13 @@ func (c *Client) DeleteMessages(ctx context.Context, mailboxResourceId string, f
 	return c.Client.Do(req)
 }
 
+// UpdateMessageFlagsWithBody Update message flags
+//
+// Add and/or remove flags on multiple messages. Returns 200 when all UIDs succeed, 207 with per-UID outcome when some fail.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/flags (the `UpdateMessageFlags` operationId).
 func (c *Client) UpdateMessageFlagsWithBody(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateMessageFlagsRequestWithBody(c.Server, mailboxResourceId, folder, contentType, body)
 	if err != nil {
@@ -1300,6 +1790,13 @@ func (c *Client) UpdateMessageFlagsWithBody(ctx context.Context, mailboxResource
 	return c.Client.Do(req)
 }
 
+// UpdateMessageFlags Update message flags
+//
+// Add and/or remove flags on multiple messages. Returns 200 when all UIDs succeed, 207 with per-UID outcome when some fail.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/flags (the `UpdateMessageFlags` operationId).
 func (c *Client) UpdateMessageFlags(ctx context.Context, mailboxResourceId string, folder string, body UpdateMessageFlagsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateMessageFlagsRequest(c.Server, mailboxResourceId, folder, body)
 	if err != nil {
@@ -1312,6 +1809,13 @@ func (c *Client) UpdateMessageFlags(ctx context.Context, mailboxResourceId strin
 	return c.Client.Do(req)
 }
 
+// MoveMessagesWithBody Move messages
+//
+// Move multiple messages from a source folder to a target folder.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/move (the `MoveMessages` operationId).
 func (c *Client) MoveMessagesWithBody(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewMoveMessagesRequestWithBody(c.Server, mailboxResourceId, folder, contentType, body)
 	if err != nil {
@@ -1324,6 +1828,13 @@ func (c *Client) MoveMessagesWithBody(ctx context.Context, mailboxResourceId str
 	return c.Client.Do(req)
 }
 
+// MoveMessages Move messages
+//
+// Move multiple messages from a source folder to a target folder.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/move (the `MoveMessages` operationId).
 func (c *Client) MoveMessages(ctx context.Context, mailboxResourceId string, folder string, body MoveMessagesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewMoveMessagesRequest(c.Server, mailboxResourceId, folder, body)
 	if err != nil {
@@ -1336,6 +1847,13 @@ func (c *Client) MoveMessages(ctx context.Context, mailboxResourceId string, fol
 	return c.Client.Do(req)
 }
 
+// SearchMessagesWithBody Search messages
+//
+// Search messages in a folder. Filters in body; pagination and sort via query (`page`, `perPage`, `sort`).
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/search (the `SearchMessages` operationId).
 func (c *Client) SearchMessagesWithBody(ctx context.Context, mailboxResourceId string, folder string, params *SearchMessagesParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSearchMessagesRequestWithBody(c.Server, mailboxResourceId, folder, params, contentType, body)
 	if err != nil {
@@ -1348,6 +1866,13 @@ func (c *Client) SearchMessagesWithBody(ctx context.Context, mailboxResourceId s
 	return c.Client.Do(req)
 }
 
+// SearchMessages Search messages
+//
+// Search messages in a folder. Filters in body; pagination and sort via query (`page`, `perPage`, `sort`).
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/search (the `SearchMessages` operationId).
 func (c *Client) SearchMessages(ctx context.Context, mailboxResourceId string, folder string, params *SearchMessagesParams, body SearchMessagesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSearchMessagesRequest(c.Server, mailboxResourceId, folder, params, body)
 	if err != nil {
@@ -1360,6 +1885,11 @@ func (c *Client) SearchMessages(ctx context.Context, mailboxResourceId string, f
 	return c.Client.Do(req)
 }
 
+// DeleteMessage Delete message
+//
+// Permanently delete a single message.
+//
+// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid} (the `DeleteMessage` operationId).
 func (c *Client) DeleteMessage(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteMessageRequest(c.Server, mailboxResourceId, folder, uid)
 	if err != nil {
@@ -1372,6 +1902,11 @@ func (c *Client) DeleteMessage(ctx context.Context, mailboxResourceId string, fo
 	return c.Client.Do(req)
 }
 
+// GetMessage Get message
+//
+// Retrieve a single message by UID.
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid} (the `GetMessage` operationId).
 func (c *Client) GetMessage(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetMessageRequest(c.Server, mailboxResourceId, folder, uid)
 	if err != nil {
@@ -1384,6 +1919,13 @@ func (c *Client) GetMessage(ctx context.Context, mailboxResourceId string, folde
 	return c.Client.Do(req)
 }
 
+// PatchMessageWithBody Update message flags
+//
+// Add and/or remove flags on a single message. Returns the updated message.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid} (the `PatchMessage` operationId).
 func (c *Client) PatchMessageWithBody(ctx context.Context, mailboxResourceId string, folder string, uid int, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPatchMessageRequestWithBody(c.Server, mailboxResourceId, folder, uid, contentType, body)
 	if err != nil {
@@ -1396,6 +1938,13 @@ func (c *Client) PatchMessageWithBody(ctx context.Context, mailboxResourceId str
 	return c.Client.Do(req)
 }
 
+// PatchMessage Update message flags
+//
+// Add and/or remove flags on a single message. Returns the updated message.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid} (the `PatchMessage` operationId).
 func (c *Client) PatchMessage(ctx context.Context, mailboxResourceId string, folder string, uid int, body PatchMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPatchMessageRequest(c.Server, mailboxResourceId, folder, uid, body)
 	if err != nil {
@@ -1408,6 +1957,11 @@ func (c *Client) PatchMessage(ctx context.Context, mailboxResourceId string, fol
 	return c.Client.Do(req)
 }
 
+// GetMessageAttachment Download message attachment
+//
+// Download a message attachment as `application/octet-stream`.
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/attachments/{attachmentId} (the `GetMessageAttachment` operationId).
 func (c *Client) GetMessageAttachment(ctx context.Context, mailboxResourceId string, folder string, uid int, attachmentId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetMessageAttachmentRequest(c.Server, mailboxResourceId, folder, uid, attachmentId)
 	if err != nil {
@@ -1420,6 +1974,13 @@ func (c *Client) GetMessageAttachment(ctx context.Context, mailboxResourceId str
 	return c.Client.Do(req)
 }
 
+// MoveMessageWithBody Move message
+//
+// Move a single message to a target folder.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/move (the `MoveMessage` operationId).
 func (c *Client) MoveMessageWithBody(ctx context.Context, mailboxResourceId string, folder string, uid int, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewMoveMessageRequestWithBody(c.Server, mailboxResourceId, folder, uid, contentType, body)
 	if err != nil {
@@ -1432,6 +1993,13 @@ func (c *Client) MoveMessageWithBody(ctx context.Context, mailboxResourceId stri
 	return c.Client.Do(req)
 }
 
+// MoveMessage Move message
+//
+// Move a single message to a target folder.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/move (the `MoveMessage` operationId).
 func (c *Client) MoveMessage(ctx context.Context, mailboxResourceId string, folder string, uid int, body MoveMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewMoveMessageRequest(c.Server, mailboxResourceId, folder, uid, body)
 	if err != nil {
@@ -1444,6 +2012,11 @@ func (c *Client) MoveMessage(ctx context.Context, mailboxResourceId string, fold
 	return c.Client.Do(req)
 }
 
+// GetMessageSource Get message source
+//
+// Retrieve raw RFC822 source of a message as `message/rfc822` attachment.
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/source (the `GetMessageSource` operationId).
 func (c *Client) GetMessageSource(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetMessageSourceRequest(c.Server, mailboxResourceId, folder, uid)
 	if err != nil {
@@ -1456,6 +2029,11 @@ func (c *Client) GetMessageSource(ctx context.Context, mailboxResourceId string,
 	return c.Client.Do(req)
 }
 
+// GetMessageText Get message text content
+//
+// Retrieve rendered text (plain + HTML) of a message. Marks message as `\Seen`.
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/text (the `GetMessageText` operationId).
 func (c *Client) GetMessageText(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetMessageTextRequest(c.Server, mailboxResourceId, folder, uid)
 	if err != nil {
@@ -1468,6 +2046,11 @@ func (c *Client) GetMessageText(ctx context.Context, mailboxResourceId string, f
 	return c.Client.Do(req)
 }
 
+// GetQuota Get mailbox quota
+//
+// Retrieve storage and message quota usage for the managed mailbox.
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/quota (the `GetQuota` operationId).
 func (c *Client) GetQuota(ctx context.Context, mailboxResourceId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetQuotaRequest(c.Server, mailboxResourceId)
 	if err != nil {
@@ -1480,6 +2063,13 @@ func (c *Client) GetQuota(ctx context.Context, mailboxResourceId string, reqEdit
 	return c.Client.Do(req)
 }
 
+// SendEmailWithBody Send email
+//
+// Send a message from the managed mailbox. Saves a copy to INBOX.Sent.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/send (the `SendEmail` operationId).
 func (c *Client) SendEmailWithBody(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSendEmailRequestWithBody(c.Server, mailboxResourceId, contentType, body)
 	if err != nil {
@@ -1492,6 +2082,13 @@ func (c *Client) SendEmailWithBody(ctx context.Context, mailboxResourceId string
 	return c.Client.Do(req)
 }
 
+// SendEmail Send email
+//
+// Send a message from the managed mailbox. Saves a copy to INBOX.Sent.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/send (the `SendEmail` operationId).
 func (c *Client) SendEmail(ctx context.Context, mailboxResourceId string, body SendEmailJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSendEmailRequest(c.Server, mailboxResourceId, body)
 	if err != nil {
@@ -1504,6 +2101,11 @@ func (c *Client) SendEmail(ctx context.Context, mailboxResourceId string, body S
 	return c.Client.Do(req)
 }
 
+// ListWebhooks List webhooks
+//
+// List webhooks for a mailbox.
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/webhooks (the `ListWebhooks` operationId).
 func (c *Client) ListWebhooks(ctx context.Context, mailboxResourceId string, params *ListWebhooksParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListWebhooksRequest(c.Server, mailboxResourceId, params)
 	if err != nil {
@@ -1516,6 +2118,13 @@ func (c *Client) ListWebhooks(ctx context.Context, mailboxResourceId string, par
 	return c.Client.Do(req)
 }
 
+// CreateWebhookWithBody Create webhook
+//
+// Create a webhook. The response includes the one-time `secret` — store it securely as it is never returned again.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/webhooks (the `CreateWebhook` operationId).
 func (c *Client) CreateWebhookWithBody(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateWebhookRequestWithBody(c.Server, mailboxResourceId, contentType, body)
 	if err != nil {
@@ -1528,6 +2137,13 @@ func (c *Client) CreateWebhookWithBody(ctx context.Context, mailboxResourceId st
 	return c.Client.Do(req)
 }
 
+// CreateWebhook Create webhook
+//
+// Create a webhook. The response includes the one-time `secret` — store it securely as it is never returned again.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/webhooks (the `CreateWebhook` operationId).
 func (c *Client) CreateWebhook(ctx context.Context, mailboxResourceId string, body CreateWebhookJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateWebhookRequest(c.Server, mailboxResourceId, body)
 	if err != nil {
@@ -1540,6 +2156,11 @@ func (c *Client) CreateWebhook(ctx context.Context, mailboxResourceId string, bo
 	return c.Client.Do(req)
 }
 
+// DeleteWebhook Delete webhook
+//
+// Delete a webhook.
+//
+// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook} (the `DeleteWebhook` operationId).
 func (c *Client) DeleteWebhook(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteWebhookRequest(c.Server, mailboxResourceId, webhook)
 	if err != nil {
@@ -1552,6 +2173,11 @@ func (c *Client) DeleteWebhook(ctx context.Context, mailboxResourceId string, we
 	return c.Client.Do(req)
 }
 
+// GetWebhook Get webhook
+//
+// Retrieve a single webhook by id.
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook} (the `GetWebhook` operationId).
 func (c *Client) GetWebhook(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetWebhookRequest(c.Server, mailboxResourceId, webhook)
 	if err != nil {
@@ -1564,6 +2190,13 @@ func (c *Client) GetWebhook(ctx context.Context, mailboxResourceId string, webho
 	return c.Client.Do(req)
 }
 
+// UpdateWebhookWithBody Update webhook
+//
+// Partially update a webhook.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook} (the `UpdateWebhook` operationId).
 func (c *Client) UpdateWebhookWithBody(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateWebhookRequestWithBody(c.Server, mailboxResourceId, webhook, contentType, body)
 	if err != nil {
@@ -1576,6 +2209,13 @@ func (c *Client) UpdateWebhookWithBody(ctx context.Context, mailboxResourceId st
 	return c.Client.Do(req)
 }
 
+// UpdateWebhook Update webhook
+//
+// Partially update a webhook.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook} (the `UpdateWebhook` operationId).
 func (c *Client) UpdateWebhook(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, body UpdateWebhookJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateWebhookRequest(c.Server, mailboxResourceId, webhook, body)
 	if err != nil {
@@ -1588,6 +2228,11 @@ func (c *Client) UpdateWebhook(ctx context.Context, mailboxResourceId string, we
 	return c.Client.Do(req)
 }
 
+// RegenerateWebhookSecret Regenerate webhook secret
+//
+// Regenerate the webhook secret. The previous secret is immediately invalidated. The new secret is returned once.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook}/regenerate-secret (the `RegenerateWebhookSecret` operationId).
 func (c *Client) RegenerateWebhookSecret(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRegenerateWebhookSecretRequest(c.Server, mailboxResourceId, webhook)
 	if err != nil {
@@ -1600,6 +2245,11 @@ func (c *Client) RegenerateWebhookSecret(ctx context.Context, mailboxResourceId 
 	return c.Client.Do(req)
 }
 
+// TestWebhook Test webhook
+//
+// Send a test delivery to the webhook URL and return the upstream response.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook}/test (the `TestWebhook` operationId).
 func (c *Client) TestWebhook(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewTestWebhookRequest(c.Server, mailboxResourceId, webhook)
 	if err != nil {
@@ -1612,6 +2262,11 @@ func (c *Client) TestWebhook(ctx context.Context, mailboxResourceId string, webh
 	return c.Client.Do(req)
 }
 
+// GetCurrentAccount Get the authenticated account
+//
+// Returns the authenticated account and the mailboxes it can manage.
+//
+// Corresponds with GET /api/v1/me (the `GetCurrentAccount` operationId).
 func (c *Client) GetCurrentAccount(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCurrentAccountRequest(c.Server)
 	if err != nil {
@@ -1624,7 +2279,7 @@ func (c *Client) GetCurrentAccount(ctx context.Context, reqEditors ...RequestEdi
 	return c.Client.Do(req)
 }
 
-// NewListFoldersRequest generates requests for ListFolders
+// NewListFoldersRequest constructs an http.Request for the ListFolders method
 func NewListFoldersRequest(server string, mailboxResourceId string, params *ListFoldersParams) (*http.Request, error) {
 	var err error
 
@@ -1708,7 +2363,7 @@ func NewCreateFolderRequest(server string, mailboxResourceId string, body Create
 	return NewCreateFolderRequestWithBody(server, mailboxResourceId, "application/json", bodyReader)
 }
 
-// NewCreateFolderRequestWithBody generates requests for CreateFolder with any type of body
+// NewCreateFolderRequestWithBody constructs an http.Request for the CreateFolder method, with any body, and a specified content type
 func NewCreateFolderRequestWithBody(server string, mailboxResourceId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -1744,7 +2399,7 @@ func NewCreateFolderRequestWithBody(server string, mailboxResourceId string, con
 	return req, nil
 }
 
-// NewDeleteFolderRequest generates requests for DeleteFolder
+// NewDeleteFolderRequest constructs an http.Request for the DeleteFolder method
 func NewDeleteFolderRequest(server string, mailboxResourceId string, folder string) (*http.Request, error) {
 	var err error
 
@@ -1796,7 +2451,7 @@ func NewUpdateFolderRequest(server string, mailboxResourceId string, folder stri
 	return NewUpdateFolderRequestWithBody(server, mailboxResourceId, folder, "application/json", bodyReader)
 }
 
-// NewUpdateFolderRequestWithBody generates requests for UpdateFolder with any type of body
+// NewUpdateFolderRequestWithBody constructs an http.Request for the UpdateFolder method, with any body, and a specified content type
 func NewUpdateFolderRequestWithBody(server string, mailboxResourceId string, folder string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -1839,7 +2494,7 @@ func NewUpdateFolderRequestWithBody(server string, mailboxResourceId string, fol
 	return req, nil
 }
 
-// NewDeleteAllMessagesRequest generates requests for DeleteAllMessages
+// NewDeleteAllMessagesRequest constructs an http.Request for the DeleteAllMessages method
 func NewDeleteAllMessagesRequest(server string, mailboxResourceId string, folder string) (*http.Request, error) {
 	var err error
 
@@ -1880,7 +2535,7 @@ func NewDeleteAllMessagesRequest(server string, mailboxResourceId string, folder
 	return req, nil
 }
 
-// NewListMessagesRequest generates requests for ListMessages
+// NewListMessagesRequest constructs an http.Request for the ListMessages method
 func NewListMessagesRequest(server string, mailboxResourceId string, folder string, params *ListMessagesParams) (*http.Request, error) {
 	var err error
 
@@ -1983,7 +2638,7 @@ func NewDeleteMessagesRequest(server string, mailboxResourceId string, folder st
 	return NewDeleteMessagesRequestWithBody(server, mailboxResourceId, folder, "application/json", bodyReader)
 }
 
-// NewDeleteMessagesRequestWithBody generates requests for DeleteMessages with any type of body
+// NewDeleteMessagesRequestWithBody constructs an http.Request for the DeleteMessages method, with any body, and a specified content type
 func NewDeleteMessagesRequestWithBody(server string, mailboxResourceId string, folder string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -2037,7 +2692,7 @@ func NewUpdateMessageFlagsRequest(server string, mailboxResourceId string, folde
 	return NewUpdateMessageFlagsRequestWithBody(server, mailboxResourceId, folder, "application/json", bodyReader)
 }
 
-// NewUpdateMessageFlagsRequestWithBody generates requests for UpdateMessageFlags with any type of body
+// NewUpdateMessageFlagsRequestWithBody constructs an http.Request for the UpdateMessageFlags method, with any body, and a specified content type
 func NewUpdateMessageFlagsRequestWithBody(server string, mailboxResourceId string, folder string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -2091,7 +2746,7 @@ func NewMoveMessagesRequest(server string, mailboxResourceId string, folder stri
 	return NewMoveMessagesRequestWithBody(server, mailboxResourceId, folder, "application/json", bodyReader)
 }
 
-// NewMoveMessagesRequestWithBody generates requests for MoveMessages with any type of body
+// NewMoveMessagesRequestWithBody constructs an http.Request for the MoveMessages method, with any body, and a specified content type
 func NewMoveMessagesRequestWithBody(server string, mailboxResourceId string, folder string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -2145,7 +2800,7 @@ func NewSearchMessagesRequest(server string, mailboxResourceId string, folder st
 	return NewSearchMessagesRequestWithBody(server, mailboxResourceId, folder, params, "application/json", bodyReader)
 }
 
-// NewSearchMessagesRequestWithBody generates requests for SearchMessages with any type of body
+// NewSearchMessagesRequestWithBody constructs an http.Request for the SearchMessages method, with any body, and a specified content type
 func NewSearchMessagesRequestWithBody(server string, mailboxResourceId string, folder string, params *SearchMessagesParams, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -2239,7 +2894,7 @@ func NewSearchMessagesRequestWithBody(server string, mailboxResourceId string, f
 	return req, nil
 }
 
-// NewDeleteMessageRequest generates requests for DeleteMessage
+// NewDeleteMessageRequest constructs an http.Request for the DeleteMessage method
 func NewDeleteMessageRequest(server string, mailboxResourceId string, folder string, uid int) (*http.Request, error) {
 	var err error
 
@@ -2287,7 +2942,7 @@ func NewDeleteMessageRequest(server string, mailboxResourceId string, folder str
 	return req, nil
 }
 
-// NewGetMessageRequest generates requests for GetMessage
+// NewGetMessageRequest constructs an http.Request for the GetMessage method
 func NewGetMessageRequest(server string, mailboxResourceId string, folder string, uid int) (*http.Request, error) {
 	var err error
 
@@ -2346,7 +3001,7 @@ func NewPatchMessageRequest(server string, mailboxResourceId string, folder stri
 	return NewPatchMessageRequestWithBody(server, mailboxResourceId, folder, uid, "application/json", bodyReader)
 }
 
-// NewPatchMessageRequestWithBody generates requests for PatchMessage with any type of body
+// NewPatchMessageRequestWithBody constructs an http.Request for the PatchMessage method, with any body, and a specified content type
 func NewPatchMessageRequestWithBody(server string, mailboxResourceId string, folder string, uid int, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -2396,7 +3051,7 @@ func NewPatchMessageRequestWithBody(server string, mailboxResourceId string, fol
 	return req, nil
 }
 
-// NewGetMessageAttachmentRequest generates requests for GetMessageAttachment
+// NewGetMessageAttachmentRequest constructs an http.Request for the GetMessageAttachment method
 func NewGetMessageAttachmentRequest(server string, mailboxResourceId string, folder string, uid int, attachmentId string) (*http.Request, error) {
 	var err error
 
@@ -2462,7 +3117,7 @@ func NewMoveMessageRequest(server string, mailboxResourceId string, folder strin
 	return NewMoveMessageRequestWithBody(server, mailboxResourceId, folder, uid, "application/json", bodyReader)
 }
 
-// NewMoveMessageRequestWithBody generates requests for MoveMessage with any type of body
+// NewMoveMessageRequestWithBody constructs an http.Request for the MoveMessage method, with any body, and a specified content type
 func NewMoveMessageRequestWithBody(server string, mailboxResourceId string, folder string, uid int, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -2512,7 +3167,7 @@ func NewMoveMessageRequestWithBody(server string, mailboxResourceId string, fold
 	return req, nil
 }
 
-// NewGetMessageSourceRequest generates requests for GetMessageSource
+// NewGetMessageSourceRequest constructs an http.Request for the GetMessageSource method
 func NewGetMessageSourceRequest(server string, mailboxResourceId string, folder string, uid int) (*http.Request, error) {
 	var err error
 
@@ -2560,7 +3215,7 @@ func NewGetMessageSourceRequest(server string, mailboxResourceId string, folder 
 	return req, nil
 }
 
-// NewGetMessageTextRequest generates requests for GetMessageText
+// NewGetMessageTextRequest constructs an http.Request for the GetMessageText method
 func NewGetMessageTextRequest(server string, mailboxResourceId string, folder string, uid int) (*http.Request, error) {
 	var err error
 
@@ -2608,7 +3263,7 @@ func NewGetMessageTextRequest(server string, mailboxResourceId string, folder st
 	return req, nil
 }
 
-// NewGetQuotaRequest generates requests for GetQuota
+// NewGetQuotaRequest constructs an http.Request for the GetQuota method
 func NewGetQuotaRequest(server string, mailboxResourceId string) (*http.Request, error) {
 	var err error
 
@@ -2653,7 +3308,7 @@ func NewSendEmailRequest(server string, mailboxResourceId string, body SendEmail
 	return NewSendEmailRequestWithBody(server, mailboxResourceId, "application/json", bodyReader)
 }
 
-// NewSendEmailRequestWithBody generates requests for SendEmail with any type of body
+// NewSendEmailRequestWithBody constructs an http.Request for the SendEmail method, with any body, and a specified content type
 func NewSendEmailRequestWithBody(server string, mailboxResourceId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -2689,7 +3344,7 @@ func NewSendEmailRequestWithBody(server string, mailboxResourceId string, conten
 	return req, nil
 }
 
-// NewListWebhooksRequest generates requests for ListWebhooks
+// NewListWebhooksRequest constructs an http.Request for the ListWebhooks method
 func NewListWebhooksRequest(server string, mailboxResourceId string, params *ListWebhooksParams) (*http.Request, error) {
 	var err error
 
@@ -2785,7 +3440,7 @@ func NewCreateWebhookRequest(server string, mailboxResourceId string, body Creat
 	return NewCreateWebhookRequestWithBody(server, mailboxResourceId, "application/json", bodyReader)
 }
 
-// NewCreateWebhookRequestWithBody generates requests for CreateWebhook with any type of body
+// NewCreateWebhookRequestWithBody constructs an http.Request for the CreateWebhook method, with any body, and a specified content type
 func NewCreateWebhookRequestWithBody(server string, mailboxResourceId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -2821,7 +3476,7 @@ func NewCreateWebhookRequestWithBody(server string, mailboxResourceId string, co
 	return req, nil
 }
 
-// NewDeleteWebhookRequest generates requests for DeleteWebhook
+// NewDeleteWebhookRequest constructs an http.Request for the DeleteWebhook method
 func NewDeleteWebhookRequest(server string, mailboxResourceId string, webhook openapi_types.UUID) (*http.Request, error) {
 	var err error
 
@@ -2862,7 +3517,7 @@ func NewDeleteWebhookRequest(server string, mailboxResourceId string, webhook op
 	return req, nil
 }
 
-// NewGetWebhookRequest generates requests for GetWebhook
+// NewGetWebhookRequest constructs an http.Request for the GetWebhook method
 func NewGetWebhookRequest(server string, mailboxResourceId string, webhook openapi_types.UUID) (*http.Request, error) {
 	var err error
 
@@ -2914,7 +3569,7 @@ func NewUpdateWebhookRequest(server string, mailboxResourceId string, webhook op
 	return NewUpdateWebhookRequestWithBody(server, mailboxResourceId, webhook, "application/json", bodyReader)
 }
 
-// NewUpdateWebhookRequestWithBody generates requests for UpdateWebhook with any type of body
+// NewUpdateWebhookRequestWithBody constructs an http.Request for the UpdateWebhook method, with any body, and a specified content type
 func NewUpdateWebhookRequestWithBody(server string, mailboxResourceId string, webhook openapi_types.UUID, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
@@ -2957,7 +3612,7 @@ func NewUpdateWebhookRequestWithBody(server string, mailboxResourceId string, we
 	return req, nil
 }
 
-// NewRegenerateWebhookSecretRequest generates requests for RegenerateWebhookSecret
+// NewRegenerateWebhookSecretRequest constructs an http.Request for the RegenerateWebhookSecret method
 func NewRegenerateWebhookSecretRequest(server string, mailboxResourceId string, webhook openapi_types.UUID) (*http.Request, error) {
 	var err error
 
@@ -2998,7 +3653,7 @@ func NewRegenerateWebhookSecretRequest(server string, mailboxResourceId string, 
 	return req, nil
 }
 
-// NewTestWebhookRequest generates requests for TestWebhook
+// NewTestWebhookRequest constructs an http.Request for the TestWebhook method
 func NewTestWebhookRequest(server string, mailboxResourceId string, webhook openapi_types.UUID) (*http.Request, error) {
 	var err error
 
@@ -3039,7 +3694,7 @@ func NewTestWebhookRequest(server string, mailboxResourceId string, webhook open
 	return req, nil
 }
 
-// NewGetCurrentAccountRequest generates requests for GetCurrentAccount
+// NewGetCurrentAccountRequest constructs an http.Request for the GetCurrentAccount method
 func NewGetCurrentAccountRequest(server string) (*http.Request, error) {
 	var err error
 
@@ -3109,119 +3764,400 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
-	// ListFoldersWithResponse request
+
+	// ListFoldersWithResponse List folders
+	//
+	// Retrieve a paginated list of folders in the managed mailbox.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders (the `ListFolders` operationId).
 	ListFoldersWithResponse(ctx context.Context, mailboxResourceId string, params *ListFoldersParams, reqEditors ...RequestEditorFn) (*ListFoldersResponse, error)
 
-	// CreateFolderWithBodyWithResponse request with any body
+	// CreateFolderWithBodyWithResponse Create folder
+	//
+	// Create a new folder in the managed mailbox.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders (the `CreateFolder` operationId).
 	CreateFolderWithBodyWithResponse(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFolderResponse, error)
 
+	// CreateFolderWithResponse Create folder
+	//
+	// Create a new folder in the managed mailbox.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders (the `CreateFolder` operationId).
 	CreateFolderWithResponse(ctx context.Context, mailboxResourceId string, body CreateFolderJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFolderResponse, error)
 
-	// DeleteFolderWithResponse request
+	// DeleteFolderWithResponse Delete folder
+	//
+	// Delete a folder and all of its subfolders.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/folders/{folder} (the `DeleteFolder` operationId).
 	DeleteFolderWithResponse(ctx context.Context, mailboxResourceId string, folder string, reqEditors ...RequestEditorFn) (*DeleteFolderResponse, error)
 
-	// UpdateFolderWithBodyWithResponse request with any body
+	// UpdateFolderWithBodyWithResponse Update folder
+	//
+	// Rename an existing folder.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/folders/{folder} (the `UpdateFolder` operationId).
 	UpdateFolderWithBodyWithResponse(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFolderResponse, error)
 
+	// UpdateFolderWithResponse Update folder
+	//
+	// Rename an existing folder.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/folders/{folder} (the `UpdateFolder` operationId).
 	UpdateFolderWithResponse(ctx context.Context, mailboxResourceId string, folder string, body UpdateFolderJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFolderResponse, error)
 
-	// DeleteAllMessagesWithResponse request
+	// DeleteAllMessagesWithResponse Delete all messages
+	//
+	// Permanently delete every message in a folder (empty the folder).
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages (the `DeleteAllMessages` operationId).
 	DeleteAllMessagesWithResponse(ctx context.Context, mailboxResourceId string, folder string, reqEditors ...RequestEditorFn) (*DeleteAllMessagesResponse, error)
 
-	// ListMessagesWithResponse request
+	// ListMessagesWithResponse List messages
+	//
+	// List messages in a folder. Use POST /search for filtering. Sort fields: uid, date, size (prefix with `-` for descending). Default `-uid`.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages (the `ListMessages` operationId).
 	ListMessagesWithResponse(ctx context.Context, mailboxResourceId string, folder string, params *ListMessagesParams, reqEditors ...RequestEditorFn) (*ListMessagesResponse, error)
 
-	// DeleteMessagesWithBodyWithResponse request with any body
+	// DeleteMessagesWithBodyWithResponse Delete messages
+	//
+	// Permanently delete multiple messages from a folder.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/delete (the `DeleteMessages` operationId).
 	DeleteMessagesWithBodyWithResponse(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DeleteMessagesResponse, error)
 
+	// DeleteMessagesWithResponse Delete messages
+	//
+	// Permanently delete multiple messages from a folder.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/delete (the `DeleteMessages` operationId).
 	DeleteMessagesWithResponse(ctx context.Context, mailboxResourceId string, folder string, body DeleteMessagesJSONRequestBody, reqEditors ...RequestEditorFn) (*DeleteMessagesResponse, error)
 
-	// UpdateMessageFlagsWithBodyWithResponse request with any body
+	// UpdateMessageFlagsWithBodyWithResponse Update message flags
+	//
+	// Add and/or remove flags on multiple messages. Returns 200 when all UIDs succeed, 207 with per-UID outcome when some fail.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/flags (the `UpdateMessageFlags` operationId).
 	UpdateMessageFlagsWithBodyWithResponse(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateMessageFlagsResponse, error)
 
+	// UpdateMessageFlagsWithResponse Update message flags
+	//
+	// Add and/or remove flags on multiple messages. Returns 200 when all UIDs succeed, 207 with per-UID outcome when some fail.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/flags (the `UpdateMessageFlags` operationId).
 	UpdateMessageFlagsWithResponse(ctx context.Context, mailboxResourceId string, folder string, body UpdateMessageFlagsJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateMessageFlagsResponse, error)
 
-	// MoveMessagesWithBodyWithResponse request with any body
+	// MoveMessagesWithBodyWithResponse Move messages
+	//
+	// Move multiple messages from a source folder to a target folder.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/move (the `MoveMessages` operationId).
 	MoveMessagesWithBodyWithResponse(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MoveMessagesResponse, error)
 
+	// MoveMessagesWithResponse Move messages
+	//
+	// Move multiple messages from a source folder to a target folder.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/move (the `MoveMessages` operationId).
 	MoveMessagesWithResponse(ctx context.Context, mailboxResourceId string, folder string, body MoveMessagesJSONRequestBody, reqEditors ...RequestEditorFn) (*MoveMessagesResponse, error)
 
-	// SearchMessagesWithBodyWithResponse request with any body
+	// SearchMessagesWithBodyWithResponse Search messages
+	//
+	// Search messages in a folder. Filters in body; pagination and sort via query (`page`, `perPage`, `sort`).
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/search (the `SearchMessages` operationId).
 	SearchMessagesWithBodyWithResponse(ctx context.Context, mailboxResourceId string, folder string, params *SearchMessagesParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SearchMessagesResponse, error)
 
+	// SearchMessagesWithResponse Search messages
+	//
+	// Search messages in a folder. Filters in body; pagination and sort via query (`page`, `perPage`, `sort`).
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/search (the `SearchMessages` operationId).
 	SearchMessagesWithResponse(ctx context.Context, mailboxResourceId string, folder string, params *SearchMessagesParams, body SearchMessagesJSONRequestBody, reqEditors ...RequestEditorFn) (*SearchMessagesResponse, error)
 
-	// DeleteMessageWithResponse request
+	// DeleteMessageWithResponse Delete message
+	//
+	// Permanently delete a single message.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid} (the `DeleteMessage` operationId).
 	DeleteMessageWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*DeleteMessageResponse, error)
 
-	// GetMessageWithResponse request
+	// GetMessageWithResponse Get message
+	//
+	// Retrieve a single message by UID.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid} (the `GetMessage` operationId).
 	GetMessageWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*GetMessageResponse, error)
 
-	// PatchMessageWithBodyWithResponse request with any body
+	// PatchMessageWithBodyWithResponse Update message flags
+	//
+	// Add and/or remove flags on a single message. Returns the updated message.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid} (the `PatchMessage` operationId).
 	PatchMessageWithBodyWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchMessageResponse, error)
 
+	// PatchMessageWithResponse Update message flags
+	//
+	// Add and/or remove flags on a single message. Returns the updated message.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid} (the `PatchMessage` operationId).
 	PatchMessageWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, body PatchMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchMessageResponse, error)
 
-	// GetMessageAttachmentWithResponse request
+	// GetMessageAttachmentWithResponse Download message attachment
+	//
+	// Download a message attachment as `application/octet-stream`.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/attachments/{attachmentId} (the `GetMessageAttachment` operationId).
 	GetMessageAttachmentWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, attachmentId string, reqEditors ...RequestEditorFn) (*GetMessageAttachmentResponse, error)
 
-	// MoveMessageWithBodyWithResponse request with any body
+	// MoveMessageWithBodyWithResponse Move message
+	//
+	// Move a single message to a target folder.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/move (the `MoveMessage` operationId).
 	MoveMessageWithBodyWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MoveMessageResponse, error)
 
+	// MoveMessageWithResponse Move message
+	//
+	// Move a single message to a target folder.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/move (the `MoveMessage` operationId).
 	MoveMessageWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, body MoveMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*MoveMessageResponse, error)
 
-	// GetMessageSourceWithResponse request
+	// GetMessageSourceWithResponse Get message source
+	//
+	// Retrieve raw RFC822 source of a message as `message/rfc822` attachment.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/source (the `GetMessageSource` operationId).
 	GetMessageSourceWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*GetMessageSourceResponse, error)
 
-	// GetMessageTextWithResponse request
+	// GetMessageTextWithResponse Get message text content
+	//
+	// Retrieve rendered text (plain + HTML) of a message. Marks message as `\Seen`.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/text (the `GetMessageText` operationId).
 	GetMessageTextWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*GetMessageTextResponse, error)
 
-	// GetQuotaWithResponse request
+	// GetQuotaWithResponse Get mailbox quota
+	//
+	// Retrieve storage and message quota usage for the managed mailbox.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/quota (the `GetQuota` operationId).
 	GetQuotaWithResponse(ctx context.Context, mailboxResourceId string, reqEditors ...RequestEditorFn) (*GetQuotaResponse, error)
 
-	// SendEmailWithBodyWithResponse request with any body
+	// SendEmailWithBodyWithResponse Send email
+	//
+	// Send a message from the managed mailbox. Saves a copy to INBOX.Sent.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/send (the `SendEmail` operationId).
 	SendEmailWithBodyWithResponse(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SendEmailResponse, error)
 
+	// SendEmailWithResponse Send email
+	//
+	// Send a message from the managed mailbox. Saves a copy to INBOX.Sent.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/send (the `SendEmail` operationId).
 	SendEmailWithResponse(ctx context.Context, mailboxResourceId string, body SendEmailJSONRequestBody, reqEditors ...RequestEditorFn) (*SendEmailResponse, error)
 
-	// ListWebhooksWithResponse request
+	// ListWebhooksWithResponse List webhooks
+	//
+	// List webhooks for a mailbox.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/webhooks (the `ListWebhooks` operationId).
 	ListWebhooksWithResponse(ctx context.Context, mailboxResourceId string, params *ListWebhooksParams, reqEditors ...RequestEditorFn) (*ListWebhooksResponse, error)
 
-	// CreateWebhookWithBodyWithResponse request with any body
+	// CreateWebhookWithBodyWithResponse Create webhook
+	//
+	// Create a webhook. The response includes the one-time `secret` — store it securely as it is never returned again.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/webhooks (the `CreateWebhook` operationId).
 	CreateWebhookWithBodyWithResponse(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWebhookResponse, error)
 
+	// CreateWebhookWithResponse Create webhook
+	//
+	// Create a webhook. The response includes the one-time `secret` — store it securely as it is never returned again.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/webhooks (the `CreateWebhook` operationId).
 	CreateWebhookWithResponse(ctx context.Context, mailboxResourceId string, body CreateWebhookJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateWebhookResponse, error)
 
-	// DeleteWebhookWithResponse request
+	// DeleteWebhookWithResponse Delete webhook
+	//
+	// Delete a webhook.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook} (the `DeleteWebhook` operationId).
 	DeleteWebhookWithResponse(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteWebhookResponse, error)
 
-	// GetWebhookWithResponse request
+	// GetWebhookWithResponse Get webhook
+	//
+	// Retrieve a single webhook by id.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook} (the `GetWebhook` operationId).
 	GetWebhookWithResponse(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetWebhookResponse, error)
 
-	// UpdateWebhookWithBodyWithResponse request with any body
+	// UpdateWebhookWithBodyWithResponse Update webhook
+	//
+	// Partially update a webhook.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook} (the `UpdateWebhook` operationId).
 	UpdateWebhookWithBodyWithResponse(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateWebhookResponse, error)
 
+	// UpdateWebhookWithResponse Update webhook
+	//
+	// Partially update a webhook.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook} (the `UpdateWebhook` operationId).
 	UpdateWebhookWithResponse(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, body UpdateWebhookJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateWebhookResponse, error)
 
-	// RegenerateWebhookSecretWithResponse request
+	// RegenerateWebhookSecretWithResponse Regenerate webhook secret
+	//
+	// Regenerate the webhook secret. The previous secret is immediately invalidated. The new secret is returned once.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook}/regenerate-secret (the `RegenerateWebhookSecret` operationId).
 	RegenerateWebhookSecretWithResponse(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, reqEditors ...RequestEditorFn) (*RegenerateWebhookSecretResponse, error)
 
-	// TestWebhookWithResponse request
+	// TestWebhookWithResponse Test webhook
+	//
+	// Send a test delivery to the webhook URL and return the upstream response.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook}/test (the `TestWebhook` operationId).
 	TestWebhookWithResponse(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, reqEditors ...RequestEditorFn) (*TestWebhookResponse, error)
 
-	// GetCurrentAccountWithResponse request
+	// GetCurrentAccountWithResponse Get the authenticated account
+	//
+	// Returns the authenticated account and the mailboxes it can manage.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/me (the `GetCurrentAccount` operationId).
 	GetCurrentAccountWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetCurrentAccountResponse, error)
 }
 
 type ListFoldersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *V1FoldersCollection
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1FoldersCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ListFoldersResponse) GetJSON200() *V1FoldersCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ListFoldersResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r ListFoldersResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ListFoldersResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ListFoldersResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r ListFoldersResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r ListFoldersResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3251,13 +4187,60 @@ func (r ListFoldersResponse) ContentType() string {
 type CreateFolderResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON201      *V1FoldersResource
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON409      *CommonResponseConflictResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON201 the response for an HTTP 201 `application/json` response
+	JSON201 *V1FoldersResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *CommonResponseConflictResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON201 returns the response for an HTTP 201 `application/json` response
+func (r CreateFolderResponse) GetJSON201() *V1FoldersResource {
+	return r.JSON201
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r CreateFolderResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r CreateFolderResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r CreateFolderResponse) GetJSON409() *CommonResponseConflictResponse {
+	return r.JSON409
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r CreateFolderResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r CreateFolderResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r CreateFolderResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r CreateFolderResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3287,13 +4270,60 @@ func (r CreateFolderResponse) ContentType() string {
 type DeleteFolderResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON404      *CommonResponseNotFoundResponse
-	JSON409      *CommonResponseConflictResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *CommonResponseConflictResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DeleteFolderResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r DeleteFolderResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r DeleteFolderResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r DeleteFolderResponse) GetJSON409() *CommonResponseConflictResponse {
+	return r.JSON409
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r DeleteFolderResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DeleteFolderResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r DeleteFolderResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r DeleteFolderResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3323,13 +4353,60 @@ func (r DeleteFolderResponse) ContentType() string {
 type UpdateFolderResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *V1FoldersResource
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON409      *CommonResponseConflictResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1FoldersResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *CommonResponseConflictResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r UpdateFolderResponse) GetJSON200() *V1FoldersResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r UpdateFolderResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r UpdateFolderResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r UpdateFolderResponse) GetJSON409() *CommonResponseConflictResponse {
+	return r.JSON409
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r UpdateFolderResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r UpdateFolderResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r UpdateFolderResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r UpdateFolderResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3359,12 +4436,53 @@ func (r UpdateFolderResponse) ContentType() string {
 type DeleteAllMessagesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON404      *CommonResponseNotFoundResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DeleteAllMessagesResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r DeleteAllMessagesResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r DeleteAllMessagesResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r DeleteAllMessagesResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DeleteAllMessagesResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r DeleteAllMessagesResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r DeleteAllMessagesResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3394,12 +4512,53 @@ func (r DeleteAllMessagesResponse) ContentType() string {
 type ListMessagesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *V1FolderMessagesCollection
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1FolderMessagesCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ListMessagesResponse) GetJSON200() *V1FolderMessagesCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ListMessagesResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r ListMessagesResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ListMessagesResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ListMessagesResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r ListMessagesResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r ListMessagesResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3429,11 +4588,46 @@ func (r ListMessagesResponse) ContentType() string {
 type DeleteMessagesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DeleteMessagesResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r DeleteMessagesResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r DeleteMessagesResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DeleteMessagesResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r DeleteMessagesResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r DeleteMessagesResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3463,13 +4657,60 @@ func (r DeleteMessagesResponse) ContentType() string {
 type UpdateMessageFlagsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *V1FolderMessagesUpdateFlagsResult
-	JSON207      *V1FolderMessagesUpdateFlagsResult
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1FolderMessagesUpdateFlagsResult
+	// JSON207 the response for an HTTP 207 `application/json` response
+	JSON207 *V1FolderMessagesUpdateFlagsResult
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r UpdateMessageFlagsResponse) GetJSON200() *V1FolderMessagesUpdateFlagsResult {
+	return r.JSON200
+}
+
+// GetJSON207 returns the response for an HTTP 207 `application/json` response
+func (r UpdateMessageFlagsResponse) GetJSON207() *V1FolderMessagesUpdateFlagsResult {
+	return r.JSON207
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r UpdateMessageFlagsResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r UpdateMessageFlagsResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r UpdateMessageFlagsResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r UpdateMessageFlagsResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r UpdateMessageFlagsResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r UpdateMessageFlagsResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3499,11 +4740,46 @@ func (r UpdateMessageFlagsResponse) ContentType() string {
 type MoveMessagesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r MoveMessagesResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r MoveMessagesResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r MoveMessagesResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r MoveMessagesResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r MoveMessagesResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r MoveMessagesResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3533,12 +4809,53 @@ func (r MoveMessagesResponse) ContentType() string {
 type SearchMessagesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *V1FolderMessagesCollection
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1FolderMessagesCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r SearchMessagesResponse) GetJSON200() *V1FolderMessagesCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r SearchMessagesResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r SearchMessagesResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r SearchMessagesResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r SearchMessagesResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r SearchMessagesResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r SearchMessagesResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3568,11 +4885,46 @@ func (r SearchMessagesResponse) ContentType() string {
 type DeleteMessageResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DeleteMessageResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r DeleteMessageResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r DeleteMessageResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DeleteMessageResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r DeleteMessageResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r DeleteMessageResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3602,13 +4954,60 @@ func (r DeleteMessageResponse) ContentType() string {
 type GetMessageResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *V1FolderMessagesResource
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON404      *CommonResponseNotFoundResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1FolderMessagesResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetMessageResponse) GetJSON200() *V1FolderMessagesResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GetMessageResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetMessageResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetMessageResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r GetMessageResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetMessageResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r GetMessageResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r GetMessageResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3638,13 +5037,60 @@ func (r GetMessageResponse) ContentType() string {
 type PatchMessageResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *V1FolderMessagesResource
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON404      *CommonResponseNotFoundResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1FolderMessagesResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r PatchMessageResponse) GetJSON200() *V1FolderMessagesResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r PatchMessageResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r PatchMessageResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r PatchMessageResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r PatchMessageResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r PatchMessageResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r PatchMessageResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r PatchMessageResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3674,12 +5120,53 @@ func (r PatchMessageResponse) ContentType() string {
 type GetMessageAttachmentResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON404      *CommonResponseNotFoundResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GetMessageAttachmentResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetMessageAttachmentResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetMessageAttachmentResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r GetMessageAttachmentResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetMessageAttachmentResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r GetMessageAttachmentResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r GetMessageAttachmentResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3709,11 +5196,46 @@ func (r GetMessageAttachmentResponse) ContentType() string {
 type MoveMessageResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r MoveMessageResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r MoveMessageResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r MoveMessageResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r MoveMessageResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r MoveMessageResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r MoveMessageResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3743,12 +5265,53 @@ func (r MoveMessageResponse) ContentType() string {
 type GetMessageSourceResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON404      *CommonResponseNotFoundResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GetMessageSourceResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetMessageSourceResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetMessageSourceResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r GetMessageSourceResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetMessageSourceResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r GetMessageSourceResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r GetMessageSourceResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3778,13 +5341,60 @@ func (r GetMessageSourceResponse) ContentType() string {
 type GetMessageTextResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *V1FolderMessagesMessageTextResource
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON404      *CommonResponseNotFoundResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1FolderMessagesMessageTextResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetMessageTextResponse) GetJSON200() *V1FolderMessagesMessageTextResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GetMessageTextResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetMessageTextResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetMessageTextResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r GetMessageTextResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetMessageTextResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r GetMessageTextResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r GetMessageTextResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3814,11 +5424,46 @@ func (r GetMessageTextResponse) ContentType() string {
 type GetQuotaResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *V1QuotaResource
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1QuotaResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetQuotaResponse) GetJSON200() *V1QuotaResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GetQuotaResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetQuotaResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetQuotaResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r GetQuotaResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r GetQuotaResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3848,11 +5493,46 @@ func (r GetQuotaResponse) ContentType() string {
 type SendEmailResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r SendEmailResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r SendEmailResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r SendEmailResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r SendEmailResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r SendEmailResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r SendEmailResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3882,12 +5562,53 @@ func (r SendEmailResponse) ContentType() string {
 type ListWebhooksResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *V1WebhooksCollection
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1WebhooksCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ListWebhooksResponse) GetJSON200() *V1WebhooksCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ListWebhooksResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r ListWebhooksResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ListWebhooksResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ListWebhooksResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r ListWebhooksResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r ListWebhooksResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3917,12 +5638,53 @@ func (r ListWebhooksResponse) ContentType() string {
 type CreateWebhookResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON201      *V1WebhooksResourceWithSecret
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON201 the response for an HTTP 201 `application/json` response
+	JSON201 *V1WebhooksResourceWithSecret
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON201 returns the response for an HTTP 201 `application/json` response
+func (r CreateWebhookResponse) GetJSON201() *V1WebhooksResourceWithSecret {
+	return r.JSON201
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r CreateWebhookResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r CreateWebhookResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r CreateWebhookResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r CreateWebhookResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r CreateWebhookResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r CreateWebhookResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3952,11 +5714,46 @@ func (r CreateWebhookResponse) ContentType() string {
 type DeleteWebhookResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON404      *CommonResponseNotFoundResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DeleteWebhookResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r DeleteWebhookResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r DeleteWebhookResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DeleteWebhookResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r DeleteWebhookResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r DeleteWebhookResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -3986,12 +5783,53 @@ func (r DeleteWebhookResponse) ContentType() string {
 type GetWebhookResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *V1WebhooksResource
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON404      *CommonResponseNotFoundResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1WebhooksResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetWebhookResponse) GetJSON200() *V1WebhooksResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GetWebhookResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetWebhookResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetWebhookResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetWebhookResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r GetWebhookResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r GetWebhookResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -4021,13 +5859,60 @@ func (r GetWebhookResponse) ContentType() string {
 type UpdateWebhookResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *V1WebhooksResource
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON404      *CommonResponseNotFoundResponse
-	JSON422      *CommonResponseValidationFailedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1WebhooksResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r UpdateWebhookResponse) GetJSON200() *V1WebhooksResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r UpdateWebhookResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r UpdateWebhookResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r UpdateWebhookResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r UpdateWebhookResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r UpdateWebhookResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r UpdateWebhookResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r UpdateWebhookResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -4057,12 +5942,53 @@ func (r UpdateWebhookResponse) ContentType() string {
 type RegenerateWebhookSecretResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *V1WebhooksResourceWithSecret
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON404      *CommonResponseNotFoundResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1WebhooksResourceWithSecret
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r RegenerateWebhookSecretResponse) GetJSON200() *V1WebhooksResourceWithSecret {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r RegenerateWebhookSecretResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r RegenerateWebhookSecretResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r RegenerateWebhookSecretResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r RegenerateWebhookSecretResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r RegenerateWebhookSecretResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r RegenerateWebhookSecretResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -4092,12 +6018,53 @@ func (r RegenerateWebhookSecretResponse) ContentType() string {
 type TestWebhookResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *V1WebhooksTestResult
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON403      *CommonResponseForbiddenResponse
-	JSON404      *CommonResponseNotFoundResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1WebhooksTestResult
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r TestWebhookResponse) GetJSON200() *V1WebhooksTestResult {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r TestWebhookResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r TestWebhookResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r TestWebhookResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r TestWebhookResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r TestWebhookResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r TestWebhookResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -4127,10 +6094,39 @@ func (r TestWebhookResponse) ContentType() string {
 type GetCurrentAccountResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *V1MeResource
-	JSON401      *CommonResponseUnauthorizedResponse
-	JSON500      *CommonResponseInternalServerErrorResponse
-	JSON502      *CommonResponseBadGatewayResponse
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1MeResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetCurrentAccountResponse) GetJSON200() *V1MeResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GetCurrentAccountResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetCurrentAccountResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r GetCurrentAccountResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r GetCurrentAccountResponse) GetBody() []byte {
+	return r.Body
 }
 
 // Status returns HTTPResponse.Status
@@ -4157,7 +6153,13 @@ func (r GetCurrentAccountResponse) ContentType() string {
 	return ""
 }
 
-// ListFoldersWithResponse request returning *ListFoldersResponse
+// ListFoldersWithResponse List folders
+//
+// Retrieve a paginated list of folders in the managed mailbox.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders (the `ListFolders` operationId).
 func (c *ClientWithResponses) ListFoldersWithResponse(ctx context.Context, mailboxResourceId string, params *ListFoldersParams, reqEditors ...RequestEditorFn) (*ListFoldersResponse, error) {
 	rsp, err := c.ListFolders(ctx, mailboxResourceId, params, reqEditors...)
 	if err != nil {
@@ -4166,7 +6168,13 @@ func (c *ClientWithResponses) ListFoldersWithResponse(ctx context.Context, mailb
 	return ParseListFoldersResponse(rsp)
 }
 
-// CreateFolderWithBodyWithResponse request with arbitrary body returning *CreateFolderResponse
+// CreateFolderWithBodyWithResponse Create folder
+//
+// Create a new folder in the managed mailbox.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders (the `CreateFolder` operationId).
 func (c *ClientWithResponses) CreateFolderWithBodyWithResponse(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFolderResponse, error) {
 	rsp, err := c.CreateFolderWithBody(ctx, mailboxResourceId, contentType, body, reqEditors...)
 	if err != nil {
@@ -4175,6 +6183,13 @@ func (c *ClientWithResponses) CreateFolderWithBodyWithResponse(ctx context.Conte
 	return ParseCreateFolderResponse(rsp)
 }
 
+// CreateFolderWithResponse Create folder
+//
+// Create a new folder in the managed mailbox.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders (the `CreateFolder` operationId).
 func (c *ClientWithResponses) CreateFolderWithResponse(ctx context.Context, mailboxResourceId string, body CreateFolderJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFolderResponse, error) {
 	rsp, err := c.CreateFolder(ctx, mailboxResourceId, body, reqEditors...)
 	if err != nil {
@@ -4183,7 +6198,13 @@ func (c *ClientWithResponses) CreateFolderWithResponse(ctx context.Context, mail
 	return ParseCreateFolderResponse(rsp)
 }
 
-// DeleteFolderWithResponse request returning *DeleteFolderResponse
+// DeleteFolderWithResponse Delete folder
+//
+// Delete a folder and all of its subfolders.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/folders/{folder} (the `DeleteFolder` operationId).
 func (c *ClientWithResponses) DeleteFolderWithResponse(ctx context.Context, mailboxResourceId string, folder string, reqEditors ...RequestEditorFn) (*DeleteFolderResponse, error) {
 	rsp, err := c.DeleteFolder(ctx, mailboxResourceId, folder, reqEditors...)
 	if err != nil {
@@ -4192,7 +6213,13 @@ func (c *ClientWithResponses) DeleteFolderWithResponse(ctx context.Context, mail
 	return ParseDeleteFolderResponse(rsp)
 }
 
-// UpdateFolderWithBodyWithResponse request with arbitrary body returning *UpdateFolderResponse
+// UpdateFolderWithBodyWithResponse Update folder
+//
+// Rename an existing folder.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/folders/{folder} (the `UpdateFolder` operationId).
 func (c *ClientWithResponses) UpdateFolderWithBodyWithResponse(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFolderResponse, error) {
 	rsp, err := c.UpdateFolderWithBody(ctx, mailboxResourceId, folder, contentType, body, reqEditors...)
 	if err != nil {
@@ -4201,6 +6228,13 @@ func (c *ClientWithResponses) UpdateFolderWithBodyWithResponse(ctx context.Conte
 	return ParseUpdateFolderResponse(rsp)
 }
 
+// UpdateFolderWithResponse Update folder
+//
+// Rename an existing folder.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/folders/{folder} (the `UpdateFolder` operationId).
 func (c *ClientWithResponses) UpdateFolderWithResponse(ctx context.Context, mailboxResourceId string, folder string, body UpdateFolderJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFolderResponse, error) {
 	rsp, err := c.UpdateFolder(ctx, mailboxResourceId, folder, body, reqEditors...)
 	if err != nil {
@@ -4209,7 +6243,13 @@ func (c *ClientWithResponses) UpdateFolderWithResponse(ctx context.Context, mail
 	return ParseUpdateFolderResponse(rsp)
 }
 
-// DeleteAllMessagesWithResponse request returning *DeleteAllMessagesResponse
+// DeleteAllMessagesWithResponse Delete all messages
+//
+// Permanently delete every message in a folder (empty the folder).
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages (the `DeleteAllMessages` operationId).
 func (c *ClientWithResponses) DeleteAllMessagesWithResponse(ctx context.Context, mailboxResourceId string, folder string, reqEditors ...RequestEditorFn) (*DeleteAllMessagesResponse, error) {
 	rsp, err := c.DeleteAllMessages(ctx, mailboxResourceId, folder, reqEditors...)
 	if err != nil {
@@ -4218,7 +6258,13 @@ func (c *ClientWithResponses) DeleteAllMessagesWithResponse(ctx context.Context,
 	return ParseDeleteAllMessagesResponse(rsp)
 }
 
-// ListMessagesWithResponse request returning *ListMessagesResponse
+// ListMessagesWithResponse List messages
+//
+// List messages in a folder. Use POST /search for filtering. Sort fields: uid, date, size (prefix with `-` for descending). Default `-uid`.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages (the `ListMessages` operationId).
 func (c *ClientWithResponses) ListMessagesWithResponse(ctx context.Context, mailboxResourceId string, folder string, params *ListMessagesParams, reqEditors ...RequestEditorFn) (*ListMessagesResponse, error) {
 	rsp, err := c.ListMessages(ctx, mailboxResourceId, folder, params, reqEditors...)
 	if err != nil {
@@ -4227,7 +6273,13 @@ func (c *ClientWithResponses) ListMessagesWithResponse(ctx context.Context, mail
 	return ParseListMessagesResponse(rsp)
 }
 
-// DeleteMessagesWithBodyWithResponse request with arbitrary body returning *DeleteMessagesResponse
+// DeleteMessagesWithBodyWithResponse Delete messages
+//
+// Permanently delete multiple messages from a folder.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/delete (the `DeleteMessages` operationId).
 func (c *ClientWithResponses) DeleteMessagesWithBodyWithResponse(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DeleteMessagesResponse, error) {
 	rsp, err := c.DeleteMessagesWithBody(ctx, mailboxResourceId, folder, contentType, body, reqEditors...)
 	if err != nil {
@@ -4236,6 +6288,13 @@ func (c *ClientWithResponses) DeleteMessagesWithBodyWithResponse(ctx context.Con
 	return ParseDeleteMessagesResponse(rsp)
 }
 
+// DeleteMessagesWithResponse Delete messages
+//
+// Permanently delete multiple messages from a folder.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/delete (the `DeleteMessages` operationId).
 func (c *ClientWithResponses) DeleteMessagesWithResponse(ctx context.Context, mailboxResourceId string, folder string, body DeleteMessagesJSONRequestBody, reqEditors ...RequestEditorFn) (*DeleteMessagesResponse, error) {
 	rsp, err := c.DeleteMessages(ctx, mailboxResourceId, folder, body, reqEditors...)
 	if err != nil {
@@ -4244,7 +6303,13 @@ func (c *ClientWithResponses) DeleteMessagesWithResponse(ctx context.Context, ma
 	return ParseDeleteMessagesResponse(rsp)
 }
 
-// UpdateMessageFlagsWithBodyWithResponse request with arbitrary body returning *UpdateMessageFlagsResponse
+// UpdateMessageFlagsWithBodyWithResponse Update message flags
+//
+// Add and/or remove flags on multiple messages. Returns 200 when all UIDs succeed, 207 with per-UID outcome when some fail.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/flags (the `UpdateMessageFlags` operationId).
 func (c *ClientWithResponses) UpdateMessageFlagsWithBodyWithResponse(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateMessageFlagsResponse, error) {
 	rsp, err := c.UpdateMessageFlagsWithBody(ctx, mailboxResourceId, folder, contentType, body, reqEditors...)
 	if err != nil {
@@ -4253,6 +6318,13 @@ func (c *ClientWithResponses) UpdateMessageFlagsWithBodyWithResponse(ctx context
 	return ParseUpdateMessageFlagsResponse(rsp)
 }
 
+// UpdateMessageFlagsWithResponse Update message flags
+//
+// Add and/or remove flags on multiple messages. Returns 200 when all UIDs succeed, 207 with per-UID outcome when some fail.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/flags (the `UpdateMessageFlags` operationId).
 func (c *ClientWithResponses) UpdateMessageFlagsWithResponse(ctx context.Context, mailboxResourceId string, folder string, body UpdateMessageFlagsJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateMessageFlagsResponse, error) {
 	rsp, err := c.UpdateMessageFlags(ctx, mailboxResourceId, folder, body, reqEditors...)
 	if err != nil {
@@ -4261,7 +6333,13 @@ func (c *ClientWithResponses) UpdateMessageFlagsWithResponse(ctx context.Context
 	return ParseUpdateMessageFlagsResponse(rsp)
 }
 
-// MoveMessagesWithBodyWithResponse request with arbitrary body returning *MoveMessagesResponse
+// MoveMessagesWithBodyWithResponse Move messages
+//
+// Move multiple messages from a source folder to a target folder.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/move (the `MoveMessages` operationId).
 func (c *ClientWithResponses) MoveMessagesWithBodyWithResponse(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MoveMessagesResponse, error) {
 	rsp, err := c.MoveMessagesWithBody(ctx, mailboxResourceId, folder, contentType, body, reqEditors...)
 	if err != nil {
@@ -4270,6 +6348,13 @@ func (c *ClientWithResponses) MoveMessagesWithBodyWithResponse(ctx context.Conte
 	return ParseMoveMessagesResponse(rsp)
 }
 
+// MoveMessagesWithResponse Move messages
+//
+// Move multiple messages from a source folder to a target folder.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/move (the `MoveMessages` operationId).
 func (c *ClientWithResponses) MoveMessagesWithResponse(ctx context.Context, mailboxResourceId string, folder string, body MoveMessagesJSONRequestBody, reqEditors ...RequestEditorFn) (*MoveMessagesResponse, error) {
 	rsp, err := c.MoveMessages(ctx, mailboxResourceId, folder, body, reqEditors...)
 	if err != nil {
@@ -4278,7 +6363,13 @@ func (c *ClientWithResponses) MoveMessagesWithResponse(ctx context.Context, mail
 	return ParseMoveMessagesResponse(rsp)
 }
 
-// SearchMessagesWithBodyWithResponse request with arbitrary body returning *SearchMessagesResponse
+// SearchMessagesWithBodyWithResponse Search messages
+//
+// Search messages in a folder. Filters in body; pagination and sort via query (`page`, `perPage`, `sort`).
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/search (the `SearchMessages` operationId).
 func (c *ClientWithResponses) SearchMessagesWithBodyWithResponse(ctx context.Context, mailboxResourceId string, folder string, params *SearchMessagesParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SearchMessagesResponse, error) {
 	rsp, err := c.SearchMessagesWithBody(ctx, mailboxResourceId, folder, params, contentType, body, reqEditors...)
 	if err != nil {
@@ -4287,6 +6378,13 @@ func (c *ClientWithResponses) SearchMessagesWithBodyWithResponse(ctx context.Con
 	return ParseSearchMessagesResponse(rsp)
 }
 
+// SearchMessagesWithResponse Search messages
+//
+// Search messages in a folder. Filters in body; pagination and sort via query (`page`, `perPage`, `sort`).
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/search (the `SearchMessages` operationId).
 func (c *ClientWithResponses) SearchMessagesWithResponse(ctx context.Context, mailboxResourceId string, folder string, params *SearchMessagesParams, body SearchMessagesJSONRequestBody, reqEditors ...RequestEditorFn) (*SearchMessagesResponse, error) {
 	rsp, err := c.SearchMessages(ctx, mailboxResourceId, folder, params, body, reqEditors...)
 	if err != nil {
@@ -4295,7 +6393,13 @@ func (c *ClientWithResponses) SearchMessagesWithResponse(ctx context.Context, ma
 	return ParseSearchMessagesResponse(rsp)
 }
 
-// DeleteMessageWithResponse request returning *DeleteMessageResponse
+// DeleteMessageWithResponse Delete message
+//
+// Permanently delete a single message.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid} (the `DeleteMessage` operationId).
 func (c *ClientWithResponses) DeleteMessageWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*DeleteMessageResponse, error) {
 	rsp, err := c.DeleteMessage(ctx, mailboxResourceId, folder, uid, reqEditors...)
 	if err != nil {
@@ -4304,7 +6408,13 @@ func (c *ClientWithResponses) DeleteMessageWithResponse(ctx context.Context, mai
 	return ParseDeleteMessageResponse(rsp)
 }
 
-// GetMessageWithResponse request returning *GetMessageResponse
+// GetMessageWithResponse Get message
+//
+// Retrieve a single message by UID.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid} (the `GetMessage` operationId).
 func (c *ClientWithResponses) GetMessageWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*GetMessageResponse, error) {
 	rsp, err := c.GetMessage(ctx, mailboxResourceId, folder, uid, reqEditors...)
 	if err != nil {
@@ -4313,7 +6423,13 @@ func (c *ClientWithResponses) GetMessageWithResponse(ctx context.Context, mailbo
 	return ParseGetMessageResponse(rsp)
 }
 
-// PatchMessageWithBodyWithResponse request with arbitrary body returning *PatchMessageResponse
+// PatchMessageWithBodyWithResponse Update message flags
+//
+// Add and/or remove flags on a single message. Returns the updated message.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid} (the `PatchMessage` operationId).
 func (c *ClientWithResponses) PatchMessageWithBodyWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchMessageResponse, error) {
 	rsp, err := c.PatchMessageWithBody(ctx, mailboxResourceId, folder, uid, contentType, body, reqEditors...)
 	if err != nil {
@@ -4322,6 +6438,13 @@ func (c *ClientWithResponses) PatchMessageWithBodyWithResponse(ctx context.Conte
 	return ParsePatchMessageResponse(rsp)
 }
 
+// PatchMessageWithResponse Update message flags
+//
+// Add and/or remove flags on a single message. Returns the updated message.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid} (the `PatchMessage` operationId).
 func (c *ClientWithResponses) PatchMessageWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, body PatchMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchMessageResponse, error) {
 	rsp, err := c.PatchMessage(ctx, mailboxResourceId, folder, uid, body, reqEditors...)
 	if err != nil {
@@ -4330,7 +6453,13 @@ func (c *ClientWithResponses) PatchMessageWithResponse(ctx context.Context, mail
 	return ParsePatchMessageResponse(rsp)
 }
 
-// GetMessageAttachmentWithResponse request returning *GetMessageAttachmentResponse
+// GetMessageAttachmentWithResponse Download message attachment
+//
+// Download a message attachment as `application/octet-stream`.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/attachments/{attachmentId} (the `GetMessageAttachment` operationId).
 func (c *ClientWithResponses) GetMessageAttachmentWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, attachmentId string, reqEditors ...RequestEditorFn) (*GetMessageAttachmentResponse, error) {
 	rsp, err := c.GetMessageAttachment(ctx, mailboxResourceId, folder, uid, attachmentId, reqEditors...)
 	if err != nil {
@@ -4339,7 +6468,13 @@ func (c *ClientWithResponses) GetMessageAttachmentWithResponse(ctx context.Conte
 	return ParseGetMessageAttachmentResponse(rsp)
 }
 
-// MoveMessageWithBodyWithResponse request with arbitrary body returning *MoveMessageResponse
+// MoveMessageWithBodyWithResponse Move message
+//
+// Move a single message to a target folder.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/move (the `MoveMessage` operationId).
 func (c *ClientWithResponses) MoveMessageWithBodyWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MoveMessageResponse, error) {
 	rsp, err := c.MoveMessageWithBody(ctx, mailboxResourceId, folder, uid, contentType, body, reqEditors...)
 	if err != nil {
@@ -4348,6 +6483,13 @@ func (c *ClientWithResponses) MoveMessageWithBodyWithResponse(ctx context.Contex
 	return ParseMoveMessageResponse(rsp)
 }
 
+// MoveMessageWithResponse Move message
+//
+// Move a single message to a target folder.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/move (the `MoveMessage` operationId).
 func (c *ClientWithResponses) MoveMessageWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, body MoveMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*MoveMessageResponse, error) {
 	rsp, err := c.MoveMessage(ctx, mailboxResourceId, folder, uid, body, reqEditors...)
 	if err != nil {
@@ -4356,7 +6498,13 @@ func (c *ClientWithResponses) MoveMessageWithResponse(ctx context.Context, mailb
 	return ParseMoveMessageResponse(rsp)
 }
 
-// GetMessageSourceWithResponse request returning *GetMessageSourceResponse
+// GetMessageSourceWithResponse Get message source
+//
+// Retrieve raw RFC822 source of a message as `message/rfc822` attachment.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/source (the `GetMessageSource` operationId).
 func (c *ClientWithResponses) GetMessageSourceWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*GetMessageSourceResponse, error) {
 	rsp, err := c.GetMessageSource(ctx, mailboxResourceId, folder, uid, reqEditors...)
 	if err != nil {
@@ -4365,7 +6513,13 @@ func (c *ClientWithResponses) GetMessageSourceWithResponse(ctx context.Context, 
 	return ParseGetMessageSourceResponse(rsp)
 }
 
-// GetMessageTextWithResponse request returning *GetMessageTextResponse
+// GetMessageTextWithResponse Get message text content
+//
+// Retrieve rendered text (plain + HTML) of a message. Marks message as `\Seen`.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/text (the `GetMessageText` operationId).
 func (c *ClientWithResponses) GetMessageTextWithResponse(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*GetMessageTextResponse, error) {
 	rsp, err := c.GetMessageText(ctx, mailboxResourceId, folder, uid, reqEditors...)
 	if err != nil {
@@ -4374,7 +6528,13 @@ func (c *ClientWithResponses) GetMessageTextWithResponse(ctx context.Context, ma
 	return ParseGetMessageTextResponse(rsp)
 }
 
-// GetQuotaWithResponse request returning *GetQuotaResponse
+// GetQuotaWithResponse Get mailbox quota
+//
+// Retrieve storage and message quota usage for the managed mailbox.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/quota (the `GetQuota` operationId).
 func (c *ClientWithResponses) GetQuotaWithResponse(ctx context.Context, mailboxResourceId string, reqEditors ...RequestEditorFn) (*GetQuotaResponse, error) {
 	rsp, err := c.GetQuota(ctx, mailboxResourceId, reqEditors...)
 	if err != nil {
@@ -4383,7 +6543,13 @@ func (c *ClientWithResponses) GetQuotaWithResponse(ctx context.Context, mailboxR
 	return ParseGetQuotaResponse(rsp)
 }
 
-// SendEmailWithBodyWithResponse request with arbitrary body returning *SendEmailResponse
+// SendEmailWithBodyWithResponse Send email
+//
+// Send a message from the managed mailbox. Saves a copy to INBOX.Sent.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/send (the `SendEmail` operationId).
 func (c *ClientWithResponses) SendEmailWithBodyWithResponse(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SendEmailResponse, error) {
 	rsp, err := c.SendEmailWithBody(ctx, mailboxResourceId, contentType, body, reqEditors...)
 	if err != nil {
@@ -4392,6 +6558,13 @@ func (c *ClientWithResponses) SendEmailWithBodyWithResponse(ctx context.Context,
 	return ParseSendEmailResponse(rsp)
 }
 
+// SendEmailWithResponse Send email
+//
+// Send a message from the managed mailbox. Saves a copy to INBOX.Sent.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/send (the `SendEmail` operationId).
 func (c *ClientWithResponses) SendEmailWithResponse(ctx context.Context, mailboxResourceId string, body SendEmailJSONRequestBody, reqEditors ...RequestEditorFn) (*SendEmailResponse, error) {
 	rsp, err := c.SendEmail(ctx, mailboxResourceId, body, reqEditors...)
 	if err != nil {
@@ -4400,7 +6573,13 @@ func (c *ClientWithResponses) SendEmailWithResponse(ctx context.Context, mailbox
 	return ParseSendEmailResponse(rsp)
 }
 
-// ListWebhooksWithResponse request returning *ListWebhooksResponse
+// ListWebhooksWithResponse List webhooks
+//
+// List webhooks for a mailbox.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/webhooks (the `ListWebhooks` operationId).
 func (c *ClientWithResponses) ListWebhooksWithResponse(ctx context.Context, mailboxResourceId string, params *ListWebhooksParams, reqEditors ...RequestEditorFn) (*ListWebhooksResponse, error) {
 	rsp, err := c.ListWebhooks(ctx, mailboxResourceId, params, reqEditors...)
 	if err != nil {
@@ -4409,7 +6588,13 @@ func (c *ClientWithResponses) ListWebhooksWithResponse(ctx context.Context, mail
 	return ParseListWebhooksResponse(rsp)
 }
 
-// CreateWebhookWithBodyWithResponse request with arbitrary body returning *CreateWebhookResponse
+// CreateWebhookWithBodyWithResponse Create webhook
+//
+// Create a webhook. The response includes the one-time `secret` — store it securely as it is never returned again.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/webhooks (the `CreateWebhook` operationId).
 func (c *ClientWithResponses) CreateWebhookWithBodyWithResponse(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateWebhookResponse, error) {
 	rsp, err := c.CreateWebhookWithBody(ctx, mailboxResourceId, contentType, body, reqEditors...)
 	if err != nil {
@@ -4418,6 +6603,13 @@ func (c *ClientWithResponses) CreateWebhookWithBodyWithResponse(ctx context.Cont
 	return ParseCreateWebhookResponse(rsp)
 }
 
+// CreateWebhookWithResponse Create webhook
+//
+// Create a webhook. The response includes the one-time `secret` — store it securely as it is never returned again.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/webhooks (the `CreateWebhook` operationId).
 func (c *ClientWithResponses) CreateWebhookWithResponse(ctx context.Context, mailboxResourceId string, body CreateWebhookJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateWebhookResponse, error) {
 	rsp, err := c.CreateWebhook(ctx, mailboxResourceId, body, reqEditors...)
 	if err != nil {
@@ -4426,7 +6618,13 @@ func (c *ClientWithResponses) CreateWebhookWithResponse(ctx context.Context, mai
 	return ParseCreateWebhookResponse(rsp)
 }
 
-// DeleteWebhookWithResponse request returning *DeleteWebhookResponse
+// DeleteWebhookWithResponse Delete webhook
+//
+// Delete a webhook.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook} (the `DeleteWebhook` operationId).
 func (c *ClientWithResponses) DeleteWebhookWithResponse(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteWebhookResponse, error) {
 	rsp, err := c.DeleteWebhook(ctx, mailboxResourceId, webhook, reqEditors...)
 	if err != nil {
@@ -4435,7 +6633,13 @@ func (c *ClientWithResponses) DeleteWebhookWithResponse(ctx context.Context, mai
 	return ParseDeleteWebhookResponse(rsp)
 }
 
-// GetWebhookWithResponse request returning *GetWebhookResponse
+// GetWebhookWithResponse Get webhook
+//
+// Retrieve a single webhook by id.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook} (the `GetWebhook` operationId).
 func (c *ClientWithResponses) GetWebhookWithResponse(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetWebhookResponse, error) {
 	rsp, err := c.GetWebhook(ctx, mailboxResourceId, webhook, reqEditors...)
 	if err != nil {
@@ -4444,7 +6648,13 @@ func (c *ClientWithResponses) GetWebhookWithResponse(ctx context.Context, mailbo
 	return ParseGetWebhookResponse(rsp)
 }
 
-// UpdateWebhookWithBodyWithResponse request with arbitrary body returning *UpdateWebhookResponse
+// UpdateWebhookWithBodyWithResponse Update webhook
+//
+// Partially update a webhook.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook} (the `UpdateWebhook` operationId).
 func (c *ClientWithResponses) UpdateWebhookWithBodyWithResponse(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateWebhookResponse, error) {
 	rsp, err := c.UpdateWebhookWithBody(ctx, mailboxResourceId, webhook, contentType, body, reqEditors...)
 	if err != nil {
@@ -4453,6 +6663,13 @@ func (c *ClientWithResponses) UpdateWebhookWithBodyWithResponse(ctx context.Cont
 	return ParseUpdateWebhookResponse(rsp)
 }
 
+// UpdateWebhookWithResponse Update webhook
+//
+// Partially update a webhook.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook} (the `UpdateWebhook` operationId).
 func (c *ClientWithResponses) UpdateWebhookWithResponse(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, body UpdateWebhookJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateWebhookResponse, error) {
 	rsp, err := c.UpdateWebhook(ctx, mailboxResourceId, webhook, body, reqEditors...)
 	if err != nil {
@@ -4461,7 +6678,13 @@ func (c *ClientWithResponses) UpdateWebhookWithResponse(ctx context.Context, mai
 	return ParseUpdateWebhookResponse(rsp)
 }
 
-// RegenerateWebhookSecretWithResponse request returning *RegenerateWebhookSecretResponse
+// RegenerateWebhookSecretWithResponse Regenerate webhook secret
+//
+// Regenerate the webhook secret. The previous secret is immediately invalidated. The new secret is returned once.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook}/regenerate-secret (the `RegenerateWebhookSecret` operationId).
 func (c *ClientWithResponses) RegenerateWebhookSecretWithResponse(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, reqEditors ...RequestEditorFn) (*RegenerateWebhookSecretResponse, error) {
 	rsp, err := c.RegenerateWebhookSecret(ctx, mailboxResourceId, webhook, reqEditors...)
 	if err != nil {
@@ -4470,7 +6693,13 @@ func (c *ClientWithResponses) RegenerateWebhookSecretWithResponse(ctx context.Co
 	return ParseRegenerateWebhookSecretResponse(rsp)
 }
 
-// TestWebhookWithResponse request returning *TestWebhookResponse
+// TestWebhookWithResponse Test webhook
+//
+// Send a test delivery to the webhook URL and return the upstream response.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook}/test (the `TestWebhook` operationId).
 func (c *ClientWithResponses) TestWebhookWithResponse(ctx context.Context, mailboxResourceId string, webhook openapi_types.UUID, reqEditors ...RequestEditorFn) (*TestWebhookResponse, error) {
 	rsp, err := c.TestWebhook(ctx, mailboxResourceId, webhook, reqEditors...)
 	if err != nil {
@@ -4479,7 +6708,13 @@ func (c *ClientWithResponses) TestWebhookWithResponse(ctx context.Context, mailb
 	return ParseTestWebhookResponse(rsp)
 }
 
-// GetCurrentAccountWithResponse request returning *GetCurrentAccountResponse
+// GetCurrentAccountWithResponse Get the authenticated account
+//
+// Returns the authenticated account and the mailboxes it can manage.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/me (the `GetCurrentAccount` operationId).
 func (c *ClientWithResponses) GetCurrentAccountWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetCurrentAccountResponse, error) {
 	rsp, err := c.GetCurrentAccount(ctx, reqEditors...)
 	if err != nil {
@@ -4631,6 +6866,9 @@ func ParseDeleteFolderResponse(rsp *http.Response) (*DeleteFolderResponse, error
 	}
 
 	switch {
+	case rsp.StatusCode == 204:
+		break // No content-type
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest CommonResponseUnauthorizedResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -4767,6 +7005,9 @@ func ParseDeleteAllMessagesResponse(rsp *http.Response) (*DeleteAllMessagesRespo
 	}
 
 	switch {
+	case rsp.StatusCode == 204:
+		break // No content-type
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest CommonResponseUnauthorizedResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -4889,6 +7130,9 @@ func ParseDeleteMessagesResponse(rsp *http.Response) (*DeleteMessagesResponse, e
 	}
 
 	switch {
+	case rsp.StatusCode == 204:
+		break // No content-type
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest CommonResponseUnauthorizedResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -5011,6 +7255,9 @@ func ParseMoveMessagesResponse(rsp *http.Response) (*MoveMessagesResponse, error
 	}
 
 	switch {
+	case rsp.StatusCode == 204:
+		break // No content-type
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest CommonResponseUnauthorizedResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -5126,6 +7373,9 @@ func ParseDeleteMessageResponse(rsp *http.Response) (*DeleteMessageResponse, err
 	}
 
 	switch {
+	case rsp.StatusCode == 204:
+		break // No content-type
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest CommonResponseUnauthorizedResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -5377,6 +7627,9 @@ func ParseMoveMessageResponse(rsp *http.Response) (*MoveMessageResponse, error) 
 	}
 
 	switch {
+	case rsp.StatusCode == 204:
+		break // No content-type
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest CommonResponseUnauthorizedResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -5614,6 +7867,9 @@ func ParseSendEmailResponse(rsp *http.Response) (*SendEmailResponse, error) {
 	}
 
 	switch {
+	case rsp.StatusCode == 204:
+		break // No content-type
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest CommonResponseUnauthorizedResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -5790,6 +8046,9 @@ func ParseDeleteWebhookResponse(rsp *http.Response) (*DeleteWebhookResponse, err
 	}
 
 	switch {
+	case rsp.StatusCode == 204:
+		break // No content-type
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest CommonResponseUnauthorizedResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
