@@ -2,6 +2,13 @@ name: release
 
 on:
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      tag:
+        description: 'Tag to publish; defaults to the tag on the checked-out commit'
+        required: false
+        type: string
+        default: ''
 
 permissions:
   contents: write
@@ -39,3 +46,4 @@ jobs:
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
+          GORELEASER_CURRENT_TAG: ${{ inputs.tag }}
