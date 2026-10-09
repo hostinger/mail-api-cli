@@ -31,8 +31,8 @@ var UpdateFlagsCmd = &cobra.Command{
 }
 
 func init() {
-	UpdateFlagsCmd.Flags().StringSliceP("addflags", "", nil, "")
-	UpdateFlagsCmd.Flags().StringSliceP("removeflags", "", nil, "")
+	UpdateFlagsCmd.Flags().StringSliceP("addflags", "", nil, "IMAP flags to set on every listed message, e.g. \\Seen, \\Flagged, \\Answered, $forwarded.")
+	UpdateFlagsCmd.Flags().StringSliceP("removeflags", "", nil, "IMAP flags to clear from every listed message.")
 	UpdateFlagsCmd.Flags().IntSliceP("uids", "", nil, "Message UIDs to update. 1-100 entries, each > 0.")
 	UpdateFlagsCmd.MarkFlagRequired("uids")
 }

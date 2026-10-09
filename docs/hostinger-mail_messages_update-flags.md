@@ -13,9 +13,9 @@ hostinger-mail messages update-flags <mailbox-resource-id> <folder> [flags]
 ### Options
 
 ```
-      --addflags strings      
+      --addflags strings      IMAP flags to set on every listed message, e.g. \Seen, \Flagged, \Answered, $forwarded.
   -h, --help                  help for update-flags
-      --removeflags strings   
+      --removeflags strings   IMAP flags to clear from every listed message.
       --uids ints             Message UIDs to update. 1-100 entries, each > 0.
 ```
 

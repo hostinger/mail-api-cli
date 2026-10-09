@@ -45,9 +45,9 @@ Examples:
 
 ```
 hostinger-mail account current
+hostinger-mail feedback submit <mailbox-resource-id>
 hostinger-mail folders list <mailbox-resource-id>
 hostinger-mail messages list <mailbox-resource-id> <folder>
-hostinger-mail quota get <mailbox-resource-id>
 ```
 
 Output format defaults to a table; use `--format json|table|tree` to change it.

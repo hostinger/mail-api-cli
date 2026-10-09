@@ -13,6 +13,7 @@ Hostinger Mail API Command Line Interface
 ### SEE ALSO
 
 * [hostinger-mail account](hostinger-mail_account.md)	 - Account commands
+* [hostinger-mail feedback](hostinger-mail_feedback.md)	 - Feedback commands
 * [hostinger-mail folders](hostinger-mail_folders.md)	 - Folders commands
 * [hostinger-mail messages](hostinger-mail_messages.md)	 - Messages commands
 * [hostinger-mail quota](hostinger-mail_quota.md)	 - Quota commands

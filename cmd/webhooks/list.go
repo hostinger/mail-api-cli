@@ -28,9 +28,9 @@ var ListCmd = &cobra.Command{
 }
 
 func init() {
-	ListCmd.Flags().StringP("status", "", "", "(one of: active, paused, disabled)")
-	ListCmd.Flags().IntP("page", "", 1, "")
-	ListCmd.Flags().IntP("perpage", "", 15, "")
+	ListCmd.Flags().StringP("status", "", "", "Return only webhooks with this status. (one of: active, paused, disabled)")
+	ListCmd.Flags().IntP("page", "", 1, "Page number (1-based).")
+	ListCmd.Flags().IntP("perpage", "", 15, "Items per page (max 1000).")
 }
 
 func listParams(cmd *cobra.Command) *client.ListWebhooksParams {

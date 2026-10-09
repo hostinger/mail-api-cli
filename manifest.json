@@ -114,6 +114,11 @@
     "method": "POST",
     "path": "/api/v1/mailboxes/{mailboxResourceId}/send"
   },
+  "submitFeedback": {
+    "command": "hostinger-mail feedback submit",
+    "method": "POST",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/feedback"
+  },
   "testWebhook": {
     "command": "hostinger-mail webhooks test",
     "method": "POST",

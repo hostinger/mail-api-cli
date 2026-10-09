@@ -222,6 +222,19 @@ type Pagination struct {
 	TotalPages int `json:"totalPages"`
 }
 
+// V1FeedbackSubmitRequest Feedback about the Mail API or the MCP server. The message is scrubbed of tokens, JWTs and key/secret/password values before validation and storage, so the length limit applies to the scrubbed text.
+type V1FeedbackSubmitRequest struct {
+	// Message What happened and what was expected, including the operation and status code involved. Never include tokens, passwords or email contents.
+	//
+	// Example: POST /api/v1/mailboxes/{mailboxResourceId}/send returned 502 after 30 seconds for a message with a 10 MB attachment.
+	Message string `json:"message"`
+
+	// Score How well the API served the task: 1 (poor) to 10 (excellent).
+	//
+	// Example: 3
+	Score int `json:"score"`
+}
+
 // V1FolderMessagesCollection Paginated list of messages.
 type V1FolderMessagesCollection struct {
 	Data []V1FolderMessagesMessage `json:"data"`
@@ -240,10 +253,14 @@ type V1FolderMessagesDeleteBulkRequest struct {
 
 // V1FolderMessagesFlagsBulkRequest Add and/or remove flags on multiple messages. At least one of addFlags or removeFlags must be set.
 type V1FolderMessagesFlagsBulkRequest struct {
-	// AddFlags Example: ["\\Seen","\\Flagged","$forwarded"]
+	// AddFlags IMAP flags to set on every listed message, e.g. \Seen, \Flagged, \Answered, $forwarded.
+	//
+	// Example: ["\\Seen","\\Flagged","$forwarded"]
 	AddFlags *[]string `json:"addFlags,omitempty"`
 
-	// RemoveFlags Example: ["\\Seen"]
+	// RemoveFlags IMAP flags to clear from every listed message.
+	//
+	// Example: ["\\Seen"]
 	RemoveFlags *[]string `json:"removeFlags,omitempty"`
 
 	// Uids Message UIDs to update. 1-100 entries, each > 0.
@@ -254,10 +271,14 @@ type V1FolderMessagesFlagsBulkRequest struct {
 
 // V1FolderMessagesFlagsRequest Add and/or remove flags on a message. At least one of addFlags or removeFlags must be set.
 type V1FolderMessagesFlagsRequest struct {
-	// AddFlags Example: ["\\Seen","\\Flagged","$forwarded"]
+	// AddFlags IMAP flags to set on the message, e.g. \Seen, \Flagged, \Answered, $forwarded.
+	//
+	// Example: ["\\Seen","\\Flagged","$forwarded"]
 	AddFlags *[]string `json:"addFlags,omitempty"`
 
-	// RemoveFlags Example: ["\\Seen"]
+	// RemoveFlags IMAP flags to clear from the message.
+	//
+	// Example: ["\\Seen"]
 	RemoveFlags *[]string `json:"removeFlags,omitempty"`
 }
 
@@ -376,45 +397,71 @@ type V1FolderMessagesResource struct {
 	Data V1FolderMessagesMessage `json:"data"`
 }
 
-// V1FolderMessagesSearchRequest Search criteria. All fields optional; combine to narrow results.
+// V1FolderMessagesSearchRequest Search criteria. All fields optional. subject, from, to, cc and body are alternatives (a message matching any one of them qualifies); all other fields are combined with AND.
 type V1FolderMessagesSearchRequest struct {
-	// Before Example: 2024-12-31
+	// Before Only messages received before this date (YYYY-MM-DD).
+	//
+	// Example: 2024-12-31
 	Before *openapi_types.Date `json:"before,omitempty"`
 
-	// Body Example: important
+	// Body Case-insensitive substring match on the message body only (headers excluded). OR-combined with subject/from/to/cc.
+	//
+	// Example: important
 	Body *string `json:"body,omitempty"`
 
-	// Cc Example: team@example.com
+	// Cc Case-insensitive substring match on the Cc header. OR-combined with subject/from/to/body.
+	//
+	// Example: team@example.com
 	Cc *string `json:"cc,omitempty"`
 
-	// Flags Example: ["\\Seen","\\Flagged"]
+	// Flags Only messages carrying all of these IMAP flags, e.g. \Seen, \Flagged, \Answered, $forwarded.
+	//
+	// Example: ["\\Seen","\\Flagged"]
 	Flags *[]string `json:"flags,omitempty"`
 
-	// From Example: john@example.com
+	// From Case-insensitive substring match on the From header. OR-combined with subject/to/cc/body.
+	//
+	// Example: john@example.com
 	From *string `json:"from,omitempty"`
 
-	// Header Example: X-Custom-Header:value
+	// Header Match a specific header as Name:value, e.g. X-Custom-Header:value. Value match is a substring.
+	//
+	// Example: X-Custom-Header:value
 	Header *string `json:"header,omitempty"`
 
-	// Larger Example: 1024
+	// Larger Only messages larger than this size in bytes.
+	//
+	// Example: 1024
 	Larger *int `json:"larger,omitempty"`
 
-	// Since Example: 2024-01-01
+	// Since Only messages received on or after this date (YYYY-MM-DD).
+	//
+	// Example: 2024-01-01
 	Since *openapi_types.Date `json:"since,omitempty"`
 
-	// Smaller Example: 1048576
+	// Smaller Only messages smaller than this size in bytes.
+	//
+	// Example: 1048576
 	Smaller *int `json:"smaller,omitempty"`
 
-	// Subject Example: meeting
+	// Subject Case-insensitive substring match on the Subject header. OR-combined with from/to/cc/body.
+	//
+	// Example: meeting
 	Subject *string `json:"subject,omitempty"`
 
-	// Text Example: urgent
+	// Text Case-insensitive substring match across headers and body.
+	//
+	// Example: urgent
 	Text *string `json:"text,omitempty"`
 
-	// To Example: jane@example.com
+	// To Case-insensitive substring match on the To header. OR-combined with subject/from/cc/body.
+	//
+	// Example: jane@example.com
 	To *string `json:"to,omitempty"`
 
-	// Uid Example: 1:100
+	// Uid IMAP UID set: single UID, range (1:100), open range (100:*), or comma-separated list.
+	//
+	// Example: 1:100
 	Uid *string `json:"uid,omitempty"`
 }
 
@@ -590,7 +637,9 @@ type V1SendAttachment struct {
 	// Example: JVBERi0xLjQK...
 	Content string `json:"content"`
 
-	// ContentType Example: application/pdf
+	// ContentType MIME type of the attachment, e.g. application/pdf. Not inferred from filename; set it explicitly so clients render the attachment correctly.
+	//
+	// Example: application/pdf
 	ContentType *string `json:"contentType,omitempty"`
 
 	// Encoding Encoding of content. Defaults to base64.
@@ -598,7 +647,9 @@ type V1SendAttachment struct {
 	// Example: base64
 	Encoding *string `json:"encoding,omitempty"`
 
-	// Filename Example: invoice.pdf
+	// Filename File name shown to the recipient, including extension.
+	//
+	// Example: invoice.pdf
 	Filename string `json:"filename"`
 }
 
@@ -617,33 +668,48 @@ type V1SendMessageRef struct {
 
 // V1SendRequest Outgoing message payload. At least one of to, cc, or bcc must be present.
 type V1SendRequest struct {
+	// Attachments Files to attach. Inline images set cid; regular attachments omit it.
 	Attachments *[]V1SendAttachment `json:"attachments,omitempty"`
 
-	// Bcc Example: ["bcc@example.com"]
+	// Bcc Blind-carbon-copy recipient email addresses. Not visible to other recipients.
+	//
+	// Example: ["bcc@example.com"]
 	Bcc *[]openapi_types.Email `json:"bcc,omitempty"`
 
-	// Cc Example: ["cc@example.com"]
+	// Cc Carbon-copy recipient email addresses.
+	//
+	// Example: ["cc@example.com"]
 	Cc *[]openapi_types.Email `json:"cc,omitempty"`
 
-	// DisplayName Example: John Doe
+	// DisplayName Sender display name shown in the From header alongside the mailbox address.
+	//
+	// Example: John Doe
 	DisplayName *string `json:"displayName,omitempty"`
 
 	// ForwardOf Source message this forwards. Copies its Message-Id/References into In-Reply-To/References and flags it $forwarded. Mutually exclusive with inReplyTo.
 	ForwardOf *V1SendMessageRef `json:"forwardOf,omitempty"`
 
-	// Html Example: <p>HTML body</p>
+	// Html HTML body. Optional; if both text and html are omitted the message is sent without a body. Inline images are referenced via cid: URLs matching attachment cid values.
+	//
+	// Example: <p>HTML body</p>
 	Html *string `json:"html,omitempty"`
 
 	// InReplyTo Source message this is a reply to. Copies its Message-Id/References into In-Reply-To/References and flags it \Answered. Mutually exclusive with forwardOf.
 	InReplyTo *V1SendMessageRef `json:"inReplyTo,omitempty"`
 
-	// Subject Example: Hello
+	// Subject Message subject line.
+	//
+	// Example: Hello
 	Subject *string `json:"subject,omitempty"`
 
-	// Text Example: Plain body
+	// Text Plain-text body. Optional; if both text and html are omitted the message is sent without a body.
+	//
+	// Example: Plain body
 	Text *string `json:"text,omitempty"`
 
-	// To Example: ["recipient@example.com"]
+	// To Primary recipient email addresses.
+	//
+	// Example: ["recipient@example.com"]
 	To    *[]openapi_types.Email `json:"to,omitempty"`
 	union json.RawMessage
 }
@@ -667,26 +733,38 @@ type V1WebhooksCollection struct {
 
 // V1WebhooksCreateRequest Body for creating a webhook.
 type V1WebhooksCreateRequest struct {
-	// Description Example: Notifies CRM on new mail
+	// Description Optional free-text note about the webhook purpose.
+	//
+	// Example: Notifies CRM on new mail
 	Description *string `json:"description,omitempty"`
 
-	// Events Example: ["message.received"]
+	// Events Event types that trigger a delivery.
+	//
+	// Example: ["message.received"]
 	Events []V1WebhooksCreateRequestEvents `json:"events"`
 
-	// Name Example: New message notifier
+	// Name Human-readable webhook name.
+	//
+	// Example: New message notifier
 	Name string `json:"name"`
 
-	// Status Example: active
+	// Status Initial delivery state. Only active webhooks receive events.
+	//
+	// Example: active
 	Status *V1WebhooksCreateRequestStatus `json:"status,omitempty"`
 
-	// Url Example: https://example.com/webhooks/incoming
+	// Url HTTPS endpoint that receives POST deliveries, authenticated with the webhook secret as `Authorization: Bearer <secret>`. Must be a public domain name (no IPs or internal hosts).
+	//
+	// Example: https://example.com/webhooks/incoming
 	Url string `json:"url"`
 }
 
 // V1WebhooksCreateRequestEvents defines model for V1WebhooksCreateRequest.Events.
 type V1WebhooksCreateRequestEvents string
 
-// V1WebhooksCreateRequestStatus Example: active
+// V1WebhooksCreateRequestStatus Initial delivery state. Only active webhooks receive events.
+//
+// Example: active
 type V1WebhooksCreateRequestStatus string
 
 // V1WebhooksResource Single webhook payload.
@@ -717,26 +795,38 @@ type V1WebhooksTestResult struct {
 
 // V1WebhooksUpdateRequest Body for partially updating a webhook. All fields optional; only present fields are applied.
 type V1WebhooksUpdateRequest struct {
-	// Description Example: Updated description
+	// Description Free-text note about the webhook purpose. Send null to clear.
+	//
+	// Example: Updated description
 	Description *string `json:"description,omitempty"`
 
-	// Events Example: ["message.received"]
+	// Events Event types that trigger a delivery. Replaces the current list.
+	//
+	// Example: ["message.received"]
 	Events *[]V1WebhooksUpdateRequestEvents `json:"events,omitempty"`
 
-	// Name Example: Renamed webhook
+	// Name Human-readable webhook name.
+	//
+	// Example: Renamed webhook
 	Name *string `json:"name,omitempty"`
 
-	// Status Example: paused
+	// Status Delivery state. Only active webhooks receive events; paused keeps config but stops deliveries.
+	//
+	// Example: paused
 	Status *V1WebhooksUpdateRequestStatus `json:"status,omitempty"`
 
-	// Url Example: https://example.com/webhooks/new
+	// Url HTTPS endpoint that receives POST deliveries, authenticated with the webhook secret as `Authorization: Bearer <secret>`. Must be a public domain name (no IPs or internal hosts).
+	//
+	// Example: https://example.com/webhooks/new
 	Url *string `json:"url,omitempty"`
 }
 
 // V1WebhooksUpdateRequestEvents defines model for V1WebhooksUpdateRequest.Events.
 type V1WebhooksUpdateRequestEvents string
 
-// V1WebhooksUpdateRequestStatus Example: paused
+// V1WebhooksUpdateRequestStatus Delivery state. Only active webhooks receive events; paused keeps config but stops deliveries.
+//
+// Example: paused
 type V1WebhooksUpdateRequestStatus string
 
 // V1WebhooksWebhook Webhook configured for a managed mailbox.
@@ -837,11 +927,17 @@ type CommonResponseConflictResponse = Error
 // CommonResponseForbiddenResponse Standard error envelope. Frontend translations key off `code`, never off `error`.
 type CommonResponseForbiddenResponse = Error
 
+// CommonResponseGatewayTimeoutResponse Standard error envelope. Frontend translations key off `code`, never off `error`.
+type CommonResponseGatewayTimeoutResponse = Error
+
 // CommonResponseInternalServerErrorResponse Standard error envelope. Frontend translations key off `code`, never off `error`.
 type CommonResponseInternalServerErrorResponse = Error
 
 // CommonResponseNotFoundResponse Standard error envelope. Frontend translations key off `code`, never off `error`.
 type CommonResponseNotFoundResponse = Error
+
+// CommonResponseTooManyRequestsResponse Standard error envelope. Frontend translations key off `code`, never off `error`.
+type CommonResponseTooManyRequestsResponse = Error
 
 // CommonResponseUnauthorizedResponse Standard error envelope. Frontend translations key off `code`, never off `error`.
 type CommonResponseUnauthorizedResponse = Error
@@ -872,20 +968,33 @@ type ListMessagesParams struct {
 
 // SearchMessagesParams defines parameters for SearchMessages.
 type SearchMessagesParams struct {
-	Page    *int    `form:"page,omitempty" json:"page,omitempty"`
-	PerPage *int    `form:"perPage,omitempty" json:"perPage,omitempty"`
-	Sort    *string `form:"sort,omitempty" json:"sort,omitempty"`
+	// Page Page number (1-based).
+	Page *int `form:"page,omitempty" json:"page,omitempty"`
+
+	// PerPage Items per page (max 100).
+	PerPage *int `form:"perPage,omitempty" json:"perPage,omitempty"`
+
+	// Sort Sort field with optional `-` prefix for descending. Allowed: uid, date, size.
+	Sort *string `form:"sort,omitempty" json:"sort,omitempty"`
 }
 
 // ListWebhooksParams defines parameters for ListWebhooks.
 type ListWebhooksParams struct {
-	Status  *ListWebhooksParamsStatus `form:"status,omitempty" json:"status,omitempty"`
-	Page    *int                      `form:"page,omitempty" json:"page,omitempty"`
-	PerPage *int                      `form:"perPage,omitempty" json:"perPage,omitempty"`
+	// Status Return only webhooks with this status.
+	Status *ListWebhooksParamsStatus `form:"status,omitempty" json:"status,omitempty"`
+
+	// Page Page number (1-based).
+	Page *int `form:"page,omitempty" json:"page,omitempty"`
+
+	// PerPage Items per page (max 1000).
+	PerPage *int `form:"perPage,omitempty" json:"perPage,omitempty"`
 }
 
 // ListWebhooksParamsStatus defines parameters for ListWebhooks.
 type ListWebhooksParamsStatus string
+
+// SubmitFeedbackJSONRequestBody defines body for SubmitFeedback for application/json ContentType.
+type SubmitFeedbackJSONRequestBody = V1FeedbackSubmitRequest
 
 // CreateFolderJSONRequestBody defines body for CreateFolder for application/json ContentType.
 type CreateFolderJSONRequestBody = V1FoldersCreateRequest
@@ -1278,6 +1387,32 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 // The interface specification for the client above.
 type ClientInterface interface {
 
+	// SubmitFeedbackWithBody Submit feedback
+	//
+	// Report a problem or suggestion about this API or the MCP server to the Hostinger mail team.
+	//
+	// Report when a call returned 4xx/5xx or unexpected data, was too slow, when documentation was missing or unclear, or when a capability you needed does not exist. Mention the failing operation and the status code you received so the team can find the request. Never include tokens, passwords or email contents: the message is scrubbed of secrets and capped at 2000 characters. Send one report per distinct issue.
+	//
+	// A `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/feedback (the `SubmitFeedback` operationId).
+	SubmitFeedbackWithBody(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// SubmitFeedback Submit feedback
+	//
+	// Report a problem or suggestion about this API or the MCP server to the Hostinger mail team.
+	//
+	// Report when a call returned 4xx/5xx or unexpected data, was too slow, when documentation was missing or unclear, or when a capability you needed does not exist. Mention the failing operation and the status code you received so the team can find the request. Never include tokens, passwords or email contents: the message is scrubbed of secrets and capped at 2000 characters. Send one report per distinct issue.
+	//
+	// A `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/feedback (the `SubmitFeedback` operationId).
+	SubmitFeedback(ctx context.Context, mailboxResourceId string, body SubmitFeedbackJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListFolders List folders
 	//
 	// Retrieve a paginated list of folders in the managed mailbox.
@@ -1587,6 +1722,52 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/v1/me (the `GetCurrentAccount` operationId).
 	GetCurrentAccount(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+}
+
+// SubmitFeedbackWithBody Submit feedback
+//
+// Report a problem or suggestion about this API or the MCP server to the Hostinger mail team.
+//
+// Report when a call returned 4xx/5xx or unexpected data, was too slow, when documentation was missing or unclear, or when a capability you needed does not exist. Mention the failing operation and the status code you received so the team can find the request. Never include tokens, passwords or email contents: the message is scrubbed of secrets and capped at 2000 characters. Send one report per distinct issue.
+//
+// A `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/feedback (the `SubmitFeedback` operationId).
+func (c *Client) SubmitFeedbackWithBody(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewSubmitFeedbackRequestWithBody(c.Server, mailboxResourceId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// SubmitFeedback Submit feedback
+//
+// Report a problem or suggestion about this API or the MCP server to the Hostinger mail team.
+//
+// Report when a call returned 4xx/5xx or unexpected data, was too slow, when documentation was missing or unclear, or when a capability you needed does not exist. Mention the failing operation and the status code you received so the team can find the request. Never include tokens, passwords or email contents: the message is scrubbed of secrets and capped at 2000 characters. Send one report per distinct issue.
+//
+// A `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/feedback (the `SubmitFeedback` operationId).
+func (c *Client) SubmitFeedback(ctx context.Context, mailboxResourceId string, body SubmitFeedbackJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewSubmitFeedbackRequest(c.Server, mailboxResourceId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
 }
 
 // ListFolders List folders
@@ -2277,6 +2458,53 @@ func (c *Client) GetCurrentAccount(ctx context.Context, reqEditors ...RequestEdi
 		return nil, err
 	}
 	return c.Client.Do(req)
+}
+
+// NewSubmitFeedbackRequest calls the generic SubmitFeedback builder with application/json body
+func NewSubmitFeedbackRequest(server string, mailboxResourceId string, body SubmitFeedbackJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewSubmitFeedbackRequestWithBody(server, mailboxResourceId, "application/json", bodyReader)
+}
+
+// NewSubmitFeedbackRequestWithBody constructs an http.Request for the SubmitFeedback method, with any body, and a specified content type
+func NewSubmitFeedbackRequestWithBody(server string, mailboxResourceId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "mailboxResourceId", mailboxResourceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/v1/mailboxes/%s/feedback", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
 }
 
 // NewListFoldersRequest constructs an http.Request for the ListFolders method
@@ -3765,6 +3993,32 @@ func WithBaseURL(baseURL string) ClientOption {
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
 
+	// SubmitFeedbackWithBodyWithResponse Submit feedback
+	//
+	// Report a problem or suggestion about this API or the MCP server to the Hostinger mail team.
+	//
+	// Report when a call returned 4xx/5xx or unexpected data, was too slow, when documentation was missing or unclear, or when a capability you needed does not exist. Mention the failing operation and the status code you received so the team can find the request. Never include tokens, passwords or email contents: the message is scrubbed of secrets and capped at 2000 characters. Send one report per distinct issue.
+	//
+	// A `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/feedback (the `SubmitFeedback` operationId).
+	SubmitFeedbackWithBodyWithResponse(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SubmitFeedbackResponse, error)
+
+	// SubmitFeedbackWithResponse Submit feedback
+	//
+	// Report a problem or suggestion about this API or the MCP server to the Hostinger mail team.
+	//
+	// Report when a call returned 4xx/5xx or unexpected data, was too slow, when documentation was missing or unclear, or when a capability you needed does not exist. Mention the failing operation and the status code you received so the team can find the request. Never include tokens, passwords or email contents: the message is scrubbed of secrets and capped at 2000 characters. Send one report per distinct issue.
+	//
+	// A `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/feedback (the `SubmitFeedback` operationId).
+	SubmitFeedbackWithResponse(ctx context.Context, mailboxResourceId string, body SubmitFeedbackJSONRequestBody, reqEditors ...RequestEditorFn) (*SubmitFeedbackResponse, error)
+
 	// ListFoldersWithResponse List folders
 	//
 	// Retrieve a paginated list of folders in the managed mailbox.
@@ -4106,6 +4360,89 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/v1/me (the `GetCurrentAccount` operationId).
 	GetCurrentAccountWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetCurrentAccountResponse, error)
+}
+
+type SubmitFeedbackResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON429 the response for an HTTP 429 `application/json` response
+	JSON429 *CommonResponseTooManyRequestsResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+	// JSON504 the response for an HTTP 504 `application/json` response
+	JSON504 *CommonResponseGatewayTimeoutResponse
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r SubmitFeedbackResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r SubmitFeedbackResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r SubmitFeedbackResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON429 returns the response for an HTTP 429 `application/json` response
+func (r SubmitFeedbackResponse) GetJSON429() *CommonResponseTooManyRequestsResponse {
+	return r.JSON429
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r SubmitFeedbackResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r SubmitFeedbackResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetJSON504 returns the response for an HTTP 504 `application/json` response
+func (r SubmitFeedbackResponse) GetJSON504() *CommonResponseGatewayTimeoutResponse {
+	return r.JSON504
+}
+
+// GetBody returns the raw response body bytes
+func (r SubmitFeedbackResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r SubmitFeedbackResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r SubmitFeedbackResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r SubmitFeedbackResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
 }
 
 type ListFoldersResponse struct {
@@ -5503,6 +5840,8 @@ type SendEmailResponse struct {
 	JSON500 *CommonResponseInternalServerErrorResponse
 	// JSON502 the response for an HTTP 502 `application/json` response
 	JSON502 *CommonResponseBadGatewayResponse
+	// JSON504 the response for an HTTP 504 `application/json` response
+	JSON504 *CommonResponseGatewayTimeoutResponse
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
@@ -5528,6 +5867,11 @@ func (r SendEmailResponse) GetJSON500() *CommonResponseInternalServerErrorRespon
 // GetJSON502 returns the response for an HTTP 502 `application/json` response
 func (r SendEmailResponse) GetJSON502() *CommonResponseBadGatewayResponse {
 	return r.JSON502
+}
+
+// GetJSON504 returns the response for an HTTP 504 `application/json` response
+func (r SendEmailResponse) GetJSON504() *CommonResponseGatewayTimeoutResponse {
+	return r.JSON504
 }
 
 // GetBody returns the raw response body bytes
@@ -6153,6 +6497,44 @@ func (r GetCurrentAccountResponse) ContentType() string {
 	return ""
 }
 
+// SubmitFeedbackWithBodyWithResponse Submit feedback
+//
+// Report a problem or suggestion about this API or the MCP server to the Hostinger mail team.
+//
+// Report when a call returned 4xx/5xx or unexpected data, was too slow, when documentation was missing or unclear, or when a capability you needed does not exist. Mention the failing operation and the status code you received so the team can find the request. Never include tokens, passwords or email contents: the message is scrubbed of secrets and capped at 2000 characters. Send one report per distinct issue.
+//
+// A `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/feedback (the `SubmitFeedback` operationId).
+func (c *ClientWithResponses) SubmitFeedbackWithBodyWithResponse(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SubmitFeedbackResponse, error) {
+	rsp, err := c.SubmitFeedbackWithBody(ctx, mailboxResourceId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseSubmitFeedbackResponse(rsp)
+}
+
+// SubmitFeedbackWithResponse Submit feedback
+//
+// Report a problem or suggestion about this API or the MCP server to the Hostinger mail team.
+//
+// Report when a call returned 4xx/5xx or unexpected data, was too slow, when documentation was missing or unclear, or when a capability you needed does not exist. Mention the failing operation and the status code you received so the team can find the request. Never include tokens, passwords or email contents: the message is scrubbed of secrets and capped at 2000 characters. Send one report per distinct issue.
+//
+// A `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/feedback (the `SubmitFeedback` operationId).
+func (c *ClientWithResponses) SubmitFeedbackWithResponse(ctx context.Context, mailboxResourceId string, body SubmitFeedbackJSONRequestBody, reqEditors ...RequestEditorFn) (*SubmitFeedbackResponse, error) {
+	rsp, err := c.SubmitFeedback(ctx, mailboxResourceId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseSubmitFeedbackResponse(rsp)
+}
+
 // ListFoldersWithResponse List folders
 //
 // Retrieve a paginated list of folders in the managed mailbox.
@@ -6721,6 +7103,77 @@ func (c *ClientWithResponses) GetCurrentAccountWithResponse(ctx context.Context,
 		return nil, err
 	}
 	return ParseGetCurrentAccountResponse(rsp)
+}
+
+// ParseSubmitFeedbackResponse parses an HTTP response from a SubmitFeedbackWithResponse call
+func ParseSubmitFeedbackResponse(rsp *http.Response) (*SubmitFeedbackResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &SubmitFeedbackResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case rsp.StatusCode == 204:
+		break // No content-type
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest CommonResponseForbiddenResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseValidationFailedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest CommonResponseTooManyRequestsResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseInternalServerErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 502:
+		var dest CommonResponseBadGatewayResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON502 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 504:
+		var dest CommonResponseGatewayTimeoutResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON504 = &dest
+
+	}
+
+	return response, nil
 }
 
 // ParseListFoldersResponse parses an HTTP response from a ListFoldersWithResponse call
@@ -7904,6 +8357,13 @@ func ParseSendEmailResponse(rsp *http.Response) (*SendEmailResponse, error) {
 			return nil, err
 		}
 		response.JSON502 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 504:
+		var dest CommonResponseGatewayTimeoutResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON504 = &dest
 
 	}
 

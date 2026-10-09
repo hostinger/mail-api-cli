@@ -13,9 +13,9 @@ hostinger-mail messages patch <mailbox-resource-id> <folder> <uid> [flags]
 ### Options
 
 ```
-      --addflags strings      
+      --addflags strings      IMAP flags to set on the message, e.g. \Seen, \Flagged, \Answered, $forwarded.
   -h, --help                  help for patch
-      --removeflags strings   
+      --removeflags strings   IMAP flags to clear from the message.
 ```
 
 ### Options inherited from parent commands

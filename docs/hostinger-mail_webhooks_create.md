@@ -13,12 +13,12 @@ hostinger-mail webhooks create <mailbox-resource-id> [flags]
 ### Options
 
 ```
-      --description string   
-      --events strings       (one of: message.received)
-  -h, --help                 help for create
-      --name string          
-      --status string        (one of: active, paused, disabled) (default "active")
-      --url string           
+      --description string                   Optional free-text note about the webhook purpose.
+      --events strings                       Event types that trigger a delivery. (one of: message.received)
+  -h, --help                                 help for create
+      --name string                          Human-readable webhook name.
+      --status string                        Initial delivery state. Only active webhooks receive events. (one of: active, paused, disabled) (default "active")
+      --url Authorization: Bearer <secret>   HTTPS endpoint that receives POST deliveries, authenticated with the webhook secret as Authorization: Bearer <secret>. Must be a public domain name (no IPs or internal hosts).
 ```
 
 ### Options inherited from parent commands

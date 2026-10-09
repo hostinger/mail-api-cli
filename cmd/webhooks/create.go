@@ -33,11 +33,11 @@ var CreateCmd = &cobra.Command{
 }
 
 func init() {
-	CreateCmd.Flags().StringP("description", "", "", "")
-	CreateCmd.Flags().StringSliceP("events", "", nil, "(one of: message.received)")
-	CreateCmd.Flags().StringP("name", "", "", "")
-	CreateCmd.Flags().StringP("status", "", "active", "(one of: active, paused, disabled)")
-	CreateCmd.Flags().StringP("url", "", "", "")
+	CreateCmd.Flags().StringP("description", "", "", "Optional free-text note about the webhook purpose.")
+	CreateCmd.Flags().StringSliceP("events", "", nil, "Event types that trigger a delivery. (one of: message.received)")
+	CreateCmd.Flags().StringP("name", "", "", "Human-readable webhook name.")
+	CreateCmd.Flags().StringP("status", "", "active", "Initial delivery state. Only active webhooks receive events. (one of: active, paused, disabled)")
+	CreateCmd.Flags().StringP("url", "", "", "HTTPS endpoint that receives POST deliveries, authenticated with the webhook secret as `Authorization: Bearer <secret>`. Must be a public domain name (no IPs or internal hosts).")
 	CreateCmd.MarkFlagRequired("events")
 	CreateCmd.MarkFlagRequired("name")
 	CreateCmd.MarkFlagRequired("url")

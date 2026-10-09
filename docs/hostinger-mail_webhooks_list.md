@@ -14,9 +14,9 @@ hostinger-mail webhooks list <mailbox-resource-id> [flags]
 
 ```
   -h, --help            help for list
-      --page int         (default 1)
-      --perpage int      (default 15)
-      --status string   (one of: active, paused, disabled)
+      --page int        Page number (1-based). (default 1)
+      --perpage int     Items per page (max 1000). (default 15)
+      --status string   Return only webhooks with this status. (one of: active, paused, disabled)
 ```
 
 ### Options inherited from parent commands

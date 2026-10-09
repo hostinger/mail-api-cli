@@ -32,22 +32,22 @@ var SearchCmd = &cobra.Command{
 }
 
 func init() {
-	SearchCmd.Flags().IntP("page", "", 1, "")
-	SearchCmd.Flags().IntP("perpage", "", 25, "")
-	SearchCmd.Flags().StringP("sort", "", "-uid", "")
-	SearchCmd.Flags().StringP("before", "", "", "")
-	SearchCmd.Flags().StringP("body", "", "", "")
-	SearchCmd.Flags().StringP("cc", "", "", "")
-	SearchCmd.Flags().StringSliceP("flags", "", nil, "")
-	SearchCmd.Flags().StringP("from", "", "", "")
-	SearchCmd.Flags().StringP("header", "", "", "")
-	SearchCmd.Flags().IntP("larger", "", 0, "")
-	SearchCmd.Flags().StringP("since", "", "", "")
-	SearchCmd.Flags().IntP("smaller", "", 0, "")
-	SearchCmd.Flags().StringP("subject", "", "", "")
-	SearchCmd.Flags().StringP("text", "", "", "")
-	SearchCmd.Flags().StringP("to", "", "", "")
-	SearchCmd.Flags().StringP("uid", "", "", "")
+	SearchCmd.Flags().IntP("page", "", 1, "Page number (1-based).")
+	SearchCmd.Flags().IntP("perpage", "", 25, "Items per page (max 100).")
+	SearchCmd.Flags().StringP("sort", "", "-uid", "Sort field with optional `-` prefix for descending. Allowed: uid, date, size.")
+	SearchCmd.Flags().StringP("before", "", "", "Only messages received before this date (YYYY-MM-DD).")
+	SearchCmd.Flags().StringP("body", "", "", "Case-insensitive substring match on the message body only (headers excluded). OR-combined with subject/from/to/cc.")
+	SearchCmd.Flags().StringP("cc", "", "", "Case-insensitive substring match on the Cc header. OR-combined with subject/from/to/body.")
+	SearchCmd.Flags().StringSliceP("flags", "", nil, "Only messages carrying all of these IMAP flags, e.g. \\Seen, \\Flagged, \\Answered, $forwarded.")
+	SearchCmd.Flags().StringP("from", "", "", "Case-insensitive substring match on the From header. OR-combined with subject/to/cc/body.")
+	SearchCmd.Flags().StringP("header", "", "", "Match a specific header as Name:value, e.g. X-Custom-Header:value. Value match is a substring.")
+	SearchCmd.Flags().IntP("larger", "", 0, "Only messages larger than this size in bytes.")
+	SearchCmd.Flags().StringP("since", "", "", "Only messages received on or after this date (YYYY-MM-DD).")
+	SearchCmd.Flags().IntP("smaller", "", 0, "Only messages smaller than this size in bytes.")
+	SearchCmd.Flags().StringP("subject", "", "", "Case-insensitive substring match on the Subject header. OR-combined with from/to/cc/body.")
+	SearchCmd.Flags().StringP("text", "", "", "Case-insensitive substring match across headers and body.")
+	SearchCmd.Flags().StringP("to", "", "", "Case-insensitive substring match on the To header. OR-combined with subject/from/cc/body.")
+	SearchCmd.Flags().StringP("uid", "", "", "IMAP UID set: single UID, range (1:100), open range (100:*), or comma-separated list.")
 }
 
 func searchParams(cmd *cobra.Command) *client.SearchMessagesParams {

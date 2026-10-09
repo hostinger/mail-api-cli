@@ -32,16 +32,16 @@ var EmailCmd = &cobra.Command{
 }
 
 func init() {
-	EmailCmd.Flags().StringP("attachments", "", "", " (JSON)")
-	EmailCmd.Flags().StringSliceP("bcc", "", nil, "")
-	EmailCmd.Flags().StringSliceP("cc", "", nil, "")
-	EmailCmd.Flags().StringP("displayname", "", "", "")
+	EmailCmd.Flags().StringP("attachments", "", "", "Files to attach. Inline images set cid; regular attachments omit it. (JSON)")
+	EmailCmd.Flags().StringSliceP("bcc", "", nil, "Blind-carbon-copy recipient email addresses. Not visible to other recipients.")
+	EmailCmd.Flags().StringSliceP("cc", "", nil, "Carbon-copy recipient email addresses.")
+	EmailCmd.Flags().StringP("displayname", "", "", "Sender display name shown in the From header alongside the mailbox address.")
 	EmailCmd.Flags().StringP("forwardof", "", "", "Source message this forwards. Copies its Message-Id/References into In-Reply-To/References and flags it $forwarded. Mutually exclusive with inReplyTo. (JSON)")
-	EmailCmd.Flags().StringP("html", "", "", "")
+	EmailCmd.Flags().StringP("html", "", "", "HTML body. Optional; if both text and html are omitted the message is sent without a body. Inline images are referenced via cid: URLs matching attachment cid values.")
 	EmailCmd.Flags().StringP("inreplyto", "", "", "Source message this is a reply to. Copies its Message-Id/References into In-Reply-To/References and flags it \\Answered. Mutually exclusive with forwardOf. (JSON)")
-	EmailCmd.Flags().StringP("subject", "", "", "")
-	EmailCmd.Flags().StringP("text", "", "", "")
-	EmailCmd.Flags().StringSliceP("to", "", nil, "")
+	EmailCmd.Flags().StringP("subject", "", "", "Message subject line.")
+	EmailCmd.Flags().StringP("text", "", "", "Plain-text body. Optional; if both text and html are omitted the message is sent without a body.")
+	EmailCmd.Flags().StringSliceP("to", "", nil, "Primary recipient email addresses.")
 }
 
 func emailBody(cmd *cobra.Command) map[string]any {

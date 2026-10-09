@@ -34,11 +34,11 @@ var UpdateCmd = &cobra.Command{
 }
 
 func init() {
-	UpdateCmd.Flags().StringP("description", "", "", "")
-	UpdateCmd.Flags().StringSliceP("events", "", nil, "(one of: message.received)")
-	UpdateCmd.Flags().StringP("name", "", "", "")
-	UpdateCmd.Flags().StringP("status", "", "", "(one of: active, paused, disabled)")
-	UpdateCmd.Flags().StringP("url", "", "", "")
+	UpdateCmd.Flags().StringP("description", "", "", "Free-text note about the webhook purpose. Send null to clear.")
+	UpdateCmd.Flags().StringSliceP("events", "", nil, "Event types that trigger a delivery. Replaces the current list. (one of: message.received)")
+	UpdateCmd.Flags().StringP("name", "", "", "Human-readable webhook name.")
+	UpdateCmd.Flags().StringP("status", "", "", "Delivery state. Only active webhooks receive events; paused keeps config but stops deliveries. (one of: active, paused, disabled)")
+	UpdateCmd.Flags().StringP("url", "", "", "HTTPS endpoint that receives POST deliveries, authenticated with the webhook secret as `Authorization: Bearer <secret>`. Must be a public domain name (no IPs or internal hosts).")
 }
 
 func updateBody(cmd *cobra.Command) map[string]any {

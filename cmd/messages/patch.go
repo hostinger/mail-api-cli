@@ -32,8 +32,8 @@ var PatchCmd = &cobra.Command{
 }
 
 func init() {
-	PatchCmd.Flags().StringSliceP("addflags", "", nil, "")
-	PatchCmd.Flags().StringSliceP("removeflags", "", nil, "")
+	PatchCmd.Flags().StringSliceP("addflags", "", nil, "IMAP flags to set on the message, e.g. \\Seen, \\Flagged, \\Answered, $forwarded.")
+	PatchCmd.Flags().StringSliceP("removeflags", "", nil, "IMAP flags to clear from the message.")
 }
 
 func patchBody(cmd *cobra.Command) map[string]any {

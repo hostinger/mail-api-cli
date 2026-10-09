@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"github.com/hostinger/mail-api-cli/cmd/account"
+	"github.com/hostinger/mail-api-cli/cmd/feedback"
 	"github.com/hostinger/mail-api-cli/cmd/folders"
 	"github.com/hostinger/mail-api-cli/cmd/messages"
 	"github.com/hostinger/mail-api-cli/cmd/quota"
@@ -50,6 +51,7 @@ func init() {
 	})
 
 	RootCmd.AddCommand(account.GroupCmd)
+	RootCmd.AddCommand(feedback.GroupCmd)
 	RootCmd.AddCommand(folders.GroupCmd)
 	RootCmd.AddCommand(messages.GroupCmd)
 	RootCmd.AddCommand(quota.GroupCmd)
