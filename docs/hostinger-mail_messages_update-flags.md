@@ -1,6 +1,6 @@
 ## hostinger-mail messages update-flags
 
-Update message flags
+Update flags on multiple messages
 
 ### Synopsis
 

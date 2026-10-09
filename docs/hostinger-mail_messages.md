@@ -30,5 +30,5 @@ Messages commands
 * [hostinger-mail messages search](hostinger-mail_messages_search.md)	 - Search messages
 * [hostinger-mail messages source](hostinger-mail_messages_source.md)	 - Get message source
 * [hostinger-mail messages text](hostinger-mail_messages_text.md)	 - Get message text content
-* [hostinger-mail messages update-flags](hostinger-mail_messages_update-flags.md)	 - Update message flags
+* [hostinger-mail messages update-flags](hostinger-mail_messages_update-flags.md)	 - Update flags on multiple messages
 

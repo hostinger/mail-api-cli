@@ -13,7 +13,7 @@ import (
 
 var UpdateFlagsCmd = &cobra.Command{
 	Use:   "update-flags <mailbox-resource-id> <folder>",
-	Short: "Update message flags",
+	Short: "Update flags on multiple messages",
 	Long:  "Add and/or remove flags on multiple messages. Returns 200 when all UIDs succeed, 207 with per-UID outcome when some fail.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(2)),
 	Run: func(cmd *cobra.Command, args []string) {

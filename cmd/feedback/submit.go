@@ -14,7 +14,7 @@ import (
 var SubmitCmd = &cobra.Command{
 	Use:   "submit <mailbox-resource-id>",
 	Short: "Submit feedback",
-	Long:  "Report a problem or suggestion about this API or the MCP server to the Hostinger mail team.\n\nReport when a call returned 4xx/5xx or unexpected data, was too slow, when documentation was missing or unclear, or when a capability you needed does not exist. Mention the failing operation and the status code you received so the team can find the request. Never include tokens, passwords or email contents: the message is scrubbed of secrets and capped at 2000 characters. Send one report per distinct issue.\n\nA `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.",
+	Long:  "Send the user's feedback about the Hostinger Email API to the Hostinger mail team.\n\nOnly call this when the user explicitly asks to send feedback, report a problem, or request a feature. Send the user's own words; never include tokens, passwords or email contents. The message is capped at 2000 characters.\n\nA `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.",
 	Args:  cobra.MatchAll(cobra.ExactArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
 		payload, err := json.Marshal(submitBody(cmd))
@@ -31,8 +31,8 @@ var SubmitCmd = &cobra.Command{
 }
 
 func init() {
-	SubmitCmd.Flags().StringP("message", "", "", "What happened and what was expected, including the operation and status code involved. Never include tokens, passwords or email contents.")
-	SubmitCmd.Flags().IntP("score", "", 0, "How well the API served the task: 1 (poor) to 10 (excellent).")
+	SubmitCmd.Flags().StringP("message", "", "", "The user's feedback in their own words. Never include tokens, passwords or email contents.")
+	SubmitCmd.Flags().IntP("score", "", 0, "The user's rating of the Hostinger Email API: 1 (poor) to 10 (excellent).")
 	SubmitCmd.MarkFlagRequired("message")
 	SubmitCmd.MarkFlagRequired("score")
 }

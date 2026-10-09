@@ -222,14 +222,14 @@ type Pagination struct {
 	TotalPages int `json:"totalPages"`
 }
 
-// V1FeedbackSubmitRequest Feedback about the Mail API or the MCP server. The message is scrubbed of tokens, JWTs and key/secret/password values before validation and storage, so the length limit applies to the scrubbed text.
+// V1FeedbackSubmitRequest Feedback the user wants to send to the Hostinger mail team. The message is scrubbed of tokens, JWTs and key/secret/password values before validation and storage, so the length limit applies to the scrubbed text.
 type V1FeedbackSubmitRequest struct {
-	// Message What happened and what was expected, including the operation and status code involved. Never include tokens, passwords or email contents.
+	// Message The user's feedback in their own words. Never include tokens, passwords or email contents.
 	//
-	// Example: POST /api/v1/mailboxes/{mailboxResourceId}/send returned 502 after 30 seconds for a message with a 10 MB attachment.
+	// Example: Sending a message with a 10 MB attachment fails with a timeout.
 	Message string `json:"message"`
 
-	// Score How well the API served the task: 1 (poor) to 10 (excellent).
+	// Score The user's rating of the Hostinger Email API: 1 (poor) to 10 (excellent).
 	//
 	// Example: 3
 	Score int `json:"score"`
@@ -1389,9 +1389,9 @@ type ClientInterface interface {
 
 	// SubmitFeedbackWithBody Submit feedback
 	//
-	// Report a problem or suggestion about this API or the MCP server to the Hostinger mail team.
+	// Send the user's feedback about the Hostinger Email API to the Hostinger mail team.
 	//
-	// Report when a call returned 4xx/5xx or unexpected data, was too slow, when documentation was missing or unclear, or when a capability you needed does not exist. Mention the failing operation and the status code you received so the team can find the request. Never include tokens, passwords or email contents: the message is scrubbed of secrets and capped at 2000 characters. Send one report per distinct issue.
+	// Only call this when the user explicitly asks to send feedback, report a problem, or request a feature. Send the user's own words; never include tokens, passwords or email contents. The message is capped at 2000 characters.
 	//
 	// A `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.
 	//
@@ -1402,9 +1402,9 @@ type ClientInterface interface {
 
 	// SubmitFeedback Submit feedback
 	//
-	// Report a problem or suggestion about this API or the MCP server to the Hostinger mail team.
+	// Send the user's feedback about the Hostinger Email API to the Hostinger mail team.
 	//
-	// Report when a call returned 4xx/5xx or unexpected data, was too slow, when documentation was missing or unclear, or when a capability you needed does not exist. Mention the failing operation and the status code you received so the team can find the request. Never include tokens, passwords or email contents: the message is scrubbed of secrets and capped at 2000 characters. Send one report per distinct issue.
+	// Only call this when the user explicitly asks to send feedback, report a problem, or request a feature. Send the user's own words; never include tokens, passwords or email contents. The message is capped at 2000 characters.
 	//
 	// A `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.
 	//
@@ -1495,7 +1495,7 @@ type ClientInterface interface {
 	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/delete (the `DeleteMessages` operationId).
 	DeleteMessages(ctx context.Context, mailboxResourceId string, folder string, body DeleteMessagesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// UpdateMessageFlagsWithBody Update message flags
+	// UpdateMessageFlagsWithBody Update flags on multiple messages
 	//
 	// Add and/or remove flags on multiple messages. Returns 200 when all UIDs succeed, 207 with per-UID outcome when some fail.
 	//
@@ -1504,7 +1504,7 @@ type ClientInterface interface {
 	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/flags (the `UpdateMessageFlags` operationId).
 	UpdateMessageFlagsWithBody(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// UpdateMessageFlags Update message flags
+	// UpdateMessageFlags Update flags on multiple messages
 	//
 	// Add and/or remove flags on multiple messages. Returns 200 when all UIDs succeed, 207 with per-UID outcome when some fail.
 	//
@@ -1726,9 +1726,9 @@ type ClientInterface interface {
 
 // SubmitFeedbackWithBody Submit feedback
 //
-// Report a problem or suggestion about this API or the MCP server to the Hostinger mail team.
+// Send the user's feedback about the Hostinger Email API to the Hostinger mail team.
 //
-// Report when a call returned 4xx/5xx or unexpected data, was too slow, when documentation was missing or unclear, or when a capability you needed does not exist. Mention the failing operation and the status code you received so the team can find the request. Never include tokens, passwords or email contents: the message is scrubbed of secrets and capped at 2000 characters. Send one report per distinct issue.
+// Only call this when the user explicitly asks to send feedback, report a problem, or request a feature. Send the user's own words; never include tokens, passwords or email contents. The message is capped at 2000 characters.
 //
 // A `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.
 //
@@ -1749,9 +1749,9 @@ func (c *Client) SubmitFeedbackWithBody(ctx context.Context, mailboxResourceId s
 
 // SubmitFeedback Submit feedback
 //
-// Report a problem or suggestion about this API or the MCP server to the Hostinger mail team.
+// Send the user's feedback about the Hostinger Email API to the Hostinger mail team.
 //
-// Report when a call returned 4xx/5xx or unexpected data, was too slow, when documentation was missing or unclear, or when a capability you needed does not exist. Mention the failing operation and the status code you received so the team can find the request. Never include tokens, passwords or email contents: the message is scrubbed of secrets and capped at 2000 characters. Send one report per distinct issue.
+// Only call this when the user explicitly asks to send feedback, report a problem, or request a feature. Send the user's own words; never include tokens, passwords or email contents. The message is capped at 2000 characters.
 //
 // A `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.
 //
@@ -1952,7 +1952,7 @@ func (c *Client) DeleteMessages(ctx context.Context, mailboxResourceId string, f
 	return c.Client.Do(req)
 }
 
-// UpdateMessageFlagsWithBody Update message flags
+// UpdateMessageFlagsWithBody Update flags on multiple messages
 //
 // Add and/or remove flags on multiple messages. Returns 200 when all UIDs succeed, 207 with per-UID outcome when some fail.
 //
@@ -1971,7 +1971,7 @@ func (c *Client) UpdateMessageFlagsWithBody(ctx context.Context, mailboxResource
 	return c.Client.Do(req)
 }
 
-// UpdateMessageFlags Update message flags
+// UpdateMessageFlags Update flags on multiple messages
 //
 // Add and/or remove flags on multiple messages. Returns 200 when all UIDs succeed, 207 with per-UID outcome when some fail.
 //
@@ -3995,9 +3995,9 @@ type ClientWithResponsesInterface interface {
 
 	// SubmitFeedbackWithBodyWithResponse Submit feedback
 	//
-	// Report a problem or suggestion about this API or the MCP server to the Hostinger mail team.
+	// Send the user's feedback about the Hostinger Email API to the Hostinger mail team.
 	//
-	// Report when a call returned 4xx/5xx or unexpected data, was too slow, when documentation was missing or unclear, or when a capability you needed does not exist. Mention the failing operation and the status code you received so the team can find the request. Never include tokens, passwords or email contents: the message is scrubbed of secrets and capped at 2000 characters. Send one report per distinct issue.
+	// Only call this when the user explicitly asks to send feedback, report a problem, or request a feature. Send the user's own words; never include tokens, passwords or email contents. The message is capped at 2000 characters.
 	//
 	// A `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.
 	//
@@ -4008,9 +4008,9 @@ type ClientWithResponsesInterface interface {
 
 	// SubmitFeedbackWithResponse Submit feedback
 	//
-	// Report a problem or suggestion about this API or the MCP server to the Hostinger mail team.
+	// Send the user's feedback about the Hostinger Email API to the Hostinger mail team.
 	//
-	// Report when a call returned 4xx/5xx or unexpected data, was too slow, when documentation was missing or unclear, or when a capability you needed does not exist. Mention the failing operation and the status code you received so the team can find the request. Never include tokens, passwords or email contents: the message is scrubbed of secrets and capped at 2000 characters. Send one report per distinct issue.
+	// Only call this when the user explicitly asks to send feedback, report a problem, or request a feature. Send the user's own words; never include tokens, passwords or email contents. The message is capped at 2000 characters.
 	//
 	// A `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.
 	//
@@ -4109,7 +4109,7 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/delete (the `DeleteMessages` operationId).
 	DeleteMessagesWithResponse(ctx context.Context, mailboxResourceId string, folder string, body DeleteMessagesJSONRequestBody, reqEditors ...RequestEditorFn) (*DeleteMessagesResponse, error)
 
-	// UpdateMessageFlagsWithBodyWithResponse Update message flags
+	// UpdateMessageFlagsWithBodyWithResponse Update flags on multiple messages
 	//
 	// Add and/or remove flags on multiple messages. Returns 200 when all UIDs succeed, 207 with per-UID outcome when some fail.
 	//
@@ -4118,7 +4118,7 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/flags (the `UpdateMessageFlags` operationId).
 	UpdateMessageFlagsWithBodyWithResponse(ctx context.Context, mailboxResourceId string, folder string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateMessageFlagsResponse, error)
 
-	// UpdateMessageFlagsWithResponse Update message flags
+	// UpdateMessageFlagsWithResponse Update flags on multiple messages
 	//
 	// Add and/or remove flags on multiple messages. Returns 200 when all UIDs succeed, 207 with per-UID outcome when some fail.
 	//
@@ -6499,9 +6499,9 @@ func (r GetCurrentAccountResponse) ContentType() string {
 
 // SubmitFeedbackWithBodyWithResponse Submit feedback
 //
-// Report a problem or suggestion about this API or the MCP server to the Hostinger mail team.
+// Send the user's feedback about the Hostinger Email API to the Hostinger mail team.
 //
-// Report when a call returned 4xx/5xx or unexpected data, was too slow, when documentation was missing or unclear, or when a capability you needed does not exist. Mention the failing operation and the status code you received so the team can find the request. Never include tokens, passwords or email contents: the message is scrubbed of secrets and capped at 2000 characters. Send one report per distinct issue.
+// Only call this when the user explicitly asks to send feedback, report a problem, or request a feature. Send the user's own words; never include tokens, passwords or email contents. The message is capped at 2000 characters.
 //
 // A `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.
 //
@@ -6518,9 +6518,9 @@ func (c *ClientWithResponses) SubmitFeedbackWithBodyWithResponse(ctx context.Con
 
 // SubmitFeedbackWithResponse Submit feedback
 //
-// Report a problem or suggestion about this API or the MCP server to the Hostinger mail team.
+// Send the user's feedback about the Hostinger Email API to the Hostinger mail team.
 //
-// Report when a call returned 4xx/5xx or unexpected data, was too slow, when documentation was missing or unclear, or when a capability you needed does not exist. Mention the failing operation and the status code you received so the team can find the request. Never include tokens, passwords or email contents: the message is scrubbed of secrets and capped at 2000 characters. Send one report per distinct issue.
+// Only call this when the user explicitly asks to send feedback, report a problem, or request a feature. Send the user's own words; never include tokens, passwords or email contents. The message is capped at 2000 characters.
 //
 // A `429` (`ERR_FEEDBACK_RATE_LIMIT`) means feedback for this customer was submitted less than ten seconds ago; wait and retry.
 //
@@ -6685,7 +6685,7 @@ func (c *ClientWithResponses) DeleteMessagesWithResponse(ctx context.Context, ma
 	return ParseDeleteMessagesResponse(rsp)
 }
 
-// UpdateMessageFlagsWithBodyWithResponse Update message flags
+// UpdateMessageFlagsWithBodyWithResponse Update flags on multiple messages
 //
 // Add and/or remove flags on multiple messages. Returns 200 when all UIDs succeed, 207 with per-UID outcome when some fail.
 //
@@ -6700,7 +6700,7 @@ func (c *ClientWithResponses) UpdateMessageFlagsWithBodyWithResponse(ctx context
 	return ParseUpdateMessageFlagsResponse(rsp)
 }
 
-// UpdateMessageFlagsWithResponse Update message flags
+// UpdateMessageFlagsWithResponse Update flags on multiple messages
 //
 // Add and/or remove flags on multiple messages. Returns 200 when all UIDs succeed, 207 with per-UID outcome when some fail.
 //
