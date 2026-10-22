@@ -10,6 +10,12 @@ Add and/or remove flags on a single message. Returns the updated message.
 hostinger-mail messages patch <mailbox-resource-id> <folder> <uid> [flags]
 ```
 
+### Examples
+
+```
+  hostinger-mail messages patch my-mailbox-resource-id my-folder 1234567
+```
+
 ### Options
 
 ```
@@ -22,7 +28,11 @@ hostinger-mail messages patch <mailbox-resource-id> <folder> <uid> [flags]
 
 ```
       --config string   Config file (default is $HOME/.hostinger-mail.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

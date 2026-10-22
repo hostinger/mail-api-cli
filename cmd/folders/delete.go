@@ -2,24 +2,41 @@ package folders
 
 import (
 	"context"
-	"log"
 
 	"github.com/hostinger/mail-api-cli/api"
 	"github.com/hostinger/mail-api-cli/output"
+	"github.com/hostinger/mail-api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var DeleteCmd = &cobra.Command{
-	Use:   "delete <mailbox-resource-id> <folder>",
-	Short: "Delete folder",
-	Long:  "Delete a folder and all of its subfolders.",
-	Args:  cobra.MatchAll(cobra.ExactArgs(2)),
-	Run: func(cmd *cobra.Command, args []string) {
-		r, err := api.Request().DeleteFolderWithResponse(context.TODO(), args[0], args[1])
-		if err != nil {
-			log.Fatal(err)
+	Use:               "delete <mailbox-resource-id> <folder>",
+	Short:             "Delete folder",
+	Long:              "Delete a folder and all of its subfolders.",
+	Example:           "  hostinger-mail folders delete my-mailbox-resource-id my-folder",
+	ValidArgsFunction: cobra.NoFileCompletions,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		// Last step before the request: every input check has passed.
+		if err := utils.Confirm(cmd, "Delete folder", args); err != nil {
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().DeleteFolderWithResponse(ctx, args[0], args[1])
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
+}
+
+func init() {
+	utils.RegisterArgs(DeleteCmd, utils.StringArg("mailbox-resource-id"), utils.StringArg("folder"))
+	DeleteCmd.Flags().BoolP("yes", "y", false, "Skip the confirmation prompt")
 }

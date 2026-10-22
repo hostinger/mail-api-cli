@@ -1,12 +1,15 @@
 package messages
 
 import (
+	"github.com/hostinger/mail-api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var GroupCmd = &cobra.Command{
 	Use:   "messages",
 	Short: "Messages commands",
+	Args:  cobra.ArbitraryArgs,
+	RunE:  utils.GroupRunE,
 }
 
 func init() {

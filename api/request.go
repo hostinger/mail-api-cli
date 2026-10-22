@@ -11,7 +11,20 @@ import (
 	"net/http"
 )
 
+// Request returns the API client for a command run. Without a static token it
+// signs in through OAuth, opening the browser when needed.
 func Request() client.ClientWithResponsesInterface {
+	return newClient(true)
+}
+
+// CompletionRequest returns an API client for shell completion: it uses the
+// static token or an already stored OAuth sign-in, and never starts an
+// interactive login.
+func CompletionRequest() client.ClientWithResponsesInterface {
+	return newClient(false)
+}
+
+func newClient(interactive bool) client.ClientWithResponsesInterface {
 	apiURL := viper.GetString("api_url")
 	if apiURL == "" {
 		apiURL = "https://api.mail.hostinger.com"
@@ -21,16 +34,24 @@ func Request() client.ClientWithResponsesInterface {
 		client.WithRequestEditorFn(addUserAgent),
 	}
 
-	if staticToken := viper.GetString("api_token"); staticToken != "" {
+	var doer client.HttpRequestDoer = &http.Client{}
+	if viper.GetBool("verbose") {
+		doer = &verboseDoer{base: doer}
+	}
+
+	if interactive && viper.GetBool("dry_run") {
+		// Print the request instead of sending it; no credentials are needed.
+		opts = append(opts, client.WithHTTPClient(&dryRunDoer{}))
+	} else if staticToken := viper.GetString("api_token"); staticToken != "" {
 		// Static token wins: use it unchanged. OAuth and 401 re-auth are skipped
 		// because there is no refresh source for a user-managed token.
 		bearer, err := securityprovider.NewSecurityProviderBearerToken(staticToken)
 		if err != nil {
 			panic(err)
 		}
-		opts = append(opts, client.WithRequestEditorFn(bearer.Intercept))
+		opts = append(opts, client.WithRequestEditorFn(bearer.Intercept), client.WithHTTPClient(doer))
 	} else {
-		log.Fatal("no API token configured")
+		opts = append(opts, client.WithHTTPClient(noTokenDoer{}))
 	}
 
 	c, err := client.NewClientWithResponses(apiURL, opts...)

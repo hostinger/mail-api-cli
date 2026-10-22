@@ -10,9 +10,16 @@ Search messages in a folder. Filters in body; pagination and sort via query (`pa
 hostinger-mail messages search <mailbox-resource-id> <folder> [flags]
 ```
 
+### Examples
+
+```
+  hostinger-mail messages search my-mailbox-resource-id my-folder
+```
+
 ### Options
 
 ```
+      --all              Fetch every page and print all items
       --before string    Only messages received before this date (YYYY-MM-DD).
       --body string      Case-insensitive substring match on the message body only (headers excluded). OR-combined with subject/from/to/cc.
       --cc string        Case-insensitive substring match on the Cc header. OR-combined with subject/from/to/body.
@@ -36,7 +43,11 @@ hostinger-mail messages search <mailbox-resource-id> <folder> [flags]
 
 ```
       --config string   Config file (default is $HOME/.hostinger-mail.yaml)
-      --format string   Output format type (json|table|tree), default: table
+      --dry-run         Print the request as a curl command instead of sending it
+  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose         Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

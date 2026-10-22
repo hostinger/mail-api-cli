@@ -4,34 +4,51 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"log"
 
 	"github.com/hostinger/mail-api-cli/api"
 	"github.com/hostinger/mail-api-cli/client"
 	"github.com/hostinger/mail-api-cli/output"
+	"github.com/hostinger/mail-api-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var SearchCmd = &cobra.Command{
-	Use:   "search <mailbox-resource-id> <folder>",
-	Short: "Search messages",
-	Long:  "Search messages in a folder. Filters in body; pagination and sort via query (`page`, `perPage`, `sort`).",
-	Args:  cobra.MatchAll(cobra.ExactArgs(2)),
-	Run: func(cmd *cobra.Command, args []string) {
-		payload, err := json.Marshal(searchBody(cmd))
+	Use:               "search <mailbox-resource-id> <folder>",
+	Short:             "Search messages",
+	Long:              "Search messages in a folder. Filters in body; pagination and sort via query (`page`, `perPage`, `sort`).",
+	Example:           "  hostinger-mail messages search my-mailbox-resource-id my-folder",
+	ValidArgsFunction: cobra.NoFileCompletions,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		args = utils.PromptedArgs(cmd, args)
+		params := searchParams(cmd)
+		body, err := searchBody(cmd)
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
-		r, err := api.Request().SearchMessagesWithBodyWithResponse(context.TODO(), args[0], args[1], searchParams(cmd), "application/json", bytes.NewReader(payload))
+		payload, err := json.Marshal(body)
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
-
-		output.Format(cmd, r.Body, r.StatusCode())
+		call := func(ctx context.Context) ([]byte, int, error) {
+			r, err := api.Request().SearchMessagesWithBodyWithResponse(ctx, args[0], args[1], params, "application/json", bytes.NewReader(payload))
+			if err != nil {
+				return nil, 0, err
+			}
+			return r.Body, r.StatusCode(), nil
+		}
+		if all, _ := cmd.Flags().GetBool("all"); all {
+			call = utils.AllPages(call, func(page int) { params.Page = &page })
+		}
+		respBody, status, err := call(cmd.Context())
+		if err != nil {
+			return err
+		}
+		return output.Format(cmd, respBody, status)
 	},
 }
 
 func init() {
+	utils.RegisterArgs(SearchCmd, utils.StringArg("mailbox-resource-id"), utils.StringArg("folder"))
 	SearchCmd.Flags().IntP("page", "", 1, "Page number (1-based).")
 	SearchCmd.Flags().IntP("perpage", "", 25, "Items per page (max 100).")
 	SearchCmd.Flags().StringP("sort", "", "-uid", "Sort field with optional `-` prefix for descending. Allowed: uid, date, size.")
@@ -48,6 +65,24 @@ func init() {
 	SearchCmd.Flags().StringP("text", "", "", "Case-insensitive substring match across headers and body.")
 	SearchCmd.Flags().StringP("to", "", "", "Case-insensitive substring match on the To header. OR-combined with subject/from/cc/body.")
 	SearchCmd.Flags().StringP("uid", "", "", "IMAP UID set: single UID, range (1:100), open range (100:*), or comma-separated list.")
+	SearchCmd.RegisterFlagCompletionFunc("page", cobra.NoFileCompletions)
+	SearchCmd.RegisterFlagCompletionFunc("perpage", cobra.NoFileCompletions)
+	SearchCmd.RegisterFlagCompletionFunc("sort", cobra.NoFileCompletions)
+	SearchCmd.RegisterFlagCompletionFunc("before", cobra.NoFileCompletions)
+	SearchCmd.RegisterFlagCompletionFunc("body", cobra.NoFileCompletions)
+	SearchCmd.RegisterFlagCompletionFunc("cc", cobra.NoFileCompletions)
+	SearchCmd.RegisterFlagCompletionFunc("flags", cobra.NoFileCompletions)
+	SearchCmd.RegisterFlagCompletionFunc("from", cobra.NoFileCompletions)
+	SearchCmd.RegisterFlagCompletionFunc("header", cobra.NoFileCompletions)
+	SearchCmd.RegisterFlagCompletionFunc("larger", cobra.NoFileCompletions)
+	SearchCmd.RegisterFlagCompletionFunc("since", cobra.NoFileCompletions)
+	SearchCmd.RegisterFlagCompletionFunc("smaller", cobra.NoFileCompletions)
+	SearchCmd.RegisterFlagCompletionFunc("subject", cobra.NoFileCompletions)
+	SearchCmd.RegisterFlagCompletionFunc("text", cobra.NoFileCompletions)
+	SearchCmd.RegisterFlagCompletionFunc("to", cobra.NoFileCompletions)
+	SearchCmd.RegisterFlagCompletionFunc("uid", cobra.NoFileCompletions)
+	SearchCmd.Flags().Bool("all", false, "Fetch every page and print all items")
+	SearchCmd.MarkFlagsMutuallyExclusive("all", "page")
 }
 
 func searchParams(cmd *cobra.Command) *client.SearchMessagesParams {
@@ -67,7 +102,7 @@ func searchParams(cmd *cobra.Command) *client.SearchMessagesParams {
 	return params
 }
 
-func searchBody(cmd *cobra.Command) map[string]any {
+func searchBody(cmd *cobra.Command) (map[string]any, error) {
 	body := map[string]any{}
 	if cmd.Flags().Changed("before") {
 		v, _ := cmd.Flags().GetString("before")
@@ -121,5 +156,5 @@ func searchBody(cmd *cobra.Command) map[string]any {
 		v, _ := cmd.Flags().GetString("uid")
 		body["uid"] = v
 	}
-	return body
+	return body, nil
 }
