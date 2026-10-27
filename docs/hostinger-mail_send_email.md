@@ -48,10 +48,10 @@ hostinger-mail send email <mailbox-resource-id> [flags]
       --bcc strings          Blind-carbon-copy recipient email addresses. Not visible to other recipients.
       --cc strings           Carbon-copy recipient email addresses.
       --displayname string   Sender display name shown in the From header alongside the mailbox address.
-      --forwardof string     Source message this forwards. Copies its Message-Id/References into In-Reply-To/References and flags it $forwarded. Mutually exclusive with inReplyTo. (JSON, @file or -; shape in the help above)
+      --forwardof string     Source message this forwards, as an object {uid, folder} — not the Message-ID header string. Copies its Message-Id/References into In-Reply-To/References and flags it $forwarded. Mutually exclusive with inReplyTo. (JSON, @file or -; shape in the help above)
   -h, --help                 help for email
       --html string          HTML body. Optional; if both text and html are omitted the message is sent without a body. Inline images are referenced via cid: URLs matching attachment cid values.
-      --inreplyto string     Source message this is a reply to. Copies its Message-Id/References into In-Reply-To/References and flags it \Answered. Mutually exclusive with forwardOf. (JSON, @file or -; shape in the help above)
+      --inreplyto string     Source message this is a reply to, as an object {uid, folder} — not the Message-ID header string. Copies its Message-Id/References into In-Reply-To/References and flags it \Answered. Mutually exclusive with forwardOf. (JSON, @file or -; shape in the help above)
       --subject string       Message subject line.
       --text string          Plain-text body. Optional; if both text and html are omitted the message is sent without a body.
       --to strings           Primary recipient email addresses.

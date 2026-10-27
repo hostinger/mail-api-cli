@@ -4,7 +4,7 @@ Get message text content
 
 ### Synopsis
 
-Retrieve rendered text (plain + HTML) of a message. Marks message as `\Seen`.
+Retrieve rendered text (plain + HTML) of a message. Does not change the message `\Seen` flag.
 
 ```
 hostinger-mail messages text <mailbox-resource-id> <folder> <uid> [flags]

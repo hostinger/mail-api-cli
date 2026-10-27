@@ -12,7 +12,7 @@ import (
 var TextCmd = &cobra.Command{
 	Use:               "text <mailbox-resource-id> <folder> <uid>",
 	Short:             "Get message text content",
-	Long:              "Retrieve rendered text (plain + HTML) of a message. Marks message as `\\Seen`.",
+	Long:              "Retrieve rendered text (plain + HTML) of a message. Does not change the message `\\Seen` flag.",
 	Example:           "  hostinger-mail messages text my-mailbox-resource-id my-folder 1234567",
 	ValidArgsFunction: cobra.NoFileCompletions,
 	RunE: func(cmd *cobra.Command, args []string) error {

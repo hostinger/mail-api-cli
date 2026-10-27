@@ -4,7 +4,7 @@ Get message source
 
 ### Synopsis
 
-Retrieve raw RFC822 source of a message as `message/rfc822` attachment.
+Retrieve raw RFC822 source of a message as `message/rfc822` attachment. Does not change the message `\Seen` flag.
 
 ```
 hostinger-mail messages source <mailbox-resource-id> <folder> <uid> [flags]

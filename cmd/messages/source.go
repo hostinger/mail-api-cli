@@ -12,7 +12,7 @@ import (
 var SourceCmd = &cobra.Command{
 	Use:               "source <mailbox-resource-id> <folder> <uid>",
 	Short:             "Get message source",
-	Long:              "Retrieve raw RFC822 source of a message as `message/rfc822` attachment.",
+	Long:              "Retrieve raw RFC822 source of a message as `message/rfc822` attachment. Does not change the message `\\Seen` flag.",
 	Example:           "  hostinger-mail messages source my-mailbox-resource-id my-folder 1234567",
 	ValidArgsFunction: cobra.NoFileCompletions,
 	RunE: func(cmd *cobra.Command, args []string) error {

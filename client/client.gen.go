@@ -292,8 +292,8 @@ type V1FolderMessagesMessage struct {
 	Date time.Time `json:"date"`
 
 	// Flags Example: ["\\Seen","\\Flagged"]
-	Flags []string                      `json:"flags"`
-	From  *V1FolderMessagesMessage_From `json:"from"`
+	Flags []string                     `json:"flags"`
+	From  V1FolderMessagesMessage_From `json:"from"`
 
 	// InReplyTo Example: <0987654321@example.com>
 	InReplyTo *string `json:"inReplyTo"`
@@ -317,6 +317,9 @@ type V1FolderMessagesMessage struct {
 	// Unseen Example: false
 	Unseen bool `json:"unseen"`
 }
+
+// V1FolderMessagesMessageFrom1 defines model for V1FolderMessagesMessage.From.1.
+type V1FolderMessagesMessageFrom1 = map[string]interface{}
 
 // V1FolderMessagesMessage_From defines model for V1FolderMessagesMessage.From.
 type V1FolderMessagesMessage_From struct {
@@ -686,7 +689,7 @@ type V1SendRequest struct {
 	// Example: John Doe
 	DisplayName *string `json:"displayName,omitempty"`
 
-	// ForwardOf Source message this forwards. Copies its Message-Id/References into In-Reply-To/References and flags it $forwarded. Mutually exclusive with inReplyTo.
+	// ForwardOf Source message this forwards, as an object {uid, folder} — not the Message-ID header string. Copies its Message-Id/References into In-Reply-To/References and flags it $forwarded. Mutually exclusive with inReplyTo.
 	ForwardOf *V1SendMessageRef `json:"forwardOf,omitempty"`
 
 	// Html HTML body. Optional; if both text and html are omitted the message is sent without a body. Inline images are referenced via cid: URLs matching attachment cid values.
@@ -694,7 +697,7 @@ type V1SendRequest struct {
 	// Example: <p>HTML body</p>
 	Html *string `json:"html,omitempty"`
 
-	// InReplyTo Source message this is a reply to. Copies its Message-Id/References into In-Reply-To/References and flags it \Answered. Mutually exclusive with forwardOf.
+	// InReplyTo Source message this is a reply to, as an object {uid, folder} — not the Message-ID header string. Copies its Message-Id/References into In-Reply-To/References and flags it \Answered. Mutually exclusive with forwardOf.
 	InReplyTo *V1SendMessageRef `json:"inReplyTo,omitempty"`
 
 	// Subject Message subject line.
@@ -710,18 +713,8 @@ type V1SendRequest struct {
 	// To Primary recipient email addresses.
 	//
 	// Example: ["recipient@example.com"]
-	To    *[]openapi_types.Email `json:"to,omitempty"`
-	union json.RawMessage
+	To *[]openapi_types.Email `json:"to,omitempty"`
 }
-
-// V1SendRequest0 defines model for V1SendRequest.0.
-type V1SendRequest0 = interface{}
-
-// V1SendRequest1 defines model for V1SendRequest.1.
-type V1SendRequest1 = interface{}
-
-// V1SendRequest2 defines model for V1SendRequest.2.
-type V1SendRequest2 = interface{}
 
 // V1WebhooksCollection Paginated list of webhooks.
 type V1WebhooksCollection struct {
@@ -1055,6 +1048,32 @@ func (t *V1FolderMessagesMessage_From) MergeV1FolderMessagesMessageAddress(v V1F
 	return err
 }
 
+// AsV1FolderMessagesMessageFrom1 returns the union data inside the V1FolderMessagesMessage_From as a V1FolderMessagesMessageFrom1
+func (t V1FolderMessagesMessage_From) AsV1FolderMessagesMessageFrom1() (V1FolderMessagesMessageFrom1, error) {
+	var body V1FolderMessagesMessageFrom1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromV1FolderMessagesMessageFrom1 overwrites any union data inside the V1FolderMessagesMessage_From as the provided V1FolderMessagesMessageFrom1
+func (t *V1FolderMessagesMessage_From) FromV1FolderMessagesMessageFrom1(v V1FolderMessagesMessageFrom1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeV1FolderMessagesMessageFrom1 performs a merge with any union data inside the V1FolderMessagesMessage_From, using the provided V1FolderMessagesMessageFrom1
+func (t *V1FolderMessagesMessage_From) MergeV1FolderMessagesMessageFrom1(v V1FolderMessagesMessageFrom1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 func (t V1FolderMessagesMessage_From) MarshalJSON() ([]byte, error) {
 	b, err := t.union.MarshalJSON()
 	return b, err
@@ -1062,254 +1081,6 @@ func (t V1FolderMessagesMessage_From) MarshalJSON() ([]byte, error) {
 
 func (t *V1FolderMessagesMessage_From) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
-// AsV1SendRequest0 returns the union data inside the V1SendRequest as a V1SendRequest0
-func (t V1SendRequest) AsV1SendRequest0() (V1SendRequest0, error) {
-	var body V1SendRequest0
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromV1SendRequest0 overwrites any union data inside the V1SendRequest as the provided V1SendRequest0
-func (t *V1SendRequest) FromV1SendRequest0(v V1SendRequest0) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeV1SendRequest0 performs a merge with any union data inside the V1SendRequest, using the provided V1SendRequest0
-func (t *V1SendRequest) MergeV1SendRequest0(v V1SendRequest0) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsV1SendRequest1 returns the union data inside the V1SendRequest as a V1SendRequest1
-func (t V1SendRequest) AsV1SendRequest1() (V1SendRequest1, error) {
-	var body V1SendRequest1
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromV1SendRequest1 overwrites any union data inside the V1SendRequest as the provided V1SendRequest1
-func (t *V1SendRequest) FromV1SendRequest1(v V1SendRequest1) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeV1SendRequest1 performs a merge with any union data inside the V1SendRequest, using the provided V1SendRequest1
-func (t *V1SendRequest) MergeV1SendRequest1(v V1SendRequest1) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsV1SendRequest2 returns the union data inside the V1SendRequest as a V1SendRequest2
-func (t V1SendRequest) AsV1SendRequest2() (V1SendRequest2, error) {
-	var body V1SendRequest2
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromV1SendRequest2 overwrites any union data inside the V1SendRequest as the provided V1SendRequest2
-func (t *V1SendRequest) FromV1SendRequest2(v V1SendRequest2) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeV1SendRequest2 performs a merge with any union data inside the V1SendRequest, using the provided V1SendRequest2
-func (t *V1SendRequest) MergeV1SendRequest2(v V1SendRequest2) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t V1SendRequest) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	if err != nil {
-		return nil, err
-	}
-	object := make(map[string]json.RawMessage)
-	if t.union != nil {
-		err = json.Unmarshal(b, &object)
-		if err != nil {
-			return nil, err
-		}
-	}
-
-	if t.Attachments != nil {
-		object["attachments"], err = json.Marshal(t.Attachments)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'attachments': %w", err)
-		}
-	}
-
-	if t.Bcc != nil {
-		object["bcc"], err = json.Marshal(t.Bcc)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'bcc': %w", err)
-		}
-	}
-
-	if t.Cc != nil {
-		object["cc"], err = json.Marshal(t.Cc)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'cc': %w", err)
-		}
-	}
-
-	if t.DisplayName != nil {
-		object["displayName"], err = json.Marshal(t.DisplayName)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'displayName': %w", err)
-		}
-	}
-
-	if t.ForwardOf != nil {
-		object["forwardOf"], err = json.Marshal(t.ForwardOf)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'forwardOf': %w", err)
-		}
-	}
-
-	if t.Html != nil {
-		object["html"], err = json.Marshal(t.Html)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'html': %w", err)
-		}
-	}
-
-	if t.InReplyTo != nil {
-		object["inReplyTo"], err = json.Marshal(t.InReplyTo)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'inReplyTo': %w", err)
-		}
-	}
-
-	if t.Subject != nil {
-		object["subject"], err = json.Marshal(t.Subject)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'subject': %w", err)
-		}
-	}
-
-	if t.Text != nil {
-		object["text"], err = json.Marshal(t.Text)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'text': %w", err)
-		}
-	}
-
-	if t.To != nil {
-		object["to"], err = json.Marshal(t.To)
-		if err != nil {
-			return nil, fmt.Errorf("error marshaling 'to': %w", err)
-		}
-	}
-	b, err = json.Marshal(object)
-	return b, err
-}
-
-func (t *V1SendRequest) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	if err != nil {
-		return err
-	}
-	object := make(map[string]json.RawMessage)
-	err = json.Unmarshal(b, &object)
-	if err != nil {
-		return err
-	}
-
-	if raw, found := object["attachments"]; found {
-		err = json.Unmarshal(raw, &t.Attachments)
-		if err != nil {
-			return fmt.Errorf("error reading 'attachments': %w", err)
-		}
-	}
-
-	if raw, found := object["bcc"]; found {
-		err = json.Unmarshal(raw, &t.Bcc)
-		if err != nil {
-			return fmt.Errorf("error reading 'bcc': %w", err)
-		}
-	}
-
-	if raw, found := object["cc"]; found {
-		err = json.Unmarshal(raw, &t.Cc)
-		if err != nil {
-			return fmt.Errorf("error reading 'cc': %w", err)
-		}
-	}
-
-	if raw, found := object["displayName"]; found {
-		err = json.Unmarshal(raw, &t.DisplayName)
-		if err != nil {
-			return fmt.Errorf("error reading 'displayName': %w", err)
-		}
-	}
-
-	if raw, found := object["forwardOf"]; found {
-		err = json.Unmarshal(raw, &t.ForwardOf)
-		if err != nil {
-			return fmt.Errorf("error reading 'forwardOf': %w", err)
-		}
-	}
-
-	if raw, found := object["html"]; found {
-		err = json.Unmarshal(raw, &t.Html)
-		if err != nil {
-			return fmt.Errorf("error reading 'html': %w", err)
-		}
-	}
-
-	if raw, found := object["inReplyTo"]; found {
-		err = json.Unmarshal(raw, &t.InReplyTo)
-		if err != nil {
-			return fmt.Errorf("error reading 'inReplyTo': %w", err)
-		}
-	}
-
-	if raw, found := object["subject"]; found {
-		err = json.Unmarshal(raw, &t.Subject)
-		if err != nil {
-			return fmt.Errorf("error reading 'subject': %w", err)
-		}
-	}
-
-	if raw, found := object["text"]; found {
-		err = json.Unmarshal(raw, &t.Text)
-		if err != nil {
-			return fmt.Errorf("error reading 'text': %w", err)
-		}
-	}
-
-	if raw, found := object["to"]; found {
-		err = json.Unmarshal(raw, &t.To)
-		if err != nil {
-			return fmt.Errorf("error reading 'to': %w", err)
-		}
-	}
-
 	return err
 }
 
@@ -1608,14 +1379,14 @@ type ClientInterface interface {
 
 	// GetMessageSource Get message source
 	//
-	// Retrieve raw RFC822 source of a message as `message/rfc822` attachment.
+	// Retrieve raw RFC822 source of a message as `message/rfc822` attachment. Does not change the message `\Seen` flag.
 	//
 	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/source (the `GetMessageSource` operationId).
 	GetMessageSource(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetMessageText Get message text content
 	//
-	// Retrieve rendered text (plain + HTML) of a message. Marks message as `\Seen`.
+	// Retrieve rendered text (plain + HTML) of a message. Does not change the message `\Seen` flag.
 	//
 	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/text (the `GetMessageText` operationId).
 	GetMessageText(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -2195,7 +1966,7 @@ func (c *Client) MoveMessage(ctx context.Context, mailboxResourceId string, fold
 
 // GetMessageSource Get message source
 //
-// Retrieve raw RFC822 source of a message as `message/rfc822` attachment.
+// Retrieve raw RFC822 source of a message as `message/rfc822` attachment. Does not change the message `\Seen` flag.
 //
 // Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/source (the `GetMessageSource` operationId).
 func (c *Client) GetMessageSource(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -2212,7 +1983,7 @@ func (c *Client) GetMessageSource(ctx context.Context, mailboxResourceId string,
 
 // GetMessageText Get message text content
 //
-// Retrieve rendered text (plain + HTML) of a message. Marks message as `\Seen`.
+// Retrieve rendered text (plain + HTML) of a message. Does not change the message `\Seen` flag.
 //
 // Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages/{uid}/text (the `GetMessageText` operationId).
 func (c *Client) GetMessageText(ctx context.Context, mailboxResourceId string, folder string, uid int, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -4228,7 +3999,7 @@ type ClientWithResponsesInterface interface {
 
 	// GetMessageSourceWithResponse Get message source
 	//
-	// Retrieve raw RFC822 source of a message as `message/rfc822` attachment.
+	// Retrieve raw RFC822 source of a message as `message/rfc822` attachment. Does not change the message `\Seen` flag.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
@@ -4237,7 +4008,7 @@ type ClientWithResponsesInterface interface {
 
 	// GetMessageTextWithResponse Get message text content
 	//
-	// Retrieve rendered text (plain + HTML) of a message. Marks message as `\Seen`.
+	// Retrieve rendered text (plain + HTML) of a message. Does not change the message `\Seen` flag.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
@@ -6882,7 +6653,7 @@ func (c *ClientWithResponses) MoveMessageWithResponse(ctx context.Context, mailb
 
 // GetMessageSourceWithResponse Get message source
 //
-// Retrieve raw RFC822 source of a message as `message/rfc822` attachment.
+// Retrieve raw RFC822 source of a message as `message/rfc822` attachment. Does not change the message `\Seen` flag.
 //
 // Returns a wrapper object for the known response body format(s).
 //
@@ -6897,7 +6668,7 @@ func (c *ClientWithResponses) GetMessageSourceWithResponse(ctx context.Context, 
 
 // GetMessageTextWithResponse Get message text content
 //
-// Retrieve rendered text (plain + HTML) of a message. Marks message as `\Seen`.
+// Retrieve rendered text (plain + HTML) of a message. Does not change the message `\Seen` flag.
 //
 // Returns a wrapper object for the known response body format(s).
 //
