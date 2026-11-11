@@ -23,20 +23,20 @@ hostinger-mail feedback submit <mailbox-resource-id> [flags]
 ### Options
 
 ```
-  -h, --help             help for submit
-      --message string   The user's feedback in their own words. Never include tokens, passwords or email contents.
-      --score int        The user's rating of the Hostinger Email API: 1 (poor) to 10 (excellent).
+  -h, --help[=true|false]   help for submit
+      --message string      The user's feedback in their own words. Never include tokens, passwords or email contents.
+      --score int           The user's rating of the Hostinger Email API: 1 (poor) to 10 (excellent).
 ```
 
 ### Options inherited from parent commands
 
 ```
-      --config string   Config file (default is $HOME/.hostinger-mail.yaml)
-      --dry-run         Print the request as a curl command instead of sending it
-  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
-      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
-      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
-      --verbose         Print the config file used and each HTTP request to stderr
+      --config string           Config file (default is $HOME/.hostinger-mail.yaml)
+      --dry-run[=true|false]    Print the request as a curl command instead of sending it
+  -o, --format string           Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string               Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input[=true|false]   Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose[=true|false]    Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO

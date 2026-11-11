@@ -21,7 +21,7 @@ hostinger-mail webhooks update <mailbox-resource-id> <webhook> [flags]
 ```
       --description string                   Free-text note about the webhook purpose. Send null to clear.
       --events strings                       Event types that trigger a delivery. Replaces the current list. (one of: message.received)
-  -h, --help                                 help for update
+  -h, --help[=true|false]                    help for update
       --name string                          Human-readable webhook name.
       --status string                        Delivery state. Only active webhooks receive events; paused keeps config but stops deliveries. (one of: active, paused, disabled)
       --url Authorization: Bearer <secret>   HTTPS endpoint that receives POST deliveries, authenticated with the webhook secret as Authorization: Bearer <secret>. Must be a public domain name (no IPs or internal hosts).
@@ -30,12 +30,12 @@ hostinger-mail webhooks update <mailbox-resource-id> <webhook> [flags]
 ### Options inherited from parent commands
 
 ```
-      --config string   Config file (default is $HOME/.hostinger-mail.yaml)
-      --dry-run         Print the request as a curl command instead of sending it
-  -o, --format string   Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
-      --jq string       Filter the JSON response with a jq expression, e.g. '.data[].id'
-      --no-input        Never prompt; fail when an argument, flag or confirmation is missing
-      --verbose         Print the config file used and each HTTP request to stderr
+      --config string           Config file (default is $HOME/.hostinger-mail.yaml)
+      --dry-run[=true|false]    Print the request as a curl command instead of sending it
+  -o, --format string           Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string               Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input[=true|false]   Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose[=true|false]    Print the config file used and each HTTP request to stderr
 ```
 
 ### SEE ALSO
