@@ -14,7 +14,7 @@ import (
 var EmailCmd = &cobra.Command{
 	Use:               "email <mailbox-resource-id>",
 	Short:             "Send email",
-	Long:              "Send a message from the managed mailbox. Saves a copy to INBOX.Sent.\n\nJSON flags take inline JSON, @file.json, or - to read stdin. Example values:\n\n  --attachments\n    [\n      {\n        \"cid\": \"logo\",\n        \"content\": \"JVBERi0xLjQK...\",\n        \"contentType\": \"application/pdf\",\n        \"encoding\": \"base64\",\n        \"filename\": \"invoice.pdf\"\n      }\n    ]\n\n  --forwardof\n    {\n      \"folder\": \"INBOX\",\n      \"uid\": 123\n    }\n\n  --inreplyto\n    {\n      \"folder\": \"INBOX\",\n      \"uid\": 123\n    }",
+	Long:              "Send a message from the managed mailbox. The message is accepted for delivery and dispatched within a few seconds; a copy is saved to INBOX.Sent once it is sent. A delivery failure after acceptance is not reported on this call.\n\nJSON flags take inline JSON, @file.json, or - to read stdin. Example values:\n\n  --attachments\n    [\n      {\n        \"cid\": \"logo\",\n        \"content\": \"JVBERi0xLjQK...\",\n        \"contentType\": \"application/pdf\",\n        \"encoding\": \"base64\",\n        \"filename\": \"invoice.pdf\"\n      }\n    ]\n\n  --forwardof\n    {\n      \"folder\": \"INBOX\",\n      \"uid\": 123\n    }\n\n  --inreplyto\n    {\n      \"folder\": \"INBOX\",\n      \"uid\": 123\n    }",
 	Example:           "  hostinger-mail send email my-mailbox-resource-id",
 	ValidArgsFunction: cobra.NoFileCompletions,
 	RunE: func(cmd *cobra.Command, args []string) error {

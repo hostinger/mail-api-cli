@@ -1,4 +1,14 @@
 {
+  "createCalendar": {
+    "command": "hostinger-mail calendars create",
+    "method": "POST",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/calendars"
+  },
+  "createCalendarEvent": {
+    "command": "hostinger-mail calendar-events create",
+    "method": "POST",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events"
+  },
   "createFolder": {
     "command": "hostinger-mail folders create",
     "method": "POST",
@@ -13,6 +23,16 @@
     "command": "hostinger-mail messages delete-all",
     "method": "DELETE",
     "path": "/api/v1/mailboxes/{mailboxResourceId}/folders/{folder}/messages"
+  },
+  "deleteCalendar": {
+    "command": "hostinger-mail calendars delete",
+    "method": "DELETE",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}"
+  },
+  "deleteCalendarEvent": {
+    "command": "hostinger-mail calendar-events delete",
+    "method": "DELETE",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}"
   },
   "deleteFolder": {
     "command": "hostinger-mail folders delete",
@@ -33,6 +53,16 @@
     "command": "hostinger-mail webhooks delete",
     "method": "DELETE",
     "path": "/api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook}"
+  },
+  "getCalendar": {
+    "command": "hostinger-mail calendars get",
+    "method": "GET",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}"
+  },
+  "getCalendarEvent": {
+    "command": "hostinger-mail calendar-events get",
+    "method": "GET",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}"
   },
   "getCurrentAccount": {
     "command": "hostinger-mail account current",
@@ -69,6 +99,16 @@
     "method": "GET",
     "path": "/api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook}"
   },
+  "listCalendarEvents": {
+    "command": "hostinger-mail calendar-events list",
+    "method": "GET",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events"
+  },
+  "listCalendars": {
+    "command": "hostinger-mail calendars list",
+    "method": "GET",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/calendars"
+  },
   "listFolders": {
     "command": "hostinger-mail folders list",
     "method": "GET",
@@ -104,6 +144,16 @@
     "method": "POST",
     "path": "/api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook}/regenerate-secret"
   },
+  "replyToCalendarEvent": {
+    "command": "hostinger-mail calendar-events reply-to",
+    "method": "POST",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reply"
+  },
+  "rescheduleCalendarEvent": {
+    "command": "hostinger-mail calendar-events reschedule",
+    "method": "PUT",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reschedule"
+  },
   "searchMessages": {
     "command": "hostinger-mail messages search",
     "method": "POST",
@@ -123,6 +173,16 @@
     "command": "hostinger-mail webhooks test",
     "method": "POST",
     "path": "/api/v1/mailboxes/{mailboxResourceId}/webhooks/{webhook}/test"
+  },
+  "updateCalendar": {
+    "command": "hostinger-mail calendars update",
+    "method": "PUT",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}"
+  },
+  "updateCalendarEvent": {
+    "command": "hostinger-mail calendar-events update",
+    "method": "PUT",
+    "path": "/api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}"
   },
   "updateFolder": {
     "command": "hostinger-mail folders update",

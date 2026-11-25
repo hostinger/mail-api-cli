@@ -1,0 +1,39 @@
+## hostinger-mail calendars get
+
+Get calendar
+
+### Synopsis
+
+Retrieve one calendar of a mailbox: its name, description, color, whether it is the default calendar and whether it is shown in the calendar view. It does not return events; use `listCalendarEvents` for those.
+
+```
+hostinger-mail calendars get <mailbox-resource-id> <calendar-uuid> [flags]
+```
+
+### Examples
+
+```
+  hostinger-mail calendars get my-mailbox-resource-id 9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d
+```
+
+### Options
+
+```
+  -h, --help[=true|false]   help for get
+```
+
+### Options inherited from parent commands
+
+```
+      --config string           Config file (default is $HOME/.hostinger-mail.yaml)
+      --dry-run[=true|false]    Print the request as a curl command instead of sending it
+  -o, --format string           Output format: table|json|yaml|tree (default: table on a terminal, json when piped)
+      --jq string               Filter the JSON response with a jq expression, e.g. '.data[].id'
+      --no-input[=true|false]   Never prompt; fail when an argument, flag or confirmation is missing
+      --verbose[=true|false]    Print the config file used and each HTTP request to stderr
+```
+
+### SEE ALSO
+
+* [hostinger-mail calendars](hostinger-mail_calendars.md)	 - Calendars commands
+

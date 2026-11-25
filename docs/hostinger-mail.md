@@ -33,6 +33,8 @@ Documentation: https://github.com/hostinger/mail-api-cli/tree/main/docs
 
 * [hostinger-mail account](hostinger-mail_account.md)	 - Account commands
 * [hostinger-mail auth](hostinger-mail_auth.md)	 - Sign in and check which credentials are used
+* [hostinger-mail calendar-events](hostinger-mail_calendar-events.md)	 - Calendar Events commands
+* [hostinger-mail calendars](hostinger-mail_calendars.md)	 - Calendars commands
 * [hostinger-mail completion](hostinger-mail_completion.md)	 - Generate the autocompletion script for the specified shell
 * [hostinger-mail config](hostinger-mail_config.md)	 - Read and write CLI settings
 * [hostinger-mail feedback](hostinger-mail_feedback.md)	 - Feedback commands

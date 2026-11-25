@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/hostinger/mail-api-cli/cmd/account"
+	"github.com/hostinger/mail-api-cli/cmd/calendar_events"
+	"github.com/hostinger/mail-api-cli/cmd/calendars"
 	"github.com/hostinger/mail-api-cli/cmd/feedback"
 	"github.com/hostinger/mail-api-cli/cmd/folders"
 	"github.com/hostinger/mail-api-cli/cmd/messages"
@@ -104,6 +106,10 @@ func init() {
 
 	account.GroupCmd.GroupID = groupAPI
 	RootCmd.AddCommand(account.GroupCmd)
+	calendar_events.GroupCmd.GroupID = groupAPI
+	RootCmd.AddCommand(calendar_events.GroupCmd)
+	calendars.GroupCmd.GroupID = groupAPI
+	RootCmd.AddCommand(calendars.GroupCmd)
 	feedback.GroupCmd.GroupID = groupAPI
 	RootCmd.AddCommand(feedback.GroupCmd)
 	folders.GroupCmd.GroupID = groupAPI

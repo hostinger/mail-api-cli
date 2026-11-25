@@ -68,9 +68,9 @@ Examples:
 
 ```
 hostinger-mail account current
+hostinger-mail calendar-events list <mailbox-resource-id> <calendar-uuid>
+hostinger-mail calendars list <mailbox-resource-id>
 hostinger-mail feedback submit <mailbox-resource-id>
-hostinger-mail folders list <mailbox-resource-id>
-hostinger-mail messages list <mailbox-resource-id> <folder>
 ```
 
 Every command's `--help` lists its required flags separately and shows examples. Flags that take

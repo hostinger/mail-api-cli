@@ -18,6 +18,309 @@ import (
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
+// Defines values for V1CalendarEventsAttendeeParticipationStatus.
+const (
+	V1CalendarEventsAttendeeParticipationStatusACCEPTED    V1CalendarEventsAttendeeParticipationStatus = "ACCEPTED"
+	V1CalendarEventsAttendeeParticipationStatusDECLINED    V1CalendarEventsAttendeeParticipationStatus = "DECLINED"
+	V1CalendarEventsAttendeeParticipationStatusDELEGATED   V1CalendarEventsAttendeeParticipationStatus = "DELEGATED"
+	V1CalendarEventsAttendeeParticipationStatusNEEDSACTION V1CalendarEventsAttendeeParticipationStatus = "NEEDS-ACTION"
+	V1CalendarEventsAttendeeParticipationStatusTENTATIVE   V1CalendarEventsAttendeeParticipationStatus = "TENTATIVE"
+)
+
+// Valid indicates whether the value is a known member of the V1CalendarEventsAttendeeParticipationStatus enum.
+func (e V1CalendarEventsAttendeeParticipationStatus) Valid() bool {
+	switch e {
+	case V1CalendarEventsAttendeeParticipationStatusACCEPTED:
+		return true
+	case V1CalendarEventsAttendeeParticipationStatusDECLINED:
+		return true
+	case V1CalendarEventsAttendeeParticipationStatusDELEGATED:
+		return true
+	case V1CalendarEventsAttendeeParticipationStatusNEEDSACTION:
+		return true
+	case V1CalendarEventsAttendeeParticipationStatusTENTATIVE:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for V1CalendarEventsEventParticipationStatus.
+const (
+	V1CalendarEventsEventParticipationStatusACCEPTED    V1CalendarEventsEventParticipationStatus = "ACCEPTED"
+	V1CalendarEventsEventParticipationStatusDECLINED    V1CalendarEventsEventParticipationStatus = "DECLINED"
+	V1CalendarEventsEventParticipationStatusDELEGATED   V1CalendarEventsEventParticipationStatus = "DELEGATED"
+	V1CalendarEventsEventParticipationStatusNEEDSACTION V1CalendarEventsEventParticipationStatus = "NEEDS-ACTION"
+	V1CalendarEventsEventParticipationStatusTENTATIVE   V1CalendarEventsEventParticipationStatus = "TENTATIVE"
+)
+
+// Valid indicates whether the value is a known member of the V1CalendarEventsEventParticipationStatus enum.
+func (e V1CalendarEventsEventParticipationStatus) Valid() bool {
+	switch e {
+	case V1CalendarEventsEventParticipationStatusACCEPTED:
+		return true
+	case V1CalendarEventsEventParticipationStatusDECLINED:
+		return true
+	case V1CalendarEventsEventParticipationStatusDELEGATED:
+		return true
+	case V1CalendarEventsEventParticipationStatusNEEDSACTION:
+		return true
+	case V1CalendarEventsEventParticipationStatusTENTATIVE:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for V1CalendarEventsEventStatus.
+const (
+	V1CalendarEventsEventStatusCANCELLED V1CalendarEventsEventStatus = "CANCELLED"
+	V1CalendarEventsEventStatusCONFIRMED V1CalendarEventsEventStatus = "CONFIRMED"
+)
+
+// Valid indicates whether the value is a known member of the V1CalendarEventsEventStatus enum.
+func (e V1CalendarEventsEventStatus) Valid() bool {
+	switch e {
+	case V1CalendarEventsEventStatusCANCELLED:
+		return true
+	case V1CalendarEventsEventStatusCONFIRMED:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for V1CalendarEventsEventListItemParticipationStatus.
+const (
+	V1CalendarEventsEventListItemParticipationStatusACCEPTED    V1CalendarEventsEventListItemParticipationStatus = "ACCEPTED"
+	V1CalendarEventsEventListItemParticipationStatusDECLINED    V1CalendarEventsEventListItemParticipationStatus = "DECLINED"
+	V1CalendarEventsEventListItemParticipationStatusDELEGATED   V1CalendarEventsEventListItemParticipationStatus = "DELEGATED"
+	V1CalendarEventsEventListItemParticipationStatusNEEDSACTION V1CalendarEventsEventListItemParticipationStatus = "NEEDS-ACTION"
+	V1CalendarEventsEventListItemParticipationStatusTENTATIVE   V1CalendarEventsEventListItemParticipationStatus = "TENTATIVE"
+)
+
+// Valid indicates whether the value is a known member of the V1CalendarEventsEventListItemParticipationStatus enum.
+func (e V1CalendarEventsEventListItemParticipationStatus) Valid() bool {
+	switch e {
+	case V1CalendarEventsEventListItemParticipationStatusACCEPTED:
+		return true
+	case V1CalendarEventsEventListItemParticipationStatusDECLINED:
+		return true
+	case V1CalendarEventsEventListItemParticipationStatusDELEGATED:
+		return true
+	case V1CalendarEventsEventListItemParticipationStatusNEEDSACTION:
+		return true
+	case V1CalendarEventsEventListItemParticipationStatusTENTATIVE:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for V1CalendarEventsEventListItemStatus.
+const (
+	V1CalendarEventsEventListItemStatusCANCELLED V1CalendarEventsEventListItemStatus = "CANCELLED"
+	V1CalendarEventsEventListItemStatusCONFIRMED V1CalendarEventsEventListItemStatus = "CONFIRMED"
+)
+
+// Valid indicates whether the value is a known member of the V1CalendarEventsEventListItemStatus enum.
+func (e V1CalendarEventsEventListItemStatus) Valid() bool {
+	switch e {
+	case V1CalendarEventsEventListItemStatusCANCELLED:
+		return true
+	case V1CalendarEventsEventListItemStatusCONFIRMED:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for V1CalendarEventsRecurrenceDayDay.
+const (
+	V1CalendarEventsRecurrenceDayDayFriday    V1CalendarEventsRecurrenceDayDay = "friday"
+	V1CalendarEventsRecurrenceDayDayMonday    V1CalendarEventsRecurrenceDayDay = "monday"
+	V1CalendarEventsRecurrenceDayDaySaturday  V1CalendarEventsRecurrenceDayDay = "saturday"
+	V1CalendarEventsRecurrenceDayDaySunday    V1CalendarEventsRecurrenceDayDay = "sunday"
+	V1CalendarEventsRecurrenceDayDayThursday  V1CalendarEventsRecurrenceDayDay = "thursday"
+	V1CalendarEventsRecurrenceDayDayTuesday   V1CalendarEventsRecurrenceDayDay = "tuesday"
+	V1CalendarEventsRecurrenceDayDayWednesday V1CalendarEventsRecurrenceDayDay = "wednesday"
+)
+
+// Valid indicates whether the value is a known member of the V1CalendarEventsRecurrenceDayDay enum.
+func (e V1CalendarEventsRecurrenceDayDay) Valid() bool {
+	switch e {
+	case V1CalendarEventsRecurrenceDayDayFriday:
+		return true
+	case V1CalendarEventsRecurrenceDayDayMonday:
+		return true
+	case V1CalendarEventsRecurrenceDayDaySaturday:
+		return true
+	case V1CalendarEventsRecurrenceDayDaySunday:
+		return true
+	case V1CalendarEventsRecurrenceDayDayThursday:
+		return true
+	case V1CalendarEventsRecurrenceDayDayTuesday:
+		return true
+	case V1CalendarEventsRecurrenceDayDayWednesday:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for V1CalendarEventsRecurrenceRuleFrequency.
+const (
+	DAILY    V1CalendarEventsRecurrenceRuleFrequency = "DAILY"
+	HOURLY   V1CalendarEventsRecurrenceRuleFrequency = "HOURLY"
+	MINUTELY V1CalendarEventsRecurrenceRuleFrequency = "MINUTELY"
+	MONTHLY  V1CalendarEventsRecurrenceRuleFrequency = "MONTHLY"
+	SECONDLY V1CalendarEventsRecurrenceRuleFrequency = "SECONDLY"
+	WEEKLY   V1CalendarEventsRecurrenceRuleFrequency = "WEEKLY"
+	YEARLY   V1CalendarEventsRecurrenceRuleFrequency = "YEARLY"
+)
+
+// Valid indicates whether the value is a known member of the V1CalendarEventsRecurrenceRuleFrequency enum.
+func (e V1CalendarEventsRecurrenceRuleFrequency) Valid() bool {
+	switch e {
+	case DAILY:
+		return true
+	case HOURLY:
+		return true
+	case MINUTELY:
+		return true
+	case MONTHLY:
+		return true
+	case SECONDLY:
+		return true
+	case WEEKLY:
+		return true
+	case YEARLY:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for V1CalendarEventsRecurrenceRuleWeekStart.
+const (
+	V1CalendarEventsRecurrenceRuleWeekStartFriday    V1CalendarEventsRecurrenceRuleWeekStart = "friday"
+	V1CalendarEventsRecurrenceRuleWeekStartMonday    V1CalendarEventsRecurrenceRuleWeekStart = "monday"
+	V1CalendarEventsRecurrenceRuleWeekStartSaturday  V1CalendarEventsRecurrenceRuleWeekStart = "saturday"
+	V1CalendarEventsRecurrenceRuleWeekStartSunday    V1CalendarEventsRecurrenceRuleWeekStart = "sunday"
+	V1CalendarEventsRecurrenceRuleWeekStartThursday  V1CalendarEventsRecurrenceRuleWeekStart = "thursday"
+	V1CalendarEventsRecurrenceRuleWeekStartTuesday   V1CalendarEventsRecurrenceRuleWeekStart = "tuesday"
+	V1CalendarEventsRecurrenceRuleWeekStartWednesday V1CalendarEventsRecurrenceRuleWeekStart = "wednesday"
+)
+
+// Valid indicates whether the value is a known member of the V1CalendarEventsRecurrenceRuleWeekStart enum.
+func (e V1CalendarEventsRecurrenceRuleWeekStart) Valid() bool {
+	switch e {
+	case V1CalendarEventsRecurrenceRuleWeekStartFriday:
+		return true
+	case V1CalendarEventsRecurrenceRuleWeekStartMonday:
+		return true
+	case V1CalendarEventsRecurrenceRuleWeekStartSaturday:
+		return true
+	case V1CalendarEventsRecurrenceRuleWeekStartSunday:
+		return true
+	case V1CalendarEventsRecurrenceRuleWeekStartThursday:
+		return true
+	case V1CalendarEventsRecurrenceRuleWeekStartTuesday:
+		return true
+	case V1CalendarEventsRecurrenceRuleWeekStartWednesday:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for V1CalendarEventsReminderUnit.
+const (
+	Days    V1CalendarEventsReminderUnit = "days"
+	Hours   V1CalendarEventsReminderUnit = "hours"
+	Minutes V1CalendarEventsReminderUnit = "minutes"
+	Weeks   V1CalendarEventsReminderUnit = "weeks"
+)
+
+// Valid indicates whether the value is a known member of the V1CalendarEventsReminderUnit enum.
+func (e V1CalendarEventsReminderUnit) Valid() bool {
+	switch e {
+	case Days:
+		return true
+	case Hours:
+		return true
+	case Minutes:
+		return true
+	case Weeks:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for V1CalendarEventsReplyRequestParticipationStatus.
+const (
+	V1CalendarEventsReplyRequestParticipationStatusACCEPTED  V1CalendarEventsReplyRequestParticipationStatus = "ACCEPTED"
+	V1CalendarEventsReplyRequestParticipationStatusDECLINED  V1CalendarEventsReplyRequestParticipationStatus = "DECLINED"
+	V1CalendarEventsReplyRequestParticipationStatusTENTATIVE V1CalendarEventsReplyRequestParticipationStatus = "TENTATIVE"
+)
+
+// Valid indicates whether the value is a known member of the V1CalendarEventsReplyRequestParticipationStatus enum.
+func (e V1CalendarEventsReplyRequestParticipationStatus) Valid() bool {
+	switch e {
+	case V1CalendarEventsReplyRequestParticipationStatusACCEPTED:
+		return true
+	case V1CalendarEventsReplyRequestParticipationStatusDECLINED:
+		return true
+	case V1CalendarEventsReplyRequestParticipationStatusTENTATIVE:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for V1CalendarEventsRescheduleRequestScope.
+const (
+	V1CalendarEventsRescheduleRequestScopeAll    V1CalendarEventsRescheduleRequestScope = "all"
+	V1CalendarEventsRescheduleRequestScopeFuture V1CalendarEventsRescheduleRequestScope = "future"
+	V1CalendarEventsRescheduleRequestScopeThis   V1CalendarEventsRescheduleRequestScope = "this"
+)
+
+// Valid indicates whether the value is a known member of the V1CalendarEventsRescheduleRequestScope enum.
+func (e V1CalendarEventsRescheduleRequestScope) Valid() bool {
+	switch e {
+	case V1CalendarEventsRescheduleRequestScopeAll:
+		return true
+	case V1CalendarEventsRescheduleRequestScopeFuture:
+		return true
+	case V1CalendarEventsRescheduleRequestScopeThis:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for V1CalendarEventsUpdateRequestScope.
+const (
+	V1CalendarEventsUpdateRequestScopeAll    V1CalendarEventsUpdateRequestScope = "all"
+	V1CalendarEventsUpdateRequestScopeFuture V1CalendarEventsUpdateRequestScope = "future"
+	V1CalendarEventsUpdateRequestScopeThis   V1CalendarEventsUpdateRequestScope = "this"
+)
+
+// Valid indicates whether the value is a known member of the V1CalendarEventsUpdateRequestScope enum.
+func (e V1CalendarEventsUpdateRequestScope) Valid() bool {
+	switch e {
+	case V1CalendarEventsUpdateRequestScopeAll:
+		return true
+	case V1CalendarEventsUpdateRequestScopeFuture:
+		return true
+	case V1CalendarEventsUpdateRequestScopeThis:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for V1WebhooksCreateRequestEvents.
 const (
 	V1WebhooksCreateRequestEventsMessageReceived V1WebhooksCreateRequestEvents = "message.received"
@@ -162,6 +465,51 @@ func (e V1WebhooksWebhookWithSecretStatus) Valid() bool {
 	}
 }
 
+// Defines values for DeleteCalendarEventParamsScope.
+const (
+	DeleteCalendarEventParamsScopeAll    DeleteCalendarEventParamsScope = "all"
+	DeleteCalendarEventParamsScopeFuture DeleteCalendarEventParamsScope = "future"
+	DeleteCalendarEventParamsScopeThis   DeleteCalendarEventParamsScope = "this"
+)
+
+// Valid indicates whether the value is a known member of the DeleteCalendarEventParamsScope enum.
+func (e DeleteCalendarEventParamsScope) Valid() bool {
+	switch e {
+	case DeleteCalendarEventParamsScopeAll:
+		return true
+	case DeleteCalendarEventParamsScopeFuture:
+		return true
+	case DeleteCalendarEventParamsScopeThis:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for DeleteCalendarEventParamsNotifyAttendees.
+const (
+	False DeleteCalendarEventParamsNotifyAttendees = "false"
+	N0    DeleteCalendarEventParamsNotifyAttendees = "0"
+	N1    DeleteCalendarEventParamsNotifyAttendees = "1"
+	True  DeleteCalendarEventParamsNotifyAttendees = "true"
+)
+
+// Valid indicates whether the value is a known member of the DeleteCalendarEventParamsNotifyAttendees enum.
+func (e DeleteCalendarEventParamsNotifyAttendees) Valid() bool {
+	switch e {
+	case False:
+		return true
+	case N0:
+		return true
+	case N1:
+		return true
+	case True:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ListWebhooksParamsStatus.
 const (
 	ListWebhooksParamsStatusActive   ListWebhooksParamsStatus = "active"
@@ -187,7 +535,7 @@ func (e ListWebhooksParamsStatus) Valid() bool {
 type Error struct {
 	// Code Machine-readable error code in SCREAMING_SNAKE_CASE.
 	//
-	// Example: ERR_RESOURCE_NOT_FOUND
+	// Example: ERR_NOT_FOUND
 	Code string `json:"code"`
 
 	// Error Human-readable error message.
@@ -220,6 +568,588 @@ type Pagination struct {
 	//
 	// Example: 6
 	TotalPages int `json:"totalPages"`
+}
+
+// V1CalendarEventsAttendee Attendee of an event with their answer to the invitation.
+type V1CalendarEventsAttendee struct {
+	// Email Example: john@example.com
+	Email openapi_types.Email `json:"email"`
+
+	// Name Example: John
+	Name *string `json:"name"`
+
+	// ParticipationStatus Answer of the attendee. NEEDS-ACTION means no answer yet.
+	//
+	// Example: NEEDS-ACTION
+	ParticipationStatus V1CalendarEventsAttendeeParticipationStatus `json:"participationStatus"`
+}
+
+// V1CalendarEventsAttendeeParticipationStatus Answer of the attendee. NEEDS-ACTION means no answer yet.
+//
+// Example: NEEDS-ACTION
+type V1CalendarEventsAttendeeParticipationStatus string
+
+// V1CalendarEventsAttendeeInput Person to invite to an event.
+type V1CalendarEventsAttendeeInput struct {
+	// Email Email address of the attendee.
+	//
+	// Example: john@example.com
+	Email openapi_types.Email `json:"email"`
+
+	// Name Display name of the attendee, null when unknown.
+	//
+	// Example: John
+	Name *string `json:"name,omitempty"`
+}
+
+// V1CalendarEventsCollection Calendar events overlapping the requested time range. Not paginated.
+type V1CalendarEventsCollection struct {
+	Data []V1CalendarEventsEventListItem `json:"data"`
+	Meta struct {
+		// Truncated Whether some events were left out because the calendar holds too many to list in one request.
+		//
+		// Example: false
+		Truncated bool `json:"truncated"`
+	} `json:"meta"`
+}
+
+// V1CalendarEventsCreateRequest Body for creating a calendar event.
+type V1CalendarEventsCreateRequest struct {
+	// AllDay `true` for an all-day event (dates only, `timeZone` ignored), `false` for an event at a time of day.
+	//
+	// Example: false
+	AllDay bool `json:"allDay"`
+
+	// Attendees People to invite; each receives an email invitation. Unique addresses, at most 100 not counting the mailbox itself, across all occurrences. The own address of the mailbox is stored as accepted and not invited. Omitted, null or empty for none.
+	Attendees *[]V1CalendarEventsAttendeeInput `json:"attendees,omitempty"`
+
+	// Color Color of the event as #RRGGBB or #RRGGBBAA. Omitted or null uses the calendar color.
+	//
+	// Example: #251951
+	Color *string `json:"color,omitempty"`
+
+	// Description Notes of the event. Omitted or null for none.
+	//
+	// Example: Bring the notes.
+	Description *string `json:"description,omitempty"`
+
+	// End Exclusive end, same format as `start`. Required for a timed event and not before `start`. For an all-day event the day after the last day (2026-09-29 for one day on 2026-09-28); omitted means one day.
+	//
+	// Example: 2026-09-28T14:00:00+03:00
+	End *string `json:"end,omitempty"`
+
+	// Location Place of the event. Omitted or null for none.
+	//
+	// Example: Room 4
+	Location *string `json:"location,omitempty"`
+
+	// MeetingLink http or https URL of the online meeting. Omitted or null for none.
+	//
+	// Example: https://meet.example.com/abc-defg-hij
+	MeetingLink *string `json:"meetingLink,omitempty"`
+
+	// RecurrenceRule Omitted or null for a one-off event. A repeating event sends every field of the rule, null when unused: `frequency` DAILY, WEEKLY, MONTHLY or YEARLY, `interval` 1 to 1000, and `count` or `until` to end it, not both.
+	RecurrenceRule *V1CalendarEventsRecurrenceRule `json:"recurrenceRule,omitempty"`
+
+	// Reminder Alarm before the start: `value` 0 to 1000 and `unit`. Omitted or null for none.
+	Reminder *V1CalendarEventsReminder `json:"reminder,omitempty"`
+
+	// Start ISO 8601 date-time with offset; without an offset it is read as UTC. For an all-day event a date is enough (2026-09-28).
+	//
+	// Example: 2026-09-28T13:00:00+03:00
+	Start string `json:"start"`
+
+	// TimeZone IANA time zone of the event. Required when `allDay` is false, ignored when `allDay` is true.
+	//
+	// Example: Europe/Vilnius
+	TimeZone *string `json:"timeZone,omitempty"`
+
+	// Title Title of the event.
+	//
+	// Example: Planning
+	Title string `json:"title"`
+}
+
+// V1CalendarEventsEvent Full details of one calendar event. Requested without `recurrenceId`, a recurring event is the series itself and `recurrenceId` is null; with it, one occurrence of the series.
+type V1CalendarEventsEvent struct {
+	// AllDay Example: false
+	AllDay    bool                       `json:"allDay"`
+	Attendees []V1CalendarEventsAttendee `json:"attendees"`
+
+	// CalendarUuid Identifier of the calendar the event is stored in.
+	//
+	// Example: 42c370e3-48ae-4286-90c5-d952f28c67cc
+	CalendarUuid openapi_types.UUID `json:"calendarUuid"`
+
+	// Color Color of the event. The calendar color when the event has none or is an invitation from someone else.
+	//
+	// Example: #673de6
+	Color *string `json:"color"`
+
+	// Description Example: Bring the notes.
+	Description *string `json:"description"`
+
+	// Editable Whether `updateCalendarEvent`, `rescheduleCalendarEvent` and `deleteCalendarEvent` can change the event.
+	//
+	// Example: true
+	Editable bool `json:"editable"`
+
+	// End Exclusive end, same form as `start`. When `allDay` is true, midnight of the day after the last day of the event (2026-09-30T00:00:00.000000Z for a one-day event on 2026-09-29).
+	//
+	// Example: 2026-09-28T11:00:00.000000Z
+	End time.Time `json:"end"`
+
+	// Etag Version of the event. Send it as `If-Match` on a write to fail instead of overwriting a newer version.
+	//
+	// Example: 3c9f1a2b8e04
+	Etag string `json:"etag"`
+
+	// Location Example: Room 4
+	Location *string `json:"location"`
+
+	// MeetingLink Example: https://meet.example.com/abc-defg-hij
+	MeetingLink *string `json:"meetingLink"`
+
+	// Organizer Who organizes the event. Null when the event has no organizer.
+	Organizer *V1CalendarEventsOrganizer `json:"organizer"`
+
+	// ParticipationStatus Answer of the mailbox to an invitation from someone else. Null for its own events.
+	//
+	// Example: ACCEPTED
+	ParticipationStatus *V1CalendarEventsEventParticipationStatus `json:"participationStatus"`
+
+	// RecurrenceId Identifies one occurrence of a recurring event. Null for a one-off event or for the series itself.
+	//
+	// Example: 2026-09-28T10:00:00.000000Z
+	RecurrenceId *time.Time `json:"recurrenceId"`
+
+	// RecurrenceRule How the event repeats. Null for a one-off event.
+	RecurrenceRule *V1CalendarEventsRecurrenceRule `json:"recurrenceRule"`
+
+	// Reminder Alarm before the start. Null for none.
+	Reminder *V1CalendarEventsReminder `json:"reminder"`
+
+	// Replyable Whether the mailbox is invited by someone else and the event is not cancelled, so `replyToCalendarEvent` can answer it.
+	//
+	// Example: false
+	Replyable bool `json:"replyable"`
+
+	// Start Start in UTC. When `allDay` is true, the date at midnight (2026-09-29T00:00:00.000000Z). An event stored without a time zone keeps its wall-clock time (09:00 is 09:00:00.000000Z).
+	//
+	// Example: 2026-09-28T10:00:00.000000Z
+	Start time.Time `json:"start"`
+
+	// Status CANCELLED when the organizer cancelled the event, CONFIRMED otherwise.
+	//
+	// Example: CONFIRMED
+	Status V1CalendarEventsEventStatus `json:"status"`
+
+	// TimeZone IANA time zone the event is stored in. Null when it has none.
+	//
+	// Example: Europe/Vilnius
+	TimeZone *string `json:"timeZone"`
+
+	// Title Example: Planning
+	Title string `json:"title"`
+
+	// Uuid Event identifier, the `eventUuid` of the calendar event endpoints. Every occurrence of a recurring event has the same uuid.
+	//
+	// Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+	Uuid openapi_types.UUID `json:"uuid"`
+}
+
+// V1CalendarEventsEventParticipationStatus Answer of the mailbox to an invitation from someone else. Null for its own events.
+//
+// Example: ACCEPTED
+type V1CalendarEventsEventParticipationStatus string
+
+// V1CalendarEventsEventStatus CANCELLED when the organizer cancelled the event, CONFIRMED otherwise.
+//
+// Example: CONFIRMED
+type V1CalendarEventsEventStatus string
+
+// V1CalendarEventsEventListItem Summary of one calendar event or of one occurrence of a recurring event.
+type V1CalendarEventsEventListItem struct {
+	// AllDay Example: false
+	AllDay bool `json:"allDay"`
+
+	// CalendarUuid Identifier of the calendar the event is stored in.
+	//
+	// Example: 42c370e3-48ae-4286-90c5-d952f28c67cc
+	CalendarUuid openapi_types.UUID `json:"calendarUuid"`
+
+	// Color Color of the event. The calendar color when the event has none or is an invitation from someone else.
+	//
+	// Example: #673de6
+	Color *string `json:"color"`
+
+	// Editable Whether `updateCalendarEvent`, `rescheduleCalendarEvent` and `deleteCalendarEvent` can change the event.
+	//
+	// Example: true
+	Editable bool `json:"editable"`
+
+	// End Exclusive end, same form as `start`. When `allDay` is true, midnight of the day after the last day of the event (2026-09-30T00:00:00.000000Z for a one-day event on 2026-09-29).
+	//
+	// Example: 2026-09-28T11:00:00.000000Z
+	End time.Time `json:"end"`
+
+	// ParticipationStatus Answer of the mailbox to an invitation from someone else. Null for its own events.
+	//
+	// Example: ACCEPTED
+	ParticipationStatus *V1CalendarEventsEventListItemParticipationStatus `json:"participationStatus"`
+
+	// RecurrenceId Identifies one occurrence of a recurring event. Null for a one-off event or for the series itself.
+	//
+	// Example: 2026-09-28T10:00:00.000000Z
+	RecurrenceId *time.Time `json:"recurrenceId"`
+
+	// Start Start in UTC. When `allDay` is true, the date at midnight (2026-09-29T00:00:00.000000Z). An event stored without a time zone keeps its wall-clock time (09:00 is 09:00:00.000000Z).
+	//
+	// Example: 2026-09-28T10:00:00.000000Z
+	Start time.Time `json:"start"`
+
+	// Status CANCELLED when the organizer cancelled the event, CONFIRMED otherwise.
+	//
+	// Example: CONFIRMED
+	Status V1CalendarEventsEventListItemStatus `json:"status"`
+
+	// TimeZone IANA time zone the event is stored in. Null when it has none.
+	//
+	// Example: Europe/Vilnius
+	TimeZone *string `json:"timeZone"`
+
+	// Title Example: Planning
+	Title string `json:"title"`
+
+	// Uuid Event identifier, the `eventUuid` of the calendar event endpoints. Every occurrence of a recurring event has the same uuid.
+	//
+	// Example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+	Uuid openapi_types.UUID `json:"uuid"`
+}
+
+// V1CalendarEventsEventListItemParticipationStatus Answer of the mailbox to an invitation from someone else. Null for its own events.
+//
+// Example: ACCEPTED
+type V1CalendarEventsEventListItemParticipationStatus string
+
+// V1CalendarEventsEventListItemStatus CANCELLED when the organizer cancelled the event, CONFIRMED otherwise.
+//
+// Example: CONFIRMED
+type V1CalendarEventsEventListItemStatus string
+
+// V1CalendarEventsOrganizer Organizer of an event.
+type V1CalendarEventsOrganizer struct {
+	// Email Example: jane@example.com
+	Email openapi_types.Email `json:"email"`
+
+	// Name Example: Jane
+	Name *string `json:"name"`
+}
+
+// V1CalendarEventsRecurrenceDay One weekday of a recurrence rule.
+type V1CalendarEventsRecurrenceDay struct {
+	// Day Example: friday
+	Day V1CalendarEventsRecurrenceDayDay `json:"day"`
+
+	// Position Which such weekday in the month or year, for a MONTHLY or YEARLY rule only: 1 is the first, -1 the last, never 0. Null means every such weekday and is the only value allowed for other frequencies.
+	//
+	// Example: -1
+	Position *int `json:"position"`
+}
+
+// V1CalendarEventsRecurrenceDayDay Example: friday
+type V1CalendarEventsRecurrenceDayDay string
+
+// V1CalendarEventsRecurrenceRule How an event repeats. Every field is always present, null when unused.
+type V1CalendarEventsRecurrenceRule struct {
+	// ByDay Weekdays the event repeats on. Null when unused.
+	ByDay *[]V1CalendarEventsRecurrenceDay `json:"byDay"`
+
+	// ByMonth Months, 1 is January. Null when unused.
+	ByMonth *[]int `json:"byMonth"`
+
+	// ByMonthDay Days of the month, 1 to 31. Negative values count from the end of the month: -1 is the last day. Always null for a WEEKLY rule.
+	ByMonthDay *[]int `json:"byMonthDay"`
+
+	// Count Number of occurrences after which the series ends, at most 1000 when writing. Never set together with `until`.
+	//
+	// Example: 10
+	Count *int `json:"count"`
+
+	// Frequency Unit of repetition. Only DAILY, WEEKLY, MONTHLY and YEARLY can be written; SECONDLY, MINUTELY and HOURLY appear only on events created by other calendar applications.
+	//
+	// Example: WEEKLY
+	Frequency V1CalendarEventsRecurrenceRuleFrequency `json:"frequency"`
+
+	// Interval Repeat every this many units of `frequency`. 1 to 1000 when writing.
+	//
+	// Example: 1
+	Interval int `json:"interval"`
+
+	// Until Moment after which the series ends, not before the start of the event. Never set together with `count`.
+	Until *time.Time `json:"until"`
+
+	// WeekStart First day of the week used by the rule. Null when not set.
+	//
+	// Example: monday
+	WeekStart *V1CalendarEventsRecurrenceRuleWeekStart `json:"weekStart"`
+}
+
+// V1CalendarEventsRecurrenceRuleFrequency Unit of repetition. Only DAILY, WEEKLY, MONTHLY and YEARLY can be written; SECONDLY, MINUTELY and HOURLY appear only on events created by other calendar applications.
+//
+// Example: WEEKLY
+type V1CalendarEventsRecurrenceRuleFrequency string
+
+// V1CalendarEventsRecurrenceRuleWeekStart First day of the week used by the rule. Null when not set.
+//
+// Example: monday
+type V1CalendarEventsRecurrenceRuleWeekStart string
+
+// V1CalendarEventsReminder Alarm of an event: how long before the start it fires.
+type V1CalendarEventsReminder struct {
+	// Unit Example: minutes
+	Unit V1CalendarEventsReminderUnit `json:"unit"`
+
+	// Value How many units before the start. 0 is at the start time. At most 1000 when writing.
+	//
+	// Example: 15
+	Value int `json:"value"`
+}
+
+// V1CalendarEventsReminderUnit Example: minutes
+type V1CalendarEventsReminderUnit string
+
+// V1CalendarEventsReplyRequest Body for answering an invitation.
+type V1CalendarEventsReplyRequest struct {
+	// ParticipationStatus The answer to the invitation.
+	//
+	// Example: ACCEPTED
+	ParticipationStatus V1CalendarEventsReplyRequestParticipationStatus `json:"participationStatus"`
+
+	// RecurrenceId `recurrenceId` of one occurrence, copied unchanged from a `listCalendarEvents` item, to answer only that occurrence. Omitted or null answers the whole event.
+	//
+	// Example: 2026-10-05T07:00:00.000000Z
+	RecurrenceId *time.Time `json:"recurrenceId,omitempty"`
+}
+
+// V1CalendarEventsReplyRequestParticipationStatus The answer to the invitation.
+//
+// Example: ACCEPTED
+type V1CalendarEventsReplyRequestParticipationStatus string
+
+// V1CalendarEventsRescheduleRequest Body for moving a calendar event to another time or changing its length.
+type V1CalendarEventsRescheduleRequest struct {
+	// AllDay `true` for an all-day event (dates only, `timeZone` ignored), `false` for an event at a time of day.
+	//
+	// Example: false
+	AllDay bool `json:"allDay"`
+
+	// End Exclusive end, same format as `start`. Required for a timed event and not before `start`. For an all-day event the day after the last day (2026-09-29 for one day on 2026-09-28); omitted means one day.
+	//
+	// Example: 2026-09-28T14:00:00+03:00
+	End *string `json:"end,omitempty"`
+
+	// NotifyAttendees `false` saves the change without emailing attendees, and copies of the event in the calendars of other Hostinger mailboxes are not updated. Omitted or null means `true`.
+	//
+	// Example: true
+	NotifyAttendees *bool `json:"notifyAttendees,omitempty"`
+
+	// RecurrenceId `recurrenceId` of one occurrence, copied unchanged from a `listCalendarEvents` item. Required when `scope` is `this` or `future`, ignored for `all`.
+	//
+	// Example: 2026-10-05T07:00:00.000000Z
+	RecurrenceId *time.Time `json:"recurrenceId,omitempty"`
+
+	// Scope For a recurring event: `this` moves the occurrence at `recurrenceId`, `future` moves it and every later one, `all` moves the whole series. Omitted or null means `all`. Required when `recurrenceId` is sent.
+	//
+	// Example: all
+	Scope *V1CalendarEventsRescheduleRequestScope `json:"scope,omitempty"`
+
+	// Start ISO 8601 date-time with offset; without an offset it is read as UTC. For an all-day event a date is enough (2026-09-28).
+	//
+	// Example: 2026-09-28T13:00:00+03:00
+	Start string `json:"start"`
+
+	// TimeZone IANA time zone of the event. Required when `allDay` is false, ignored when `allDay` is true.
+	//
+	// Example: Europe/Vilnius
+	TimeZone *string `json:"timeZone,omitempty"`
+}
+
+// V1CalendarEventsRescheduleRequestScope For a recurring event: `this` moves the occurrence at `recurrenceId`, `future` moves it and every later one, `all` moves the whole series. Omitted or null means `all`. Required when `recurrenceId` is sent.
+//
+// Example: all
+type V1CalendarEventsRescheduleRequestScope string
+
+// V1CalendarEventsResource Single calendar event payload.
+type V1CalendarEventsResource struct {
+	// Data Full details of one calendar event. Requested without `recurrenceId`, a recurring event is the series itself and `recurrenceId` is null; with it, one occurrence of the series.
+	Data V1CalendarEventsEvent `json:"data"`
+}
+
+// V1CalendarEventsUpdateRequest Body for updating a calendar event. Every field replaces the stored value and an omitted optional field is cleared.
+type V1CalendarEventsUpdateRequest struct {
+	// AllDay `true` for an all-day event (dates only, `timeZone` ignored), `false` for an event at a time of day.
+	//
+	// Example: false
+	AllDay bool `json:"allDay"`
+
+	// Attendees Full list of invited people. Added addresses receive an invitation and removed ones a cancellation. Unique addresses, at most 100 not counting the mailbox itself, across all occurrences. The own address of the mailbox is stored as accepted and not invited. Omitted, null or empty for none.
+	Attendees *[]V1CalendarEventsAttendeeInput `json:"attendees,omitempty"`
+
+	// Color Color of the event as #RRGGBB or #RRGGBBAA. Omitted or null uses the calendar color.
+	//
+	// Example: #251951
+	Color *string `json:"color,omitempty"`
+
+	// Description Notes of the event. Omitted or null clears it.
+	//
+	// Example: Bring the notes.
+	Description *string `json:"description,omitempty"`
+
+	// End Exclusive end, same format as `start`. Required for a timed event and not before `start`. For an all-day event the day after the last day (2026-09-29 for one day on 2026-09-28); omitted means one day.
+	//
+	// Example: 2026-09-28T14:00:00+03:00
+	End *string `json:"end,omitempty"`
+
+	// Location Place of the event. Omitted or null clears it.
+	//
+	// Example: Room 4
+	Location *string `json:"location,omitempty"`
+
+	// MeetingLink http or https URL of the online meeting. Omitted or null clears it.
+	//
+	// Example: https://meet.example.com/abc-defg-hij
+	MeetingLink *string `json:"meetingLink,omitempty"`
+
+	// NotifyAttendees `false` saves the change without emailing attendees, and copies of the event in the calendars of other Hostinger mailboxes are not updated. Omitted or null means `true`.
+	//
+	// Example: true
+	NotifyAttendees *bool `json:"notifyAttendees,omitempty"`
+
+	// RecurrenceId `recurrenceId` of one occurrence, copied unchanged from a `listCalendarEvents` item. Required when `scope` is `this` or `future`, ignored for `all`.
+	//
+	// Example: 2026-10-05T07:00:00.000000Z
+	RecurrenceId *time.Time `json:"recurrenceId,omitempty"`
+
+	// RecurrenceRule Omitted or null makes it a one-off event. A repeating event sends every field of the rule, null when unused: `frequency` DAILY, WEEKLY, MONTHLY or YEARLY, `interval` 1 to 1000, and `count` or `until` to end it, not both.
+	RecurrenceRule *V1CalendarEventsRecurrenceRule `json:"recurrenceRule,omitempty"`
+
+	// Reminder Alarm before the start: `value` 0 to 1000 and `unit`. Omitted or null clears it.
+	Reminder *V1CalendarEventsReminder `json:"reminder,omitempty"`
+
+	// Scope For a recurring event: `this` changes the occurrence at `recurrenceId`, `future` changes it and every later one, `all` changes the whole series. Omitted or null means `all`. Required when `recurrenceId` is sent.
+	//
+	// Example: all
+	Scope *V1CalendarEventsUpdateRequestScope `json:"scope,omitempty"`
+
+	// Start ISO 8601 date-time with offset; without an offset it is read as UTC. For an all-day event a date is enough (2026-09-28).
+	//
+	// Example: 2026-09-28T13:00:00+03:00
+	Start string `json:"start"`
+
+	// TimeZone IANA time zone of the event. Required when `allDay` is false, ignored when `allDay` is true.
+	//
+	// Example: Europe/Vilnius
+	TimeZone *string `json:"timeZone,omitempty"`
+
+	// Title Title of the event.
+	//
+	// Example: Planning
+	Title string `json:"title"`
+}
+
+// V1CalendarEventsUpdateRequestScope For a recurring event: `this` changes the occurrence at `recurrenceId`, `future` changes it and every later one, `all` changes the whole series. Omitted or null means `all`. Required when `recurrenceId` is sent.
+//
+// Example: all
+type V1CalendarEventsUpdateRequestScope string
+
+// V1CalendarsCalendar Calendar of a managed mailbox: one it owns or one shared with it.
+type V1CalendarsCalendar struct {
+	// Color Hex color as #RRGGBB or #RRGGBBAA.
+	//
+	// Example: #673de6
+	Color *string `json:"color"`
+
+	// Default Whether this is the default calendar of the mailbox. New events go here unless another calendar is named.
+	//
+	// Example: true
+	Default bool `json:"default"`
+
+	// Description Example: Team schedule
+	Description *string `json:"description"`
+
+	// DisplayName Example: Work
+	DisplayName *string `json:"displayName"`
+
+	// Uuid Calendar identifier, the `calendarUuid` of the calendar and calendar event endpoints.
+	//
+	// Example: 42c370e3-48ae-4286-90c5-d952f28c67cc
+	Uuid openapi_types.UUID `json:"uuid"`
+
+	// Visible Whether the mailbox shows the calendar in its calendar view. A preference of this mailbox, not shared with other users of the calendar. Events of a hidden calendar still exist.
+	//
+	// Example: true
+	Visible bool `json:"visible"`
+}
+
+// V1CalendarsCollection Paginated list of calendars.
+type V1CalendarsCollection struct {
+	Data []V1CalendarsCalendar `json:"data"`
+
+	// Pagination Pagination metadata for paginated collections.
+	Pagination Pagination `json:"pagination"`
+}
+
+// V1CalendarsCreateRequest Body for creating a calendar.
+type V1CalendarsCreateRequest struct {
+	// Color Hex color as #RRGGBB or #RRGGBBAA. Omitted or null uses the default color.
+	//
+	// Example: #251951
+	Color *string `json:"color,omitempty"`
+
+	// Description Optional free-text note about the calendar.
+	//
+	// Example: Team schedule
+	Description *string `json:"description,omitempty"`
+
+	// DisplayName Name of the calendar.
+	//
+	// Example: Work
+	DisplayName string `json:"displayName"`
+
+	// Visible Whether the mailbox shows the calendar in its calendar view. Omitted or null means true.
+	//
+	// Example: true
+	Visible *bool `json:"visible,omitempty"`
+}
+
+// V1CalendarsResource Single calendar payload.
+type V1CalendarsResource struct {
+	// Data Calendar of a managed mailbox: one it owns or one shared with it.
+	Data V1CalendarsCalendar `json:"data"`
+}
+
+// V1CalendarsUpdateRequest Body for updating a calendar. Name, description and color replace the stored values.
+type V1CalendarsUpdateRequest struct {
+	// Color Hex color as #RRGGBB or #RRGGBBAA. Omitted or null resets it to the default color.
+	//
+	// Example: #251951
+	Color *string `json:"color,omitempty"`
+
+	// Description Free-text note about the calendar. Omitted or null clears it.
+	//
+	// Example: Team schedule
+	Description *string `json:"description,omitempty"`
+
+	// DisplayName Name of the calendar.
+	//
+	// Example: Work
+	DisplayName string `json:"displayName"`
+
+	// Visible Whether the mailbox shows the calendar in its calendar view. Omitted or null keeps the current value.
+	//
+	// Example: true
+	Visible *bool `json:"visible,omitempty"`
 }
 
 // V1FeedbackSubmitRequest Feedback the user wants to send to the Hostinger mail team. The message is scrubbed of tokens, JWTs and key/secret/password values before validation and storage, so the length limit applies to the scrubbed text.
@@ -914,8 +1844,14 @@ type V1WebhooksWebhookWithSecretStatus string
 // CommonResponseBadGatewayResponse Standard error envelope. Frontend translations key off `code`, never off `error`.
 type CommonResponseBadGatewayResponse = Error
 
+// CommonResponseCalendarLimitReachedResponse Standard error envelope. Frontend translations key off `code`, never off `error`.
+type CommonResponseCalendarLimitReachedResponse = Error
+
 // CommonResponseConflictResponse Standard error envelope. Frontend translations key off `code`, never off `error`.
 type CommonResponseConflictResponse = Error
+
+// CommonResponseEventAttendeeLimitReachedResponse Standard error envelope. Frontend translations key off `code`, never off `error`.
+type CommonResponseEventAttendeeLimitReachedResponse = Error
 
 // CommonResponseForbiddenResponse Standard error envelope. Frontend translations key off `code`, never off `error`.
 type CommonResponseForbiddenResponse = Error
@@ -929,6 +1865,9 @@ type CommonResponseInternalServerErrorResponse = Error
 // CommonResponseNotFoundResponse Standard error envelope. Frontend translations key off `code`, never off `error`.
 type CommonResponseNotFoundResponse = Error
 
+// CommonResponsePreconditionFailedResponse Standard error envelope. Frontend translations key off `code`, never off `error`.
+type CommonResponsePreconditionFailedResponse = Error
+
 // CommonResponseTooManyRequestsResponse Standard error envelope. Frontend translations key off `code`, never off `error`.
 type CommonResponseTooManyRequestsResponse = Error
 
@@ -937,6 +1876,72 @@ type CommonResponseUnauthorizedResponse = Error
 
 // CommonResponseValidationFailedResponse Standard error envelope. Frontend translations key off `code`, never off `error`.
 type CommonResponseValidationFailedResponse = Error
+
+// ListCalendarsParams defines parameters for ListCalendars.
+type ListCalendarsParams struct {
+	// Page Page number (1-based).
+	Page *int `form:"page,omitempty" json:"page,omitempty"`
+
+	// PerPage Items per page (max 200).
+	PerPage *int `form:"perPage,omitempty" json:"perPage,omitempty"`
+}
+
+// ListCalendarEventsParams defines parameters for ListCalendarEvents.
+type ListCalendarEventsParams struct {
+	// Start Start of the range, inclusive. ISO 8601 date-time with offset.
+	Start time.Time `form:"start" json:"start"`
+
+	// End End of the range, exclusive. ISO 8601 date-time after `start` and at most 32 days after it.
+	End time.Time `form:"end" json:"end"`
+
+	// TimeZone IANA time zone used to place all-day events and events without a time zone on days, also across a daylight saving change. Defaults to the fixed offset of `start`.
+	TimeZone *string `form:"timeZone,omitempty" json:"timeZone,omitempty"`
+}
+
+// DeleteCalendarEventParams defines parameters for DeleteCalendarEvent.
+type DeleteCalendarEventParams struct {
+	// Scope For a recurring event: `this` removes the occurrence at `recurrenceId`, `future` removes it and every later one, `all` deletes the whole series. Omitted means `all`. Required when `recurrenceId` is sent.
+	Scope *DeleteCalendarEventParamsScope `form:"scope,omitempty" json:"scope,omitempty"`
+
+	// RecurrenceId `recurrenceId` of one occurrence, copied unchanged from a `listCalendarEvents` item. Required when `scope` is `this` or `future`. A value that matches no occurrence, or any value on a one-off event, returns `404`.
+	RecurrenceId *time.Time `form:"recurrenceId,omitempty" json:"recurrenceId,omitempty"`
+
+	// NotifyAttendees `false` deletes without emailing attendees a cancellation or update, or the organizer a decline. Omitted means `true`.
+	NotifyAttendees *DeleteCalendarEventParamsNotifyAttendees `form:"notifyAttendees,omitempty" json:"notifyAttendees,omitempty"`
+
+	// IfMatch Optional `etag` from `getCalendarEvent`. When the event changed since that call, nothing is deleted and the request fails with `412`: fetch the event again and retry. Omit it to apply the request to the current version.
+	IfMatch *string `json:"If-Match,omitempty"`
+}
+
+// DeleteCalendarEventParamsScope defines parameters for DeleteCalendarEvent.
+type DeleteCalendarEventParamsScope string
+
+// DeleteCalendarEventParamsNotifyAttendees defines parameters for DeleteCalendarEvent.
+type DeleteCalendarEventParamsNotifyAttendees string
+
+// GetCalendarEventParams defines parameters for GetCalendarEvent.
+type GetCalendarEventParams struct {
+	// RecurrenceId `recurrenceId` of one occurrence, copied unchanged from a `listCalendarEvents` item. Omit it for a one-off event or for the whole series.
+	RecurrenceId *time.Time `form:"recurrenceId,omitempty" json:"recurrenceId,omitempty"`
+}
+
+// UpdateCalendarEventParams defines parameters for UpdateCalendarEvent.
+type UpdateCalendarEventParams struct {
+	// IfMatch Optional `etag` from `getCalendarEvent`. When the event changed since that call, nothing is changed and the request fails with `412`: fetch the event again and retry. Omit it to apply the request to the current version.
+	IfMatch *string `json:"If-Match,omitempty"`
+}
+
+// ReplyToCalendarEventParams defines parameters for ReplyToCalendarEvent.
+type ReplyToCalendarEventParams struct {
+	// IfMatch Optional `etag` from `getCalendarEvent`. When the event changed since that call, the answer is not saved and the request fails with `412`: fetch the event again and retry. Omit it to apply the request to the current version.
+	IfMatch *string `json:"If-Match,omitempty"`
+}
+
+// RescheduleCalendarEventParams defines parameters for RescheduleCalendarEvent.
+type RescheduleCalendarEventParams struct {
+	// IfMatch Optional `etag` from `getCalendarEvent`. When the event changed since that call, nothing is changed and the request fails with `412`: fetch the event again and retry. Omit it to apply the request to the current version.
+	IfMatch *string `json:"If-Match,omitempty"`
+}
 
 // ListFoldersParams defines parameters for ListFolders.
 type ListFoldersParams struct {
@@ -985,6 +1990,24 @@ type ListWebhooksParams struct {
 
 // ListWebhooksParamsStatus defines parameters for ListWebhooks.
 type ListWebhooksParamsStatus string
+
+// CreateCalendarJSONRequestBody defines body for CreateCalendar for application/json ContentType.
+type CreateCalendarJSONRequestBody = V1CalendarsCreateRequest
+
+// UpdateCalendarJSONRequestBody defines body for UpdateCalendar for application/json ContentType.
+type UpdateCalendarJSONRequestBody = V1CalendarsUpdateRequest
+
+// CreateCalendarEventJSONRequestBody defines body for CreateCalendarEvent for application/json ContentType.
+type CreateCalendarEventJSONRequestBody = V1CalendarEventsCreateRequest
+
+// UpdateCalendarEventJSONRequestBody defines body for UpdateCalendarEvent for application/json ContentType.
+type UpdateCalendarEventJSONRequestBody = V1CalendarEventsUpdateRequest
+
+// ReplyToCalendarEventJSONRequestBody defines body for ReplyToCalendarEvent for application/json ContentType.
+type ReplyToCalendarEventJSONRequestBody = V1CalendarEventsReplyRequest
+
+// RescheduleCalendarEventJSONRequestBody defines body for RescheduleCalendarEvent for application/json ContentType.
+type RescheduleCalendarEventJSONRequestBody = V1CalendarEventsRescheduleRequest
 
 // SubmitFeedbackJSONRequestBody defines body for SubmitFeedback for application/json ContentType.
 type SubmitFeedbackJSONRequestBody = V1FeedbackSubmitRequest
@@ -1157,6 +2180,176 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
+
+	// ListCalendars List calendars
+	//
+	// List the calendars of a mailbox: its own calendars and the calendars shared with it, in display order. Call it first to get the `calendarUuid` every calendar event operation needs: the `uuid` of each calendar. The calendar with `default` true is where new events go unless another one is named. `visible` false means the calendar is hidden in the calendar view; its events still exist.
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/calendars (the `ListCalendars` operationId).
+	ListCalendars(ctx context.Context, mailboxResourceId string, params *ListCalendarsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateCalendarWithBody Create calendar
+	//
+	// Create a calendar owned by the mailbox. The number of calendars a mailbox can own is limited; when the limit is reached the request fails with `400` and code `ERR_CALENDAR_LIMIT_REACHED`.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars (the `CreateCalendar` operationId).
+	CreateCalendarWithBody(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateCalendar Create calendar
+	//
+	// Create a calendar owned by the mailbox. The number of calendars a mailbox can own is limited; when the limit is reached the request fails with `400` and code `ERR_CALENDAR_LIMIT_REACHED`.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars (the `CreateCalendar` operationId).
+	CreateCalendar(ctx context.Context, mailboxResourceId string, body CreateCalendarJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteCalendar Delete calendar
+	//
+	// Delete a calendar owned by the mailbox together with all its events, or remove a calendar shared with the mailbox from its list. This cannot be undone. A calendar that cannot be deleted is rejected with `403` and code `ERR_CALENDAR_NOT_DELETABLE`.
+	//
+	// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid} (the `DeleteCalendar` operationId).
+	DeleteCalendar(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetCalendar Get calendar
+	//
+	// Retrieve one calendar of a mailbox: its name, description, color, whether it is the default calendar and whether it is shown in the calendar view. It does not return events; use `listCalendarEvents` for those.
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid} (the `GetCalendar` operationId).
+	GetCalendar(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateCalendarWithBody Update calendar
+	//
+	// Update the name, description, color and visibility of a calendar. Name, description and color replace the stored values: an omitted `description` is cleared and an omitted `color` resets to the default color. An omitted `visible` keeps the current value.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid} (the `UpdateCalendar` operationId).
+	UpdateCalendarWithBody(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateCalendar Update calendar
+	//
+	// Update the name, description, color and visibility of a calendar. Name, description and color replace the stored values: an omitted `description` is cleared and an omitted `color` resets to the default color. An omitted `visible` keeps the current value.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid} (the `UpdateCalendar` operationId).
+	UpdateCalendar(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, body UpdateCalendarJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListCalendarEvents List calendar events
+	//
+	// List the events of one calendar that overlap a time range. It covers one calendar only: get the calendars from `listCalendars` and call it for each. The range runs from `start` (inclusive) to `end` (exclusive), at most 32 days; for a longer period call it again with the next range. Recurring events are expanded: each occurrence is a separate item with the same `uuid` and its own `recurrenceId`. Results are not paginated.
+	// Items hold summary fields only. For description, location, attendees and organizer call `getCalendarEvent` with the `calendarUuid`, `uuid` (as `eventUuid`) and `recurrenceId` of the item. Times are in UTC; `timeZone` is the zone the event was created in. `participationStatus` is the answer of the mailbox to an invitation from someone else, null for its own events. `status` CANCELLED means the organizer cancelled the event.
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events (the `ListCalendarEvents` operationId).
+	ListCalendarEvents(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, params *ListCalendarEventsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateCalendarEventWithBody Create calendar event
+	//
+	// Create an event in one calendar of the mailbox. `calendarUuid` comes from `listCalendars`: use the calendar with `default` true unless another one is named. A calendar the mailbox can only read is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+	// The mailbox becomes the organizer and every address in `attendees` immediately receives an email invitation, which cannot be recalled. Without attendees no email is sent.
+	// A timed event needs `allDay` false, `start`, `end` and `timeZone`. An all-day event needs `allDay` true and a `start` date; `end` is optional. Set `recurrenceRule` for a repeating event and `reminder` for an alarm.
+	// Returns the created event. Its `uuid` is the `eventUuid` for `getCalendarEvent`, `updateCalendarEvent`, `rescheduleCalendarEvent` and `deleteCalendarEvent`.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events (the `CreateCalendarEvent` operationId).
+	CreateCalendarEventWithBody(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateCalendarEvent Create calendar event
+	//
+	// Create an event in one calendar of the mailbox. `calendarUuid` comes from `listCalendars`: use the calendar with `default` true unless another one is named. A calendar the mailbox can only read is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+	// The mailbox becomes the organizer and every address in `attendees` immediately receives an email invitation, which cannot be recalled. Without attendees no email is sent.
+	// A timed event needs `allDay` false, `start`, `end` and `timeZone`. An all-day event needs `allDay` true and a `start` date; `end` is optional. Set `recurrenceRule` for a repeating event and `reminder` for an alarm.
+	// Returns the created event. Its `uuid` is the `eventUuid` for `getCalendarEvent`, `updateCalendarEvent`, `rescheduleCalendarEvent` and `deleteCalendarEvent`.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events (the `CreateCalendarEvent` operationId).
+	CreateCalendarEvent(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, body CreateCalendarEventJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteCalendarEvent Delete calendar event
+	//
+	// Delete an event, one occurrence of a recurring event, or a recurring event from one occurrence on. This cannot be undone. `calendarUuid` and `eventUuid` come from `listCalendarEvents`.
+	// For a one-off event omit `scope` and `recurrenceId`. For a recurring event, `scope` `this` removes only the occurrence at `recurrenceId`, `future` removes it and every later one, `all` (the default) deletes the whole series.
+	// An event with `editable` true can be deleted with any scope, and its attendees receive a cancellation or the updated series by email. An invitation from someone else on the own calendar of the mailbox can be deleted with `all` or `this`: the organizer receives a decline for the removed occurrences. Any other event is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`. `notifyAttendees` false deletes without sending any email.
+	//
+	// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid} (the `DeleteCalendarEvent` operationId).
+	DeleteCalendarEvent(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *DeleteCalendarEventParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetCalendarEvent Get calendar event
+	//
+	// Retrieve the full details of one event: title, times, description, location, meeting link, recurrence rule, reminder, organizer, attendees with their answers, and its `etag`. `calendarUuid` and `eventUuid` come from `listCalendarEvents` (the `calendarUuid` and `uuid` of an item). For one occurrence of a recurring event pass the `recurrenceId` of the item; without it the whole series is returned and `recurrenceId` is null. A `recurrenceId` that matches no occurrence returns `404`.
+	// Call it before `updateCalendarEvent`, which replaces every field, so the values that should stay can be sent back. `replyable` true means the mailbox was invited by someone else and can answer with `replyToCalendarEvent`. `editable` true means the event can be changed or moved.
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid} (the `GetCalendarEvent` operationId).
+	GetCalendarEvent(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *GetCalendarEventParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateCalendarEventWithBody Update calendar event
+	//
+	// Change the details of an event: title, times, description, location, attendees, recurrence and so on. Every field replaces the stored value and an omitted optional field is cleared, so call `getCalendarEvent` first and send back the values that should stay. To only move an event in time, use `rescheduleCalendarEvent`. Only an event with `editable` true can be changed; any other is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+	// For a recurring event, `scope` `this` changes only the occurrence at `recurrenceId`, `future` ends the series before that occurrence and starts a new one with a new `uuid`, `all` (the default) changes the whole series, keeping the date of its first occurrence.
+	// Attendees receive an email update, added attendees an invitation and removed ones a cancellation, unless `notifyAttendees` is false. Returns the changed event, or the changed occurrence for `scope` `this`.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid} (the `UpdateCalendarEvent` operationId).
+	UpdateCalendarEventWithBody(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *UpdateCalendarEventParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateCalendarEvent Update calendar event
+	//
+	// Change the details of an event: title, times, description, location, attendees, recurrence and so on. Every field replaces the stored value and an omitted optional field is cleared, so call `getCalendarEvent` first and send back the values that should stay. To only move an event in time, use `rescheduleCalendarEvent`. Only an event with `editable` true can be changed; any other is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+	// For a recurring event, `scope` `this` changes only the occurrence at `recurrenceId`, `future` ends the series before that occurrence and starts a new one with a new `uuid`, `all` (the default) changes the whole series, keeping the date of its first occurrence.
+	// Attendees receive an email update, added attendees an invitation and removed ones a cancellation, unless `notifyAttendees` is false. Returns the changed event, or the changed occurrence for `scope` `this`.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid} (the `UpdateCalendarEvent` operationId).
+	UpdateCalendarEvent(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *UpdateCalendarEventParams, body UpdateCalendarEventJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReplyToCalendarEventWithBody Reply to calendar event
+	//
+	// Answer an invitation from someone else: accept, decline or tentatively accept. It saves the answer on the event and emails it to the organizer, which cannot be recalled. `calendarUuid` and `eventUuid` come from `listCalendarEvents`.
+	// It works only when `getCalendarEvent` returns `replyable` true. An event the mailbox organizes or is not invited to is rejected with `403` and code `ERR_EVENT_NOT_REPLYABLE`, an event the organizer cancelled with `409` and code `ERR_EVENT_CANCELLED`. Send the `recurrenceId` of an item to answer one occurrence of a recurring event, or omit it to answer the whole series. Returns the event with the new `participationStatus`.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reply (the `ReplyToCalendarEvent` operationId).
+	ReplyToCalendarEventWithBody(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *ReplyToCalendarEventParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ReplyToCalendarEvent Reply to calendar event
+	//
+	// Answer an invitation from someone else: accept, decline or tentatively accept. It saves the answer on the event and emails it to the organizer, which cannot be recalled. `calendarUuid` and `eventUuid` come from `listCalendarEvents`.
+	// It works only when `getCalendarEvent` returns `replyable` true. An event the mailbox organizes or is not invited to is rejected with `403` and code `ERR_EVENT_NOT_REPLYABLE`, an event the organizer cancelled with `409` and code `ERR_EVENT_CANCELLED`. Send the `recurrenceId` of an item to answer one occurrence of a recurring event, or omit it to answer the whole series. Returns the event with the new `participationStatus`.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reply (the `ReplyToCalendarEvent` operationId).
+	ReplyToCalendarEvent(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *ReplyToCalendarEventParams, body ReplyToCalendarEventJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RescheduleCalendarEventWithBody Reschedule calendar event
+	//
+	// Move an event to another time or change its length, keeping everything else (title, attendees, description and so on) as stored, so the event does not have to be fetched first. To change other fields use `updateCalendarEvent`. `calendarUuid` and `eventUuid` come from `listCalendarEvents`. Only an event with `editable` true can be moved; any other is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+	// For a recurring event, `scope` `this` moves only the occurrence at `recurrenceId`, `future` ends the series before that occurrence and starts a new one with a new `uuid`, `all` (the default) moves the whole series: only the time of day and the length apply and the series keeps the date of its first occurrence.
+	// Attendees receive an email update unless `notifyAttendees` is false. Returns the moved event, or the moved occurrence for `scope` `this`.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reschedule (the `RescheduleCalendarEvent` operationId).
+	RescheduleCalendarEventWithBody(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *RescheduleCalendarEventParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RescheduleCalendarEvent Reschedule calendar event
+	//
+	// Move an event to another time or change its length, keeping everything else (title, attendees, description and so on) as stored, so the event does not have to be fetched first. To change other fields use `updateCalendarEvent`. `calendarUuid` and `eventUuid` come from `listCalendarEvents`. Only an event with `editable` true can be moved; any other is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+	// For a recurring event, `scope` `this` moves only the occurrence at `recurrenceId`, `future` ends the series before that occurrence and starts a new one with a new `uuid`, `all` (the default) moves the whole series: only the time of day and the length apply and the series keeps the date of its first occurrence.
+	// Attendees receive an email update unless `notifyAttendees` is false. Returns the moved event, or the moved occurrence for `scope` `this`.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reschedule (the `RescheduleCalendarEvent` operationId).
+	RescheduleCalendarEvent(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *RescheduleCalendarEventParams, body RescheduleCalendarEventJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// SubmitFeedbackWithBody Submit feedback
 	//
@@ -1400,7 +2593,7 @@ type ClientInterface interface {
 
 	// SendEmailWithBody Send email
 	//
-	// Send a message from the managed mailbox. Saves a copy to INBOX.Sent.
+	// Send a message from the managed mailbox. The message is accepted for delivery and dispatched within a few seconds; a copy is saved to INBOX.Sent once it is sent. A delivery failure after acceptance is not reported on this call.
 	//
 	// Takes any type of body and a specified content type.
 	//
@@ -1409,7 +2602,7 @@ type ClientInterface interface {
 
 	// SendEmail Send email
 	//
-	// Send a message from the managed mailbox. Saves a copy to INBOX.Sent.
+	// Send a message from the managed mailbox. The message is accepted for delivery and dispatched within a few seconds; a copy is saved to INBOX.Sent once it is sent. A delivery failure after acceptance is not reported on this call.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -1493,6 +2686,356 @@ type ClientInterface interface {
 	//
 	// Corresponds with GET /api/v1/me (the `GetCurrentAccount` operationId).
 	GetCurrentAccount(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+}
+
+// ListCalendars List calendars
+//
+// List the calendars of a mailbox: its own calendars and the calendars shared with it, in display order. Call it first to get the `calendarUuid` every calendar event operation needs: the `uuid` of each calendar. The calendar with `default` true is where new events go unless another one is named. `visible` false means the calendar is hidden in the calendar view; its events still exist.
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/calendars (the `ListCalendars` operationId).
+func (c *Client) ListCalendars(ctx context.Context, mailboxResourceId string, params *ListCalendarsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListCalendarsRequest(c.Server, mailboxResourceId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// CreateCalendarWithBody Create calendar
+//
+// Create a calendar owned by the mailbox. The number of calendars a mailbox can own is limited; when the limit is reached the request fails with `400` and code `ERR_CALENDAR_LIMIT_REACHED`.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars (the `CreateCalendar` operationId).
+func (c *Client) CreateCalendarWithBody(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateCalendarRequestWithBody(c.Server, mailboxResourceId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// CreateCalendar Create calendar
+//
+// Create a calendar owned by the mailbox. The number of calendars a mailbox can own is limited; when the limit is reached the request fails with `400` and code `ERR_CALENDAR_LIMIT_REACHED`.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars (the `CreateCalendar` operationId).
+func (c *Client) CreateCalendar(ctx context.Context, mailboxResourceId string, body CreateCalendarJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateCalendarRequest(c.Server, mailboxResourceId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DeleteCalendar Delete calendar
+//
+// Delete a calendar owned by the mailbox together with all its events, or remove a calendar shared with the mailbox from its list. This cannot be undone. A calendar that cannot be deleted is rejected with `403` and code `ERR_CALENDAR_NOT_DELETABLE`.
+//
+// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid} (the `DeleteCalendar` operationId).
+func (c *Client) DeleteCalendar(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteCalendarRequest(c.Server, mailboxResourceId, calendarUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GetCalendar Get calendar
+//
+// Retrieve one calendar of a mailbox: its name, description, color, whether it is the default calendar and whether it is shown in the calendar view. It does not return events; use `listCalendarEvents` for those.
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid} (the `GetCalendar` operationId).
+func (c *Client) GetCalendar(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetCalendarRequest(c.Server, mailboxResourceId, calendarUuid)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// UpdateCalendarWithBody Update calendar
+//
+// Update the name, description, color and visibility of a calendar. Name, description and color replace the stored values: an omitted `description` is cleared and an omitted `color` resets to the default color. An omitted `visible` keeps the current value.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid} (the `UpdateCalendar` operationId).
+func (c *Client) UpdateCalendarWithBody(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateCalendarRequestWithBody(c.Server, mailboxResourceId, calendarUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// UpdateCalendar Update calendar
+//
+// Update the name, description, color and visibility of a calendar. Name, description and color replace the stored values: an omitted `description` is cleared and an omitted `color` resets to the default color. An omitted `visible` keeps the current value.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid} (the `UpdateCalendar` operationId).
+func (c *Client) UpdateCalendar(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, body UpdateCalendarJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateCalendarRequest(c.Server, mailboxResourceId, calendarUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ListCalendarEvents List calendar events
+//
+// List the events of one calendar that overlap a time range. It covers one calendar only: get the calendars from `listCalendars` and call it for each. The range runs from `start` (inclusive) to `end` (exclusive), at most 32 days; for a longer period call it again with the next range. Recurring events are expanded: each occurrence is a separate item with the same `uuid` and its own `recurrenceId`. Results are not paginated.
+// Items hold summary fields only. For description, location, attendees and organizer call `getCalendarEvent` with the `calendarUuid`, `uuid` (as `eventUuid`) and `recurrenceId` of the item. Times are in UTC; `timeZone` is the zone the event was created in. `participationStatus` is the answer of the mailbox to an invitation from someone else, null for its own events. `status` CANCELLED means the organizer cancelled the event.
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events (the `ListCalendarEvents` operationId).
+func (c *Client) ListCalendarEvents(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, params *ListCalendarEventsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListCalendarEventsRequest(c.Server, mailboxResourceId, calendarUuid, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// CreateCalendarEventWithBody Create calendar event
+//
+// Create an event in one calendar of the mailbox. `calendarUuid` comes from `listCalendars`: use the calendar with `default` true unless another one is named. A calendar the mailbox can only read is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+// The mailbox becomes the organizer and every address in `attendees` immediately receives an email invitation, which cannot be recalled. Without attendees no email is sent.
+// A timed event needs `allDay` false, `start`, `end` and `timeZone`. An all-day event needs `allDay` true and a `start` date; `end` is optional. Set `recurrenceRule` for a repeating event and `reminder` for an alarm.
+// Returns the created event. Its `uuid` is the `eventUuid` for `getCalendarEvent`, `updateCalendarEvent`, `rescheduleCalendarEvent` and `deleteCalendarEvent`.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events (the `CreateCalendarEvent` operationId).
+func (c *Client) CreateCalendarEventWithBody(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateCalendarEventRequestWithBody(c.Server, mailboxResourceId, calendarUuid, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// CreateCalendarEvent Create calendar event
+//
+// Create an event in one calendar of the mailbox. `calendarUuid` comes from `listCalendars`: use the calendar with `default` true unless another one is named. A calendar the mailbox can only read is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+// The mailbox becomes the organizer and every address in `attendees` immediately receives an email invitation, which cannot be recalled. Without attendees no email is sent.
+// A timed event needs `allDay` false, `start`, `end` and `timeZone`. An all-day event needs `allDay` true and a `start` date; `end` is optional. Set `recurrenceRule` for a repeating event and `reminder` for an alarm.
+// Returns the created event. Its `uuid` is the `eventUuid` for `getCalendarEvent`, `updateCalendarEvent`, `rescheduleCalendarEvent` and `deleteCalendarEvent`.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events (the `CreateCalendarEvent` operationId).
+func (c *Client) CreateCalendarEvent(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, body CreateCalendarEventJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateCalendarEventRequest(c.Server, mailboxResourceId, calendarUuid, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// DeleteCalendarEvent Delete calendar event
+//
+// Delete an event, one occurrence of a recurring event, or a recurring event from one occurrence on. This cannot be undone. `calendarUuid` and `eventUuid` come from `listCalendarEvents`.
+// For a one-off event omit `scope` and `recurrenceId`. For a recurring event, `scope` `this` removes only the occurrence at `recurrenceId`, `future` removes it and every later one, `all` (the default) deletes the whole series.
+// An event with `editable` true can be deleted with any scope, and its attendees receive a cancellation or the updated series by email. An invitation from someone else on the own calendar of the mailbox can be deleted with `all` or `this`: the organizer receives a decline for the removed occurrences. Any other event is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`. `notifyAttendees` false deletes without sending any email.
+//
+// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid} (the `DeleteCalendarEvent` operationId).
+func (c *Client) DeleteCalendarEvent(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *DeleteCalendarEventParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteCalendarEventRequest(c.Server, mailboxResourceId, calendarUuid, eventUuid, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GetCalendarEvent Get calendar event
+//
+// Retrieve the full details of one event: title, times, description, location, meeting link, recurrence rule, reminder, organizer, attendees with their answers, and its `etag`. `calendarUuid` and `eventUuid` come from `listCalendarEvents` (the `calendarUuid` and `uuid` of an item). For one occurrence of a recurring event pass the `recurrenceId` of the item; without it the whole series is returned and `recurrenceId` is null. A `recurrenceId` that matches no occurrence returns `404`.
+// Call it before `updateCalendarEvent`, which replaces every field, so the values that should stay can be sent back. `replyable` true means the mailbox was invited by someone else and can answer with `replyToCalendarEvent`. `editable` true means the event can be changed or moved.
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid} (the `GetCalendarEvent` operationId).
+func (c *Client) GetCalendarEvent(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *GetCalendarEventParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetCalendarEventRequest(c.Server, mailboxResourceId, calendarUuid, eventUuid, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// UpdateCalendarEventWithBody Update calendar event
+//
+// Change the details of an event: title, times, description, location, attendees, recurrence and so on. Every field replaces the stored value and an omitted optional field is cleared, so call `getCalendarEvent` first and send back the values that should stay. To only move an event in time, use `rescheduleCalendarEvent`. Only an event with `editable` true can be changed; any other is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+// For a recurring event, `scope` `this` changes only the occurrence at `recurrenceId`, `future` ends the series before that occurrence and starts a new one with a new `uuid`, `all` (the default) changes the whole series, keeping the date of its first occurrence.
+// Attendees receive an email update, added attendees an invitation and removed ones a cancellation, unless `notifyAttendees` is false. Returns the changed event, or the changed occurrence for `scope` `this`.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid} (the `UpdateCalendarEvent` operationId).
+func (c *Client) UpdateCalendarEventWithBody(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *UpdateCalendarEventParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateCalendarEventRequestWithBody(c.Server, mailboxResourceId, calendarUuid, eventUuid, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// UpdateCalendarEvent Update calendar event
+//
+// Change the details of an event: title, times, description, location, attendees, recurrence and so on. Every field replaces the stored value and an omitted optional field is cleared, so call `getCalendarEvent` first and send back the values that should stay. To only move an event in time, use `rescheduleCalendarEvent`. Only an event with `editable` true can be changed; any other is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+// For a recurring event, `scope` `this` changes only the occurrence at `recurrenceId`, `future` ends the series before that occurrence and starts a new one with a new `uuid`, `all` (the default) changes the whole series, keeping the date of its first occurrence.
+// Attendees receive an email update, added attendees an invitation and removed ones a cancellation, unless `notifyAttendees` is false. Returns the changed event, or the changed occurrence for `scope` `this`.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid} (the `UpdateCalendarEvent` operationId).
+func (c *Client) UpdateCalendarEvent(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *UpdateCalendarEventParams, body UpdateCalendarEventJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateCalendarEventRequest(c.Server, mailboxResourceId, calendarUuid, eventUuid, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReplyToCalendarEventWithBody Reply to calendar event
+//
+// Answer an invitation from someone else: accept, decline or tentatively accept. It saves the answer on the event and emails it to the organizer, which cannot be recalled. `calendarUuid` and `eventUuid` come from `listCalendarEvents`.
+// It works only when `getCalendarEvent` returns `replyable` true. An event the mailbox organizes or is not invited to is rejected with `403` and code `ERR_EVENT_NOT_REPLYABLE`, an event the organizer cancelled with `409` and code `ERR_EVENT_CANCELLED`. Send the `recurrenceId` of an item to answer one occurrence of a recurring event, or omit it to answer the whole series. Returns the event with the new `participationStatus`.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reply (the `ReplyToCalendarEvent` operationId).
+func (c *Client) ReplyToCalendarEventWithBody(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *ReplyToCalendarEventParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReplyToCalendarEventRequestWithBody(c.Server, mailboxResourceId, calendarUuid, eventUuid, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// ReplyToCalendarEvent Reply to calendar event
+//
+// Answer an invitation from someone else: accept, decline or tentatively accept. It saves the answer on the event and emails it to the organizer, which cannot be recalled. `calendarUuid` and `eventUuid` come from `listCalendarEvents`.
+// It works only when `getCalendarEvent` returns `replyable` true. An event the mailbox organizes or is not invited to is rejected with `403` and code `ERR_EVENT_NOT_REPLYABLE`, an event the organizer cancelled with `409` and code `ERR_EVENT_CANCELLED`. Send the `recurrenceId` of an item to answer one occurrence of a recurring event, or omit it to answer the whole series. Returns the event with the new `participationStatus`.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reply (the `ReplyToCalendarEvent` operationId).
+func (c *Client) ReplyToCalendarEvent(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *ReplyToCalendarEventParams, body ReplyToCalendarEventJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewReplyToCalendarEventRequest(c.Server, mailboxResourceId, calendarUuid, eventUuid, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// RescheduleCalendarEventWithBody Reschedule calendar event
+//
+// Move an event to another time or change its length, keeping everything else (title, attendees, description and so on) as stored, so the event does not have to be fetched first. To change other fields use `updateCalendarEvent`. `calendarUuid` and `eventUuid` come from `listCalendarEvents`. Only an event with `editable` true can be moved; any other is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+// For a recurring event, `scope` `this` moves only the occurrence at `recurrenceId`, `future` ends the series before that occurrence and starts a new one with a new `uuid`, `all` (the default) moves the whole series: only the time of day and the length apply and the series keeps the date of its first occurrence.
+// Attendees receive an email update unless `notifyAttendees` is false. Returns the moved event, or the moved occurrence for `scope` `this`.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reschedule (the `RescheduleCalendarEvent` operationId).
+func (c *Client) RescheduleCalendarEventWithBody(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *RescheduleCalendarEventParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRescheduleCalendarEventRequestWithBody(c.Server, mailboxResourceId, calendarUuid, eventUuid, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// RescheduleCalendarEvent Reschedule calendar event
+//
+// Move an event to another time or change its length, keeping everything else (title, attendees, description and so on) as stored, so the event does not have to be fetched first. To change other fields use `updateCalendarEvent`. `calendarUuid` and `eventUuid` come from `listCalendarEvents`. Only an event with `editable` true can be moved; any other is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+// For a recurring event, `scope` `this` moves only the occurrence at `recurrenceId`, `future` ends the series before that occurrence and starts a new one with a new `uuid`, `all` (the default) moves the whole series: only the time of day and the length apply and the series keeps the date of its first occurrence.
+// Attendees receive an email update unless `notifyAttendees` is false. Returns the moved event, or the moved occurrence for `scope` `this`.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reschedule (the `RescheduleCalendarEvent` operationId).
+func (c *Client) RescheduleCalendarEvent(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *RescheduleCalendarEventParams, body RescheduleCalendarEventJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRescheduleCalendarEventRequest(c.Server, mailboxResourceId, calendarUuid, eventUuid, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
 }
 
 // SubmitFeedbackWithBody Submit feedback
@@ -2017,7 +3560,7 @@ func (c *Client) GetQuota(ctx context.Context, mailboxResourceId string, reqEdit
 
 // SendEmailWithBody Send email
 //
-// Send a message from the managed mailbox. Saves a copy to INBOX.Sent.
+// Send a message from the managed mailbox. The message is accepted for delivery and dispatched within a few seconds; a copy is saved to INBOX.Sent once it is sent. A delivery failure after acceptance is not reported on this call.
 //
 // Takes any type of body and a specified content type.
 //
@@ -2036,7 +3579,7 @@ func (c *Client) SendEmailWithBody(ctx context.Context, mailboxResourceId string
 
 // SendEmail Send email
 //
-// Send a message from the managed mailbox. Saves a copy to INBOX.Sent.
+// Send a message from the managed mailbox. The message is accepted for delivery and dispatched within a few seconds; a copy is saved to INBOX.Sent once it is sent. A delivery failure after acceptance is not reported on this call.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -2229,6 +3772,817 @@ func (c *Client) GetCurrentAccount(ctx context.Context, reqEditors ...RequestEdi
 		return nil, err
 	}
 	return c.Client.Do(req)
+}
+
+// NewListCalendarsRequest constructs an http.Request for the ListCalendars method
+func NewListCalendarsRequest(server string, mailboxResourceId string, params *ListCalendarsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "mailboxResourceId", mailboxResourceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/v1/mailboxes/%s/calendars", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "page", *params.Page, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "perPage", *params.PerPage, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateCalendarRequest calls the generic CreateCalendar builder with application/json body
+func NewCreateCalendarRequest(server string, mailboxResourceId string, body CreateCalendarJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateCalendarRequestWithBody(server, mailboxResourceId, "application/json", bodyReader)
+}
+
+// NewCreateCalendarRequestWithBody constructs an http.Request for the CreateCalendar method, with any body, and a specified content type
+func NewCreateCalendarRequestWithBody(server string, mailboxResourceId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "mailboxResourceId", mailboxResourceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/v1/mailboxes/%s/calendars", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteCalendarRequest constructs an http.Request for the DeleteCalendar method
+func NewDeleteCalendarRequest(server string, mailboxResourceId string, calendarUuid openapi_types.UUID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "mailboxResourceId", mailboxResourceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "calendarUuid", calendarUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/v1/mailboxes/%s/calendars/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetCalendarRequest constructs an http.Request for the GetCalendar method
+func NewGetCalendarRequest(server string, mailboxResourceId string, calendarUuid openapi_types.UUID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "mailboxResourceId", mailboxResourceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "calendarUuid", calendarUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/v1/mailboxes/%s/calendars/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateCalendarRequest calls the generic UpdateCalendar builder with application/json body
+func NewUpdateCalendarRequest(server string, mailboxResourceId string, calendarUuid openapi_types.UUID, body UpdateCalendarJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateCalendarRequestWithBody(server, mailboxResourceId, calendarUuid, "application/json", bodyReader)
+}
+
+// NewUpdateCalendarRequestWithBody constructs an http.Request for the UpdateCalendar method, with any body, and a specified content type
+func NewUpdateCalendarRequestWithBody(server string, mailboxResourceId string, calendarUuid openapi_types.UUID, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "mailboxResourceId", mailboxResourceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "calendarUuid", calendarUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/v1/mailboxes/%s/calendars/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListCalendarEventsRequest constructs an http.Request for the ListCalendarEvents method
+func NewListCalendarEventsRequest(server string, mailboxResourceId string, calendarUuid openapi_types.UUID, params *ListCalendarEventsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "mailboxResourceId", mailboxResourceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "calendarUuid", calendarUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/v1/mailboxes/%s/calendars/%s/events", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "start", params.Start, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "date-time"}); err != nil {
+			return nil, err
+		} else {
+			for _, qp := range strings.Split(queryFrag, "&") {
+				rawQueryFragments = append(rawQueryFragments, qp)
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "end", params.End, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "date-time"}); err != nil {
+			return nil, err
+		} else {
+			for _, qp := range strings.Split(queryFrag, "&") {
+				rawQueryFragments = append(rawQueryFragments, qp)
+			}
+		}
+
+		if params.TimeZone != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "timeZone", *params.TimeZone, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateCalendarEventRequest calls the generic CreateCalendarEvent builder with application/json body
+func NewCreateCalendarEventRequest(server string, mailboxResourceId string, calendarUuid openapi_types.UUID, body CreateCalendarEventJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateCalendarEventRequestWithBody(server, mailboxResourceId, calendarUuid, "application/json", bodyReader)
+}
+
+// NewCreateCalendarEventRequestWithBody constructs an http.Request for the CreateCalendarEvent method, with any body, and a specified content type
+func NewCreateCalendarEventRequestWithBody(server string, mailboxResourceId string, calendarUuid openapi_types.UUID, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "mailboxResourceId", mailboxResourceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "calendarUuid", calendarUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/v1/mailboxes/%s/calendars/%s/events", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteCalendarEventRequest constructs an http.Request for the DeleteCalendarEvent method
+func NewDeleteCalendarEventRequest(server string, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *DeleteCalendarEventParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "mailboxResourceId", mailboxResourceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "calendarUuid", calendarUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam2 string
+
+	pathParam2, err = runtime.StyleParamWithOptions("simple", false, "eventUuid", eventUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/v1/mailboxes/%s/calendars/%s/events/%s", pathParam0, pathParam1, pathParam2)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Scope != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "scope", *params.Scope, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.RecurrenceId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "recurrenceId", *params.RecurrenceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "date-time"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.NotifyAttendees != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "notifyAttendees", *params.NotifyAttendees, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+
+		if params.IfMatch != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "If-Match", *params.IfMatch, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("If-Match", headerParam0)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewGetCalendarEventRequest constructs an http.Request for the GetCalendarEvent method
+func NewGetCalendarEventRequest(server string, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *GetCalendarEventParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "mailboxResourceId", mailboxResourceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "calendarUuid", calendarUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam2 string
+
+	pathParam2, err = runtime.StyleParamWithOptions("simple", false, "eventUuid", eventUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/v1/mailboxes/%s/calendars/%s/events/%s", pathParam0, pathParam1, pathParam2)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.RecurrenceId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "recurrenceId", *params.RecurrenceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "date-time"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateCalendarEventRequest calls the generic UpdateCalendarEvent builder with application/json body
+func NewUpdateCalendarEventRequest(server string, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *UpdateCalendarEventParams, body UpdateCalendarEventJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateCalendarEventRequestWithBody(server, mailboxResourceId, calendarUuid, eventUuid, params, "application/json", bodyReader)
+}
+
+// NewUpdateCalendarEventRequestWithBody constructs an http.Request for the UpdateCalendarEvent method, with any body, and a specified content type
+func NewUpdateCalendarEventRequestWithBody(server string, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *UpdateCalendarEventParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "mailboxResourceId", mailboxResourceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "calendarUuid", calendarUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam2 string
+
+	pathParam2, err = runtime.StyleParamWithOptions("simple", false, "eventUuid", eventUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/v1/mailboxes/%s/calendars/%s/events/%s", pathParam0, pathParam1, pathParam2)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.IfMatch != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "If-Match", *params.IfMatch, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("If-Match", headerParam0)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewReplyToCalendarEventRequest calls the generic ReplyToCalendarEvent builder with application/json body
+func NewReplyToCalendarEventRequest(server string, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *ReplyToCalendarEventParams, body ReplyToCalendarEventJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewReplyToCalendarEventRequestWithBody(server, mailboxResourceId, calendarUuid, eventUuid, params, "application/json", bodyReader)
+}
+
+// NewReplyToCalendarEventRequestWithBody constructs an http.Request for the ReplyToCalendarEvent method, with any body, and a specified content type
+func NewReplyToCalendarEventRequestWithBody(server string, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *ReplyToCalendarEventParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "mailboxResourceId", mailboxResourceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "calendarUuid", calendarUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam2 string
+
+	pathParam2, err = runtime.StyleParamWithOptions("simple", false, "eventUuid", eventUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/v1/mailboxes/%s/calendars/%s/events/%s/reply", pathParam0, pathParam1, pathParam2)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.IfMatch != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "If-Match", *params.IfMatch, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("If-Match", headerParam0)
+		}
+
+	}
+
+	return req, nil
+}
+
+// NewRescheduleCalendarEventRequest calls the generic RescheduleCalendarEvent builder with application/json body
+func NewRescheduleCalendarEventRequest(server string, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *RescheduleCalendarEventParams, body RescheduleCalendarEventJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewRescheduleCalendarEventRequestWithBody(server, mailboxResourceId, calendarUuid, eventUuid, params, "application/json", bodyReader)
+}
+
+// NewRescheduleCalendarEventRequestWithBody constructs an http.Request for the RescheduleCalendarEvent method, with any body, and a specified content type
+func NewRescheduleCalendarEventRequestWithBody(server string, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *RescheduleCalendarEventParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "mailboxResourceId", mailboxResourceId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "calendarUuid", calendarUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam2 string
+
+	pathParam2, err = runtime.StyleParamWithOptions("simple", false, "eventUuid", eventUuid, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: "uuid"})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/v1/mailboxes/%s/calendars/%s/events/%s/reschedule", pathParam0, pathParam1, pathParam2)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params != nil {
+
+		if params.IfMatch != nil {
+			var headerParam0 string
+
+			headerParam0, err = runtime.StyleParamWithOptions("simple", false, "If-Match", *params.IfMatch, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationHeader, Type: "string", Format: ""})
+			if err != nil {
+				return nil, err
+			}
+
+			req.Header.Set("If-Match", headerParam0)
+		}
+
+	}
+
+	return req, nil
 }
 
 // NewSubmitFeedbackRequest calls the generic SubmitFeedback builder with application/json body
@@ -3764,6 +6118,188 @@ func WithBaseURL(baseURL string) ClientOption {
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
 
+	// ListCalendarsWithResponse List calendars
+	//
+	// List the calendars of a mailbox: its own calendars and the calendars shared with it, in display order. Call it first to get the `calendarUuid` every calendar event operation needs: the `uuid` of each calendar. The calendar with `default` true is where new events go unless another one is named. `visible` false means the calendar is hidden in the calendar view; its events still exist.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/calendars (the `ListCalendars` operationId).
+	ListCalendarsWithResponse(ctx context.Context, mailboxResourceId string, params *ListCalendarsParams, reqEditors ...RequestEditorFn) (*ListCalendarsResponse, error)
+
+	// CreateCalendarWithBodyWithResponse Create calendar
+	//
+	// Create a calendar owned by the mailbox. The number of calendars a mailbox can own is limited; when the limit is reached the request fails with `400` and code `ERR_CALENDAR_LIMIT_REACHED`.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars (the `CreateCalendar` operationId).
+	CreateCalendarWithBodyWithResponse(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCalendarResponse, error)
+
+	// CreateCalendarWithResponse Create calendar
+	//
+	// Create a calendar owned by the mailbox. The number of calendars a mailbox can own is limited; when the limit is reached the request fails with `400` and code `ERR_CALENDAR_LIMIT_REACHED`.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars (the `CreateCalendar` operationId).
+	CreateCalendarWithResponse(ctx context.Context, mailboxResourceId string, body CreateCalendarJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCalendarResponse, error)
+
+	// DeleteCalendarWithResponse Delete calendar
+	//
+	// Delete a calendar owned by the mailbox together with all its events, or remove a calendar shared with the mailbox from its list. This cannot be undone. A calendar that cannot be deleted is rejected with `403` and code `ERR_CALENDAR_NOT_DELETABLE`.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid} (the `DeleteCalendar` operationId).
+	DeleteCalendarWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteCalendarResponse, error)
+
+	// GetCalendarWithResponse Get calendar
+	//
+	// Retrieve one calendar of a mailbox: its name, description, color, whether it is the default calendar and whether it is shown in the calendar view. It does not return events; use `listCalendarEvents` for those.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid} (the `GetCalendar` operationId).
+	GetCalendarWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetCalendarResponse, error)
+
+	// UpdateCalendarWithBodyWithResponse Update calendar
+	//
+	// Update the name, description, color and visibility of a calendar. Name, description and color replace the stored values: an omitted `description` is cleared and an omitted `color` resets to the default color. An omitted `visible` keeps the current value.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid} (the `UpdateCalendar` operationId).
+	UpdateCalendarWithBodyWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCalendarResponse, error)
+
+	// UpdateCalendarWithResponse Update calendar
+	//
+	// Update the name, description, color and visibility of a calendar. Name, description and color replace the stored values: an omitted `description` is cleared and an omitted `color` resets to the default color. An omitted `visible` keeps the current value.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid} (the `UpdateCalendar` operationId).
+	UpdateCalendarWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, body UpdateCalendarJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCalendarResponse, error)
+
+	// ListCalendarEventsWithResponse List calendar events
+	//
+	// List the events of one calendar that overlap a time range. It covers one calendar only: get the calendars from `listCalendars` and call it for each. The range runs from `start` (inclusive) to `end` (exclusive), at most 32 days; for a longer period call it again with the next range. Recurring events are expanded: each occurrence is a separate item with the same `uuid` and its own `recurrenceId`. Results are not paginated.
+	// Items hold summary fields only. For description, location, attendees and organizer call `getCalendarEvent` with the `calendarUuid`, `uuid` (as `eventUuid`) and `recurrenceId` of the item. Times are in UTC; `timeZone` is the zone the event was created in. `participationStatus` is the answer of the mailbox to an invitation from someone else, null for its own events. `status` CANCELLED means the organizer cancelled the event.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events (the `ListCalendarEvents` operationId).
+	ListCalendarEventsWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, params *ListCalendarEventsParams, reqEditors ...RequestEditorFn) (*ListCalendarEventsResponse, error)
+
+	// CreateCalendarEventWithBodyWithResponse Create calendar event
+	//
+	// Create an event in one calendar of the mailbox. `calendarUuid` comes from `listCalendars`: use the calendar with `default` true unless another one is named. A calendar the mailbox can only read is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+	// The mailbox becomes the organizer and every address in `attendees` immediately receives an email invitation, which cannot be recalled. Without attendees no email is sent.
+	// A timed event needs `allDay` false, `start`, `end` and `timeZone`. An all-day event needs `allDay` true and a `start` date; `end` is optional. Set `recurrenceRule` for a repeating event and `reminder` for an alarm.
+	// Returns the created event. Its `uuid` is the `eventUuid` for `getCalendarEvent`, `updateCalendarEvent`, `rescheduleCalendarEvent` and `deleteCalendarEvent`.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events (the `CreateCalendarEvent` operationId).
+	CreateCalendarEventWithBodyWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCalendarEventResponse, error)
+
+	// CreateCalendarEventWithResponse Create calendar event
+	//
+	// Create an event in one calendar of the mailbox. `calendarUuid` comes from `listCalendars`: use the calendar with `default` true unless another one is named. A calendar the mailbox can only read is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+	// The mailbox becomes the organizer and every address in `attendees` immediately receives an email invitation, which cannot be recalled. Without attendees no email is sent.
+	// A timed event needs `allDay` false, `start`, `end` and `timeZone`. An all-day event needs `allDay` true and a `start` date; `end` is optional. Set `recurrenceRule` for a repeating event and `reminder` for an alarm.
+	// Returns the created event. Its `uuid` is the `eventUuid` for `getCalendarEvent`, `updateCalendarEvent`, `rescheduleCalendarEvent` and `deleteCalendarEvent`.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events (the `CreateCalendarEvent` operationId).
+	CreateCalendarEventWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, body CreateCalendarEventJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCalendarEventResponse, error)
+
+	// DeleteCalendarEventWithResponse Delete calendar event
+	//
+	// Delete an event, one occurrence of a recurring event, or a recurring event from one occurrence on. This cannot be undone. `calendarUuid` and `eventUuid` come from `listCalendarEvents`.
+	// For a one-off event omit `scope` and `recurrenceId`. For a recurring event, `scope` `this` removes only the occurrence at `recurrenceId`, `future` removes it and every later one, `all` (the default) deletes the whole series.
+	// An event with `editable` true can be deleted with any scope, and its attendees receive a cancellation or the updated series by email. An invitation from someone else on the own calendar of the mailbox can be deleted with `all` or `this`: the organizer receives a decline for the removed occurrences. Any other event is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`. `notifyAttendees` false deletes without sending any email.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid} (the `DeleteCalendarEvent` operationId).
+	DeleteCalendarEventWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *DeleteCalendarEventParams, reqEditors ...RequestEditorFn) (*DeleteCalendarEventResponse, error)
+
+	// GetCalendarEventWithResponse Get calendar event
+	//
+	// Retrieve the full details of one event: title, times, description, location, meeting link, recurrence rule, reminder, organizer, attendees with their answers, and its `etag`. `calendarUuid` and `eventUuid` come from `listCalendarEvents` (the `calendarUuid` and `uuid` of an item). For one occurrence of a recurring event pass the `recurrenceId` of the item; without it the whole series is returned and `recurrenceId` is null. A `recurrenceId` that matches no occurrence returns `404`.
+	// Call it before `updateCalendarEvent`, which replaces every field, so the values that should stay can be sent back. `replyable` true means the mailbox was invited by someone else and can answer with `replyToCalendarEvent`. `editable` true means the event can be changed or moved.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid} (the `GetCalendarEvent` operationId).
+	GetCalendarEventWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *GetCalendarEventParams, reqEditors ...RequestEditorFn) (*GetCalendarEventResponse, error)
+
+	// UpdateCalendarEventWithBodyWithResponse Update calendar event
+	//
+	// Change the details of an event: title, times, description, location, attendees, recurrence and so on. Every field replaces the stored value and an omitted optional field is cleared, so call `getCalendarEvent` first and send back the values that should stay. To only move an event in time, use `rescheduleCalendarEvent`. Only an event with `editable` true can be changed; any other is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+	// For a recurring event, `scope` `this` changes only the occurrence at `recurrenceId`, `future` ends the series before that occurrence and starts a new one with a new `uuid`, `all` (the default) changes the whole series, keeping the date of its first occurrence.
+	// Attendees receive an email update, added attendees an invitation and removed ones a cancellation, unless `notifyAttendees` is false. Returns the changed event, or the changed occurrence for `scope` `this`.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid} (the `UpdateCalendarEvent` operationId).
+	UpdateCalendarEventWithBodyWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *UpdateCalendarEventParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCalendarEventResponse, error)
+
+	// UpdateCalendarEventWithResponse Update calendar event
+	//
+	// Change the details of an event: title, times, description, location, attendees, recurrence and so on. Every field replaces the stored value and an omitted optional field is cleared, so call `getCalendarEvent` first and send back the values that should stay. To only move an event in time, use `rescheduleCalendarEvent`. Only an event with `editable` true can be changed; any other is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+	// For a recurring event, `scope` `this` changes only the occurrence at `recurrenceId`, `future` ends the series before that occurrence and starts a new one with a new `uuid`, `all` (the default) changes the whole series, keeping the date of its first occurrence.
+	// Attendees receive an email update, added attendees an invitation and removed ones a cancellation, unless `notifyAttendees` is false. Returns the changed event, or the changed occurrence for `scope` `this`.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid} (the `UpdateCalendarEvent` operationId).
+	UpdateCalendarEventWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *UpdateCalendarEventParams, body UpdateCalendarEventJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCalendarEventResponse, error)
+
+	// ReplyToCalendarEventWithBodyWithResponse Reply to calendar event
+	//
+	// Answer an invitation from someone else: accept, decline or tentatively accept. It saves the answer on the event and emails it to the organizer, which cannot be recalled. `calendarUuid` and `eventUuid` come from `listCalendarEvents`.
+	// It works only when `getCalendarEvent` returns `replyable` true. An event the mailbox organizes or is not invited to is rejected with `403` and code `ERR_EVENT_NOT_REPLYABLE`, an event the organizer cancelled with `409` and code `ERR_EVENT_CANCELLED`. Send the `recurrenceId` of an item to answer one occurrence of a recurring event, or omit it to answer the whole series. Returns the event with the new `participationStatus`.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reply (the `ReplyToCalendarEvent` operationId).
+	ReplyToCalendarEventWithBodyWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *ReplyToCalendarEventParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReplyToCalendarEventResponse, error)
+
+	// ReplyToCalendarEventWithResponse Reply to calendar event
+	//
+	// Answer an invitation from someone else: accept, decline or tentatively accept. It saves the answer on the event and emails it to the organizer, which cannot be recalled. `calendarUuid` and `eventUuid` come from `listCalendarEvents`.
+	// It works only when `getCalendarEvent` returns `replyable` true. An event the mailbox organizes or is not invited to is rejected with `403` and code `ERR_EVENT_NOT_REPLYABLE`, an event the organizer cancelled with `409` and code `ERR_EVENT_CANCELLED`. Send the `recurrenceId` of an item to answer one occurrence of a recurring event, or omit it to answer the whole series. Returns the event with the new `participationStatus`.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reply (the `ReplyToCalendarEvent` operationId).
+	ReplyToCalendarEventWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *ReplyToCalendarEventParams, body ReplyToCalendarEventJSONRequestBody, reqEditors ...RequestEditorFn) (*ReplyToCalendarEventResponse, error)
+
+	// RescheduleCalendarEventWithBodyWithResponse Reschedule calendar event
+	//
+	// Move an event to another time or change its length, keeping everything else (title, attendees, description and so on) as stored, so the event does not have to be fetched first. To change other fields use `updateCalendarEvent`. `calendarUuid` and `eventUuid` come from `listCalendarEvents`. Only an event with `editable` true can be moved; any other is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+	// For a recurring event, `scope` `this` moves only the occurrence at `recurrenceId`, `future` ends the series before that occurrence and starts a new one with a new `uuid`, `all` (the default) moves the whole series: only the time of day and the length apply and the series keeps the date of its first occurrence.
+	// Attendees receive an email update unless `notifyAttendees` is false. Returns the moved event, or the moved occurrence for `scope` `this`.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reschedule (the `RescheduleCalendarEvent` operationId).
+	RescheduleCalendarEventWithBodyWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *RescheduleCalendarEventParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RescheduleCalendarEventResponse, error)
+
+	// RescheduleCalendarEventWithResponse Reschedule calendar event
+	//
+	// Move an event to another time or change its length, keeping everything else (title, attendees, description and so on) as stored, so the event does not have to be fetched first. To change other fields use `updateCalendarEvent`. `calendarUuid` and `eventUuid` come from `listCalendarEvents`. Only an event with `editable` true can be moved; any other is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+	// For a recurring event, `scope` `this` moves only the occurrence at `recurrenceId`, `future` ends the series before that occurrence and starts a new one with a new `uuid`, `all` (the default) moves the whole series: only the time of day and the length apply and the series keeps the date of its first occurrence.
+	// Attendees receive an email update unless `notifyAttendees` is false. Returns the moved event, or the moved occurrence for `scope` `this`.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reschedule (the `RescheduleCalendarEvent` operationId).
+	RescheduleCalendarEventWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *RescheduleCalendarEventParams, body RescheduleCalendarEventJSONRequestBody, reqEditors ...RequestEditorFn) (*RescheduleCalendarEventResponse, error)
+
 	// SubmitFeedbackWithBodyWithResponse Submit feedback
 	//
 	// Send the user's feedback about the Hostinger Email API to the Hostinger mail team.
@@ -4026,7 +6562,7 @@ type ClientWithResponsesInterface interface {
 
 	// SendEmailWithBodyWithResponse Send email
 	//
-	// Send a message from the managed mailbox. Saves a copy to INBOX.Sent.
+	// Send a message from the managed mailbox. The message is accepted for delivery and dispatched within a few seconds; a copy is saved to INBOX.Sent once it is sent. A delivery failure after acceptance is not reported on this call.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -4035,7 +6571,7 @@ type ClientWithResponsesInterface interface {
 
 	// SendEmailWithResponse Send email
 	//
-	// Send a message from the managed mailbox. Saves a copy to INBOX.Sent.
+	// Send a message from the managed mailbox. The message is accepted for delivery and dispatched within a few seconds; a copy is saved to INBOX.Sent once it is sent. A delivery failure after acceptance is not reported on this call.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -4131,6 +6667,1016 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with GET /api/v1/me (the `GetCurrentAccount` operationId).
 	GetCurrentAccountWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetCurrentAccountResponse, error)
+}
+
+type ListCalendarsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1CalendarsCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ListCalendarsResponse) GetJSON200() *V1CalendarsCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ListCalendarsResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r ListCalendarsResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ListCalendarsResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ListCalendarsResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r ListCalendarsResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r ListCalendarsResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ListCalendarsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListCalendarsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListCalendarsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type CreateCalendarResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON201 the response for an HTTP 201 `application/json` response
+	JSON201 *V1CalendarsResource
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *CommonResponseCalendarLimitReachedResponse
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON201 returns the response for an HTTP 201 `application/json` response
+func (r CreateCalendarResponse) GetJSON201() *V1CalendarsResource {
+	return r.JSON201
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r CreateCalendarResponse) GetJSON400() *CommonResponseCalendarLimitReachedResponse {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r CreateCalendarResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r CreateCalendarResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r CreateCalendarResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r CreateCalendarResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r CreateCalendarResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r CreateCalendarResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateCalendarResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateCalendarResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateCalendarResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DeleteCalendarResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DeleteCalendarResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r DeleteCalendarResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r DeleteCalendarResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DeleteCalendarResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r DeleteCalendarResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r DeleteCalendarResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteCalendarResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteCalendarResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DeleteCalendarResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetCalendarResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1CalendarsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetCalendarResponse) GetJSON200() *V1CalendarsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GetCalendarResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetCalendarResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetCalendarResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetCalendarResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r GetCalendarResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r GetCalendarResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GetCalendarResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetCalendarResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetCalendarResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type UpdateCalendarResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1CalendarsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r UpdateCalendarResponse) GetJSON200() *V1CalendarsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r UpdateCalendarResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r UpdateCalendarResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r UpdateCalendarResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r UpdateCalendarResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r UpdateCalendarResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r UpdateCalendarResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r UpdateCalendarResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateCalendarResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateCalendarResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdateCalendarResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ListCalendarEventsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1CalendarEventsCollection
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ListCalendarEventsResponse) GetJSON200() *V1CalendarEventsCollection {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ListCalendarEventsResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r ListCalendarEventsResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r ListCalendarEventsResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ListCalendarEventsResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ListCalendarEventsResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r ListCalendarEventsResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r ListCalendarEventsResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ListCalendarEventsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListCalendarEventsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ListCalendarEventsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type CreateCalendarEventResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON201 the response for an HTTP 201 `application/json` response
+	JSON201 *V1CalendarEventsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON201 returns the response for an HTTP 201 `application/json` response
+func (r CreateCalendarEventResponse) GetJSON201() *V1CalendarEventsResource {
+	return r.JSON201
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r CreateCalendarEventResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r CreateCalendarEventResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r CreateCalendarEventResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r CreateCalendarEventResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r CreateCalendarEventResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r CreateCalendarEventResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r CreateCalendarEventResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateCalendarEventResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateCalendarEventResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r CreateCalendarEventResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type DeleteCalendarEventResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON412 the response for an HTTP 412 `application/json` response
+	JSON412 *CommonResponsePreconditionFailedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r DeleteCalendarEventResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r DeleteCalendarEventResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r DeleteCalendarEventResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON412 returns the response for an HTTP 412 `application/json` response
+func (r DeleteCalendarEventResponse) GetJSON412() *CommonResponsePreconditionFailedResponse {
+	return r.JSON412
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r DeleteCalendarEventResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r DeleteCalendarEventResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r DeleteCalendarEventResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r DeleteCalendarEventResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteCalendarEventResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteCalendarEventResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r DeleteCalendarEventResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GetCalendarEventResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1CalendarEventsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GetCalendarEventResponse) GetJSON200() *V1CalendarEventsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r GetCalendarEventResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r GetCalendarEventResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r GetCalendarEventResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r GetCalendarEventResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r GetCalendarEventResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r GetCalendarEventResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r GetCalendarEventResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GetCalendarEventResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetCalendarEventResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GetCalendarEventResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type UpdateCalendarEventResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1CalendarEventsResource
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *CommonResponseEventAttendeeLimitReachedResponse
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON412 the response for an HTTP 412 `application/json` response
+	JSON412 *CommonResponsePreconditionFailedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r UpdateCalendarEventResponse) GetJSON200() *V1CalendarEventsResource {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r UpdateCalendarEventResponse) GetJSON400() *CommonResponseEventAttendeeLimitReachedResponse {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r UpdateCalendarEventResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r UpdateCalendarEventResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r UpdateCalendarEventResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON412 returns the response for an HTTP 412 `application/json` response
+func (r UpdateCalendarEventResponse) GetJSON412() *CommonResponsePreconditionFailedResponse {
+	return r.JSON412
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r UpdateCalendarEventResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r UpdateCalendarEventResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r UpdateCalendarEventResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r UpdateCalendarEventResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateCalendarEventResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateCalendarEventResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r UpdateCalendarEventResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type ReplyToCalendarEventResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1CalendarEventsResource
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON409 the response for an HTTP 409 `application/json` response
+	JSON409 *CommonResponseConflictResponse
+	// JSON412 the response for an HTTP 412 `application/json` response
+	JSON412 *CommonResponsePreconditionFailedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r ReplyToCalendarEventResponse) GetJSON200() *V1CalendarEventsResource {
+	return r.JSON200
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r ReplyToCalendarEventResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r ReplyToCalendarEventResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r ReplyToCalendarEventResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON409 returns the response for an HTTP 409 `application/json` response
+func (r ReplyToCalendarEventResponse) GetJSON409() *CommonResponseConflictResponse {
+	return r.JSON409
+}
+
+// GetJSON412 returns the response for an HTTP 412 `application/json` response
+func (r ReplyToCalendarEventResponse) GetJSON412() *CommonResponsePreconditionFailedResponse {
+	return r.JSON412
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r ReplyToCalendarEventResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r ReplyToCalendarEventResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r ReplyToCalendarEventResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r ReplyToCalendarEventResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r ReplyToCalendarEventResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ReplyToCalendarEventResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r ReplyToCalendarEventResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type RescheduleCalendarEventResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *V1CalendarEventsResource
+	// JSON400 the response for an HTTP 400 `application/json` response
+	JSON400 *CommonResponseEventAttendeeLimitReachedResponse
+	// JSON401 the response for an HTTP 401 `application/json` response
+	JSON401 *CommonResponseUnauthorizedResponse
+	// JSON403 the response for an HTTP 403 `application/json` response
+	JSON403 *CommonResponseForbiddenResponse
+	// JSON404 the response for an HTTP 404 `application/json` response
+	JSON404 *CommonResponseNotFoundResponse
+	// JSON412 the response for an HTTP 412 `application/json` response
+	JSON412 *CommonResponsePreconditionFailedResponse
+	// JSON422 the response for an HTTP 422 `application/json` response
+	JSON422 *CommonResponseValidationFailedResponse
+	// JSON500 the response for an HTTP 500 `application/json` response
+	JSON500 *CommonResponseInternalServerErrorResponse
+	// JSON502 the response for an HTTP 502 `application/json` response
+	JSON502 *CommonResponseBadGatewayResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r RescheduleCalendarEventResponse) GetJSON200() *V1CalendarEventsResource {
+	return r.JSON200
+}
+
+// GetJSON400 returns the response for an HTTP 400 `application/json` response
+func (r RescheduleCalendarEventResponse) GetJSON400() *CommonResponseEventAttendeeLimitReachedResponse {
+	return r.JSON400
+}
+
+// GetJSON401 returns the response for an HTTP 401 `application/json` response
+func (r RescheduleCalendarEventResponse) GetJSON401() *CommonResponseUnauthorizedResponse {
+	return r.JSON401
+}
+
+// GetJSON403 returns the response for an HTTP 403 `application/json` response
+func (r RescheduleCalendarEventResponse) GetJSON403() *CommonResponseForbiddenResponse {
+	return r.JSON403
+}
+
+// GetJSON404 returns the response for an HTTP 404 `application/json` response
+func (r RescheduleCalendarEventResponse) GetJSON404() *CommonResponseNotFoundResponse {
+	return r.JSON404
+}
+
+// GetJSON412 returns the response for an HTTP 412 `application/json` response
+func (r RescheduleCalendarEventResponse) GetJSON412() *CommonResponsePreconditionFailedResponse {
+	return r.JSON412
+}
+
+// GetJSON422 returns the response for an HTTP 422 `application/json` response
+func (r RescheduleCalendarEventResponse) GetJSON422() *CommonResponseValidationFailedResponse {
+	return r.JSON422
+}
+
+// GetJSON500 returns the response for an HTTP 500 `application/json` response
+func (r RescheduleCalendarEventResponse) GetJSON500() *CommonResponseInternalServerErrorResponse {
+	return r.JSON500
+}
+
+// GetJSON502 returns the response for an HTTP 502 `application/json` response
+func (r RescheduleCalendarEventResponse) GetJSON502() *CommonResponseBadGatewayResponse {
+	return r.JSON502
+}
+
+// GetBody returns the raw response body bytes
+func (r RescheduleCalendarEventResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r RescheduleCalendarEventResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RescheduleCalendarEventResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r RescheduleCalendarEventResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
 }
 
 type SubmitFeedbackResponse struct {
@@ -4929,6 +8475,8 @@ type SearchMessagesResponse struct {
 	JSON500 *CommonResponseInternalServerErrorResponse
 	// JSON502 the response for an HTTP 502 `application/json` response
 	JSON502 *CommonResponseBadGatewayResponse
+	// JSON504 the response for an HTTP 504 `application/json` response
+	JSON504 *CommonResponseGatewayTimeoutResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
@@ -4959,6 +8507,11 @@ func (r SearchMessagesResponse) GetJSON500() *CommonResponseInternalServerErrorR
 // GetJSON502 returns the response for an HTTP 502 `application/json` response
 func (r SearchMessagesResponse) GetJSON502() *CommonResponseBadGatewayResponse {
 	return r.JSON502
+}
+
+// GetJSON504 returns the response for an HTTP 504 `application/json` response
+func (r SearchMessagesResponse) GetJSON504() *CommonResponseGatewayTimeoutResponse {
+	return r.JSON504
 }
 
 // GetBody returns the raw response body bytes
@@ -5240,6 +8793,8 @@ type GetMessageAttachmentResponse struct {
 	JSON500 *CommonResponseInternalServerErrorResponse
 	// JSON502 the response for an HTTP 502 `application/json` response
 	JSON502 *CommonResponseBadGatewayResponse
+	// JSON504 the response for an HTTP 504 `application/json` response
+	JSON504 *CommonResponseGatewayTimeoutResponse
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
@@ -5270,6 +8825,11 @@ func (r GetMessageAttachmentResponse) GetJSON500() *CommonResponseInternalServer
 // GetJSON502 returns the response for an HTTP 502 `application/json` response
 func (r GetMessageAttachmentResponse) GetJSON502() *CommonResponseBadGatewayResponse {
 	return r.JSON502
+}
+
+// GetJSON504 returns the response for an HTTP 504 `application/json` response
+func (r GetMessageAttachmentResponse) GetJSON504() *CommonResponseGatewayTimeoutResponse {
+	return r.JSON504
 }
 
 // GetBody returns the raw response body bytes
@@ -5385,6 +8945,8 @@ type GetMessageSourceResponse struct {
 	JSON500 *CommonResponseInternalServerErrorResponse
 	// JSON502 the response for an HTTP 502 `application/json` response
 	JSON502 *CommonResponseBadGatewayResponse
+	// JSON504 the response for an HTTP 504 `application/json` response
+	JSON504 *CommonResponseGatewayTimeoutResponse
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
@@ -5415,6 +8977,11 @@ func (r GetMessageSourceResponse) GetJSON500() *CommonResponseInternalServerErro
 // GetJSON502 returns the response for an HTTP 502 `application/json` response
 func (r GetMessageSourceResponse) GetJSON502() *CommonResponseBadGatewayResponse {
 	return r.JSON502
+}
+
+// GetJSON504 returns the response for an HTTP 504 `application/json` response
+func (r GetMessageSourceResponse) GetJSON504() *CommonResponseGatewayTimeoutResponse {
+	return r.JSON504
 }
 
 // GetBody returns the raw response body bytes
@@ -6268,6 +9835,296 @@ func (r GetCurrentAccountResponse) ContentType() string {
 	return ""
 }
 
+// ListCalendarsWithResponse List calendars
+//
+// List the calendars of a mailbox: its own calendars and the calendars shared with it, in display order. Call it first to get the `calendarUuid` every calendar event operation needs: the `uuid` of each calendar. The calendar with `default` true is where new events go unless another one is named. `visible` false means the calendar is hidden in the calendar view; its events still exist.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/calendars (the `ListCalendars` operationId).
+func (c *ClientWithResponses) ListCalendarsWithResponse(ctx context.Context, mailboxResourceId string, params *ListCalendarsParams, reqEditors ...RequestEditorFn) (*ListCalendarsResponse, error) {
+	rsp, err := c.ListCalendars(ctx, mailboxResourceId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListCalendarsResponse(rsp)
+}
+
+// CreateCalendarWithBodyWithResponse Create calendar
+//
+// Create a calendar owned by the mailbox. The number of calendars a mailbox can own is limited; when the limit is reached the request fails with `400` and code `ERR_CALENDAR_LIMIT_REACHED`.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars (the `CreateCalendar` operationId).
+func (c *ClientWithResponses) CreateCalendarWithBodyWithResponse(ctx context.Context, mailboxResourceId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCalendarResponse, error) {
+	rsp, err := c.CreateCalendarWithBody(ctx, mailboxResourceId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateCalendarResponse(rsp)
+}
+
+// CreateCalendarWithResponse Create calendar
+//
+// Create a calendar owned by the mailbox. The number of calendars a mailbox can own is limited; when the limit is reached the request fails with `400` and code `ERR_CALENDAR_LIMIT_REACHED`.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars (the `CreateCalendar` operationId).
+func (c *ClientWithResponses) CreateCalendarWithResponse(ctx context.Context, mailboxResourceId string, body CreateCalendarJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCalendarResponse, error) {
+	rsp, err := c.CreateCalendar(ctx, mailboxResourceId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateCalendarResponse(rsp)
+}
+
+// DeleteCalendarWithResponse Delete calendar
+//
+// Delete a calendar owned by the mailbox together with all its events, or remove a calendar shared with the mailbox from its list. This cannot be undone. A calendar that cannot be deleted is rejected with `403` and code `ERR_CALENDAR_NOT_DELETABLE`.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid} (the `DeleteCalendar` operationId).
+func (c *ClientWithResponses) DeleteCalendarWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, reqEditors ...RequestEditorFn) (*DeleteCalendarResponse, error) {
+	rsp, err := c.DeleteCalendar(ctx, mailboxResourceId, calendarUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteCalendarResponse(rsp)
+}
+
+// GetCalendarWithResponse Get calendar
+//
+// Retrieve one calendar of a mailbox: its name, description, color, whether it is the default calendar and whether it is shown in the calendar view. It does not return events; use `listCalendarEvents` for those.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid} (the `GetCalendar` operationId).
+func (c *ClientWithResponses) GetCalendarWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetCalendarResponse, error) {
+	rsp, err := c.GetCalendar(ctx, mailboxResourceId, calendarUuid, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetCalendarResponse(rsp)
+}
+
+// UpdateCalendarWithBodyWithResponse Update calendar
+//
+// Update the name, description, color and visibility of a calendar. Name, description and color replace the stored values: an omitted `description` is cleared and an omitted `color` resets to the default color. An omitted `visible` keeps the current value.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid} (the `UpdateCalendar` operationId).
+func (c *ClientWithResponses) UpdateCalendarWithBodyWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCalendarResponse, error) {
+	rsp, err := c.UpdateCalendarWithBody(ctx, mailboxResourceId, calendarUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateCalendarResponse(rsp)
+}
+
+// UpdateCalendarWithResponse Update calendar
+//
+// Update the name, description, color and visibility of a calendar. Name, description and color replace the stored values: an omitted `description` is cleared and an omitted `color` resets to the default color. An omitted `visible` keeps the current value.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid} (the `UpdateCalendar` operationId).
+func (c *ClientWithResponses) UpdateCalendarWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, body UpdateCalendarJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCalendarResponse, error) {
+	rsp, err := c.UpdateCalendar(ctx, mailboxResourceId, calendarUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateCalendarResponse(rsp)
+}
+
+// ListCalendarEventsWithResponse List calendar events
+//
+// List the events of one calendar that overlap a time range. It covers one calendar only: get the calendars from `listCalendars` and call it for each. The range runs from `start` (inclusive) to `end` (exclusive), at most 32 days; for a longer period call it again with the next range. Recurring events are expanded: each occurrence is a separate item with the same `uuid` and its own `recurrenceId`. Results are not paginated.
+// Items hold summary fields only. For description, location, attendees and organizer call `getCalendarEvent` with the `calendarUuid`, `uuid` (as `eventUuid`) and `recurrenceId` of the item. Times are in UTC; `timeZone` is the zone the event was created in. `participationStatus` is the answer of the mailbox to an invitation from someone else, null for its own events. `status` CANCELLED means the organizer cancelled the event.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events (the `ListCalendarEvents` operationId).
+func (c *ClientWithResponses) ListCalendarEventsWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, params *ListCalendarEventsParams, reqEditors ...RequestEditorFn) (*ListCalendarEventsResponse, error) {
+	rsp, err := c.ListCalendarEvents(ctx, mailboxResourceId, calendarUuid, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListCalendarEventsResponse(rsp)
+}
+
+// CreateCalendarEventWithBodyWithResponse Create calendar event
+//
+// Create an event in one calendar of the mailbox. `calendarUuid` comes from `listCalendars`: use the calendar with `default` true unless another one is named. A calendar the mailbox can only read is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+// The mailbox becomes the organizer and every address in `attendees` immediately receives an email invitation, which cannot be recalled. Without attendees no email is sent.
+// A timed event needs `allDay` false, `start`, `end` and `timeZone`. An all-day event needs `allDay` true and a `start` date; `end` is optional. Set `recurrenceRule` for a repeating event and `reminder` for an alarm.
+// Returns the created event. Its `uuid` is the `eventUuid` for `getCalendarEvent`, `updateCalendarEvent`, `rescheduleCalendarEvent` and `deleteCalendarEvent`.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events (the `CreateCalendarEvent` operationId).
+func (c *ClientWithResponses) CreateCalendarEventWithBodyWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCalendarEventResponse, error) {
+	rsp, err := c.CreateCalendarEventWithBody(ctx, mailboxResourceId, calendarUuid, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateCalendarEventResponse(rsp)
+}
+
+// CreateCalendarEventWithResponse Create calendar event
+//
+// Create an event in one calendar of the mailbox. `calendarUuid` comes from `listCalendars`: use the calendar with `default` true unless another one is named. A calendar the mailbox can only read is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+// The mailbox becomes the organizer and every address in `attendees` immediately receives an email invitation, which cannot be recalled. Without attendees no email is sent.
+// A timed event needs `allDay` false, `start`, `end` and `timeZone`. An all-day event needs `allDay` true and a `start` date; `end` is optional. Set `recurrenceRule` for a repeating event and `reminder` for an alarm.
+// Returns the created event. Its `uuid` is the `eventUuid` for `getCalendarEvent`, `updateCalendarEvent`, `rescheduleCalendarEvent` and `deleteCalendarEvent`.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events (the `CreateCalendarEvent` operationId).
+func (c *ClientWithResponses) CreateCalendarEventWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, body CreateCalendarEventJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCalendarEventResponse, error) {
+	rsp, err := c.CreateCalendarEvent(ctx, mailboxResourceId, calendarUuid, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateCalendarEventResponse(rsp)
+}
+
+// DeleteCalendarEventWithResponse Delete calendar event
+//
+// Delete an event, one occurrence of a recurring event, or a recurring event from one occurrence on. This cannot be undone. `calendarUuid` and `eventUuid` come from `listCalendarEvents`.
+// For a one-off event omit `scope` and `recurrenceId`. For a recurring event, `scope` `this` removes only the occurrence at `recurrenceId`, `future` removes it and every later one, `all` (the default) deletes the whole series.
+// An event with `editable` true can be deleted with any scope, and its attendees receive a cancellation or the updated series by email. An invitation from someone else on the own calendar of the mailbox can be deleted with `all` or `this`: the organizer receives a decline for the removed occurrences. Any other event is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`. `notifyAttendees` false deletes without sending any email.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid} (the `DeleteCalendarEvent` operationId).
+func (c *ClientWithResponses) DeleteCalendarEventWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *DeleteCalendarEventParams, reqEditors ...RequestEditorFn) (*DeleteCalendarEventResponse, error) {
+	rsp, err := c.DeleteCalendarEvent(ctx, mailboxResourceId, calendarUuid, eventUuid, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteCalendarEventResponse(rsp)
+}
+
+// GetCalendarEventWithResponse Get calendar event
+//
+// Retrieve the full details of one event: title, times, description, location, meeting link, recurrence rule, reminder, organizer, attendees with their answers, and its `etag`. `calendarUuid` and `eventUuid` come from `listCalendarEvents` (the `calendarUuid` and `uuid` of an item). For one occurrence of a recurring event pass the `recurrenceId` of the item; without it the whole series is returned and `recurrenceId` is null. A `recurrenceId` that matches no occurrence returns `404`.
+// Call it before `updateCalendarEvent`, which replaces every field, so the values that should stay can be sent back. `replyable` true means the mailbox was invited by someone else and can answer with `replyToCalendarEvent`. `editable` true means the event can be changed or moved.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid} (the `GetCalendarEvent` operationId).
+func (c *ClientWithResponses) GetCalendarEventWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *GetCalendarEventParams, reqEditors ...RequestEditorFn) (*GetCalendarEventResponse, error) {
+	rsp, err := c.GetCalendarEvent(ctx, mailboxResourceId, calendarUuid, eventUuid, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetCalendarEventResponse(rsp)
+}
+
+// UpdateCalendarEventWithBodyWithResponse Update calendar event
+//
+// Change the details of an event: title, times, description, location, attendees, recurrence and so on. Every field replaces the stored value and an omitted optional field is cleared, so call `getCalendarEvent` first and send back the values that should stay. To only move an event in time, use `rescheduleCalendarEvent`. Only an event with `editable` true can be changed; any other is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+// For a recurring event, `scope` `this` changes only the occurrence at `recurrenceId`, `future` ends the series before that occurrence and starts a new one with a new `uuid`, `all` (the default) changes the whole series, keeping the date of its first occurrence.
+// Attendees receive an email update, added attendees an invitation and removed ones a cancellation, unless `notifyAttendees` is false. Returns the changed event, or the changed occurrence for `scope` `this`.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid} (the `UpdateCalendarEvent` operationId).
+func (c *ClientWithResponses) UpdateCalendarEventWithBodyWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *UpdateCalendarEventParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCalendarEventResponse, error) {
+	rsp, err := c.UpdateCalendarEventWithBody(ctx, mailboxResourceId, calendarUuid, eventUuid, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateCalendarEventResponse(rsp)
+}
+
+// UpdateCalendarEventWithResponse Update calendar event
+//
+// Change the details of an event: title, times, description, location, attendees, recurrence and so on. Every field replaces the stored value and an omitted optional field is cleared, so call `getCalendarEvent` first and send back the values that should stay. To only move an event in time, use `rescheduleCalendarEvent`. Only an event with `editable` true can be changed; any other is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+// For a recurring event, `scope` `this` changes only the occurrence at `recurrenceId`, `future` ends the series before that occurrence and starts a new one with a new `uuid`, `all` (the default) changes the whole series, keeping the date of its first occurrence.
+// Attendees receive an email update, added attendees an invitation and removed ones a cancellation, unless `notifyAttendees` is false. Returns the changed event, or the changed occurrence for `scope` `this`.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid} (the `UpdateCalendarEvent` operationId).
+func (c *ClientWithResponses) UpdateCalendarEventWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *UpdateCalendarEventParams, body UpdateCalendarEventJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCalendarEventResponse, error) {
+	rsp, err := c.UpdateCalendarEvent(ctx, mailboxResourceId, calendarUuid, eventUuid, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateCalendarEventResponse(rsp)
+}
+
+// ReplyToCalendarEventWithBodyWithResponse Reply to calendar event
+//
+// Answer an invitation from someone else: accept, decline or tentatively accept. It saves the answer on the event and emails it to the organizer, which cannot be recalled. `calendarUuid` and `eventUuid` come from `listCalendarEvents`.
+// It works only when `getCalendarEvent` returns `replyable` true. An event the mailbox organizes or is not invited to is rejected with `403` and code `ERR_EVENT_NOT_REPLYABLE`, an event the organizer cancelled with `409` and code `ERR_EVENT_CANCELLED`. Send the `recurrenceId` of an item to answer one occurrence of a recurring event, or omit it to answer the whole series. Returns the event with the new `participationStatus`.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reply (the `ReplyToCalendarEvent` operationId).
+func (c *ClientWithResponses) ReplyToCalendarEventWithBodyWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *ReplyToCalendarEventParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ReplyToCalendarEventResponse, error) {
+	rsp, err := c.ReplyToCalendarEventWithBody(ctx, mailboxResourceId, calendarUuid, eventUuid, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReplyToCalendarEventResponse(rsp)
+}
+
+// ReplyToCalendarEventWithResponse Reply to calendar event
+//
+// Answer an invitation from someone else: accept, decline or tentatively accept. It saves the answer on the event and emails it to the organizer, which cannot be recalled. `calendarUuid` and `eventUuid` come from `listCalendarEvents`.
+// It works only when `getCalendarEvent` returns `replyable` true. An event the mailbox organizes or is not invited to is rejected with `403` and code `ERR_EVENT_NOT_REPLYABLE`, an event the organizer cancelled with `409` and code `ERR_EVENT_CANCELLED`. Send the `recurrenceId` of an item to answer one occurrence of a recurring event, or omit it to answer the whole series. Returns the event with the new `participationStatus`.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reply (the `ReplyToCalendarEvent` operationId).
+func (c *ClientWithResponses) ReplyToCalendarEventWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *ReplyToCalendarEventParams, body ReplyToCalendarEventJSONRequestBody, reqEditors ...RequestEditorFn) (*ReplyToCalendarEventResponse, error) {
+	rsp, err := c.ReplyToCalendarEvent(ctx, mailboxResourceId, calendarUuid, eventUuid, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseReplyToCalendarEventResponse(rsp)
+}
+
+// RescheduleCalendarEventWithBodyWithResponse Reschedule calendar event
+//
+// Move an event to another time or change its length, keeping everything else (title, attendees, description and so on) as stored, so the event does not have to be fetched first. To change other fields use `updateCalendarEvent`. `calendarUuid` and `eventUuid` come from `listCalendarEvents`. Only an event with `editable` true can be moved; any other is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+// For a recurring event, `scope` `this` moves only the occurrence at `recurrenceId`, `future` ends the series before that occurrence and starts a new one with a new `uuid`, `all` (the default) moves the whole series: only the time of day and the length apply and the series keeps the date of its first occurrence.
+// Attendees receive an email update unless `notifyAttendees` is false. Returns the moved event, or the moved occurrence for `scope` `this`.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reschedule (the `RescheduleCalendarEvent` operationId).
+func (c *ClientWithResponses) RescheduleCalendarEventWithBodyWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *RescheduleCalendarEventParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RescheduleCalendarEventResponse, error) {
+	rsp, err := c.RescheduleCalendarEventWithBody(ctx, mailboxResourceId, calendarUuid, eventUuid, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRescheduleCalendarEventResponse(rsp)
+}
+
+// RescheduleCalendarEventWithResponse Reschedule calendar event
+//
+// Move an event to another time or change its length, keeping everything else (title, attendees, description and so on) as stored, so the event does not have to be fetched first. To change other fields use `updateCalendarEvent`. `calendarUuid` and `eventUuid` come from `listCalendarEvents`. Only an event with `editable` true can be moved; any other is rejected with `403` and code `ERR_EVENT_NOT_EDITABLE`.
+// For a recurring event, `scope` `this` moves only the occurrence at `recurrenceId`, `future` ends the series before that occurrence and starts a new one with a new `uuid`, `all` (the default) moves the whole series: only the time of day and the length apply and the series keeps the date of its first occurrence.
+// Attendees receive an email update unless `notifyAttendees` is false. Returns the moved event, or the moved occurrence for `scope` `this`.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PUT /api/v1/mailboxes/{mailboxResourceId}/calendars/{calendarUuid}/events/{eventUuid}/reschedule (the `RescheduleCalendarEvent` operationId).
+func (c *ClientWithResponses) RescheduleCalendarEventWithResponse(ctx context.Context, mailboxResourceId string, calendarUuid openapi_types.UUID, eventUuid openapi_types.UUID, params *RescheduleCalendarEventParams, body RescheduleCalendarEventJSONRequestBody, reqEditors ...RequestEditorFn) (*RescheduleCalendarEventResponse, error) {
+	rsp, err := c.RescheduleCalendarEvent(ctx, mailboxResourceId, calendarUuid, eventUuid, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRescheduleCalendarEventResponse(rsp)
+}
+
 // SubmitFeedbackWithBodyWithResponse Submit feedback
 //
 // Send the user's feedback about the Hostinger Email API to the Hostinger mail team.
@@ -6698,7 +10555,7 @@ func (c *ClientWithResponses) GetQuotaWithResponse(ctx context.Context, mailboxR
 
 // SendEmailWithBodyWithResponse Send email
 //
-// Send a message from the managed mailbox. Saves a copy to INBOX.Sent.
+// Send a message from the managed mailbox. The message is accepted for delivery and dispatched within a few seconds; a copy is saved to INBOX.Sent once it is sent. A delivery failure after acceptance is not reported on this call.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
@@ -6713,7 +10570,7 @@ func (c *ClientWithResponses) SendEmailWithBodyWithResponse(ctx context.Context,
 
 // SendEmailWithResponse Send email
 //
-// Send a message from the managed mailbox. Saves a copy to INBOX.Sent.
+// Send a message from the managed mailbox. The message is accepted for delivery and dispatched within a few seconds; a copy is saved to INBOX.Sent once it is sent. A delivery failure after acceptance is not reported on this call.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
@@ -6874,6 +10731,842 @@ func (c *ClientWithResponses) GetCurrentAccountWithResponse(ctx context.Context,
 		return nil, err
 	}
 	return ParseGetCurrentAccountResponse(rsp)
+}
+
+// ParseListCalendarsResponse parses an HTTP response from a ListCalendarsWithResponse call
+func ParseListCalendarsResponse(rsp *http.Response) (*ListCalendarsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListCalendarsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest V1CalendarsCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest CommonResponseForbiddenResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseValidationFailedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseInternalServerErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 502:
+		var dest CommonResponseBadGatewayResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON502 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateCalendarResponse parses an HTTP response from a CreateCalendarWithResponse call
+func ParseCreateCalendarResponse(rsp *http.Response) (*CreateCalendarResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateCalendarResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest V1CalendarsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest CommonResponseCalendarLimitReachedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest CommonResponseForbiddenResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseValidationFailedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseInternalServerErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 502:
+		var dest CommonResponseBadGatewayResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON502 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteCalendarResponse parses an HTTP response from a DeleteCalendarWithResponse call
+func ParseDeleteCalendarResponse(rsp *http.Response) (*DeleteCalendarResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteCalendarResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case rsp.StatusCode == 204:
+		break // No content-type
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest CommonResponseForbiddenResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseNotFoundResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseInternalServerErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 502:
+		var dest CommonResponseBadGatewayResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON502 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetCalendarResponse parses an HTTP response from a GetCalendarWithResponse call
+func ParseGetCalendarResponse(rsp *http.Response) (*GetCalendarResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetCalendarResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest V1CalendarsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest CommonResponseForbiddenResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseNotFoundResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseInternalServerErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 502:
+		var dest CommonResponseBadGatewayResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON502 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateCalendarResponse parses an HTTP response from a UpdateCalendarWithResponse call
+func ParseUpdateCalendarResponse(rsp *http.Response) (*UpdateCalendarResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateCalendarResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest V1CalendarsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest CommonResponseForbiddenResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseNotFoundResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseValidationFailedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseInternalServerErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 502:
+		var dest CommonResponseBadGatewayResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON502 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListCalendarEventsResponse parses an HTTP response from a ListCalendarEventsWithResponse call
+func ParseListCalendarEventsResponse(rsp *http.Response) (*ListCalendarEventsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListCalendarEventsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest V1CalendarEventsCollection
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest CommonResponseForbiddenResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseNotFoundResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseValidationFailedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseInternalServerErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 502:
+		var dest CommonResponseBadGatewayResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON502 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateCalendarEventResponse parses an HTTP response from a CreateCalendarEventWithResponse call
+func ParseCreateCalendarEventResponse(rsp *http.Response) (*CreateCalendarEventResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateCalendarEventResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest V1CalendarEventsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest CommonResponseForbiddenResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseNotFoundResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseValidationFailedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseInternalServerErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 502:
+		var dest CommonResponseBadGatewayResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON502 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteCalendarEventResponse parses an HTTP response from a DeleteCalendarEventWithResponse call
+func ParseDeleteCalendarEventResponse(rsp *http.Response) (*DeleteCalendarEventResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteCalendarEventResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case rsp.StatusCode == 204:
+		break // No content-type
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest CommonResponseForbiddenResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseNotFoundResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 412:
+		var dest CommonResponsePreconditionFailedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON412 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseValidationFailedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseInternalServerErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 502:
+		var dest CommonResponseBadGatewayResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON502 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetCalendarEventResponse parses an HTTP response from a GetCalendarEventWithResponse call
+func ParseGetCalendarEventResponse(rsp *http.Response) (*GetCalendarEventResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetCalendarEventResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest V1CalendarEventsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest CommonResponseForbiddenResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseNotFoundResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseValidationFailedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseInternalServerErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 502:
+		var dest CommonResponseBadGatewayResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON502 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateCalendarEventResponse parses an HTTP response from a UpdateCalendarEventWithResponse call
+func ParseUpdateCalendarEventResponse(rsp *http.Response) (*UpdateCalendarEventResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateCalendarEventResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest V1CalendarEventsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest CommonResponseEventAttendeeLimitReachedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest CommonResponseForbiddenResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseNotFoundResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 412:
+		var dest CommonResponsePreconditionFailedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON412 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseValidationFailedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseInternalServerErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 502:
+		var dest CommonResponseBadGatewayResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON502 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseReplyToCalendarEventResponse parses an HTTP response from a ReplyToCalendarEventWithResponse call
+func ParseReplyToCalendarEventResponse(rsp *http.Response) (*ReplyToCalendarEventResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ReplyToCalendarEventResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest V1CalendarEventsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest CommonResponseForbiddenResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseNotFoundResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest CommonResponseConflictResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 412:
+		var dest CommonResponsePreconditionFailedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON412 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseValidationFailedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseInternalServerErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 502:
+		var dest CommonResponseBadGatewayResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON502 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRescheduleCalendarEventResponse parses an HTTP response from a RescheduleCalendarEventWithResponse call
+func ParseRescheduleCalendarEventResponse(rsp *http.Response) (*RescheduleCalendarEventResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RescheduleCalendarEventResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest V1CalendarEventsResource
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest CommonResponseEventAttendeeLimitReachedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest CommonResponseUnauthorizedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest CommonResponseForbiddenResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest CommonResponseNotFoundResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 412:
+		var dest CommonResponsePreconditionFailedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON412 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest CommonResponseValidationFailedResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest CommonResponseInternalServerErrorResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 502:
+		var dest CommonResponseBadGatewayResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON502 = &dest
+
+	}
+
+	return response, nil
 }
 
 // ParseSubmitFeedbackResponse parses an HTTP response from a SubmitFeedbackWithResponse call
@@ -7578,6 +12271,13 @@ func ParseSearchMessagesResponse(rsp *http.Response) (*SearchMessagesResponse, e
 		}
 		response.JSON502 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 504:
+		var dest CommonResponseGatewayTimeoutResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON504 = &dest
+
 	}
 
 	return response, nil
@@ -7832,6 +12532,13 @@ func ParseGetMessageAttachmentResponse(rsp *http.Response) (*GetMessageAttachmen
 		}
 		response.JSON502 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 504:
+		var dest CommonResponseGatewayTimeoutResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON504 = &dest
+
 	}
 
 	return response, nil
@@ -7949,6 +12656,13 @@ func ParseGetMessageSourceResponse(rsp *http.Response) (*GetMessageSourceRespons
 			return nil, err
 		}
 		response.JSON502 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 504:
+		var dest CommonResponseGatewayTimeoutResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON504 = &dest
 
 	}
 

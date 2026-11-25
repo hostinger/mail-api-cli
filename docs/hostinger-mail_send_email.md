@@ -4,7 +4,7 @@ Send email
 
 ### Synopsis
 
-Send a message from the managed mailbox. Saves a copy to INBOX.Sent.
+Send a message from the managed mailbox. The message is accepted for delivery and dispatched within a few seconds; a copy is saved to INBOX.Sent once it is sent. A delivery failure after acceptance is not reported on this call.
 
 JSON flags take inline JSON, @file.json, or - to read stdin. Example values:
 
